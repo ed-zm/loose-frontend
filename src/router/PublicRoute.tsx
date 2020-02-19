@@ -1,20 +1,16 @@
-import apollo from '../config/apollo'
-import { ApolloProvider } from 'react-apollo'
-import { ApolloProvider as ApolloHooksProvider } from '@apollo/react-hooks'
+import React from 'react'
+import Providers from './Providers'
 
 const PublicRoute = (ComposedComponent) => {
-  const client = apollo('')
   const Component = props =>
-      <ApolloProvider client = { client }>
-        <ApolloHooksProvider client = { client }>
-          <ComposedComponent { ...props } />
-        </ApolloHooksProvider>
-      </ApolloProvider>
+    <Providers>
+      <ComposedComponent { ...props } />
+    </Providers>
 
   Component.getInitialProps = async ({ req }) => {
     return({ loggedIn: false })
   }
-  return Component
+  return (<Component />)
 }
   
 export default PublicRoute

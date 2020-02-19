@@ -11,14 +11,13 @@ import Cookies from 'js-cookie'
 
 let apolloClient = null
 let link
-const httpUri = `http://${process.env.PRISMA_HOST}:${process.env.PORT}/${process.env.PRISMA_SERVICE}/${process.env.STAGE}`
 if(!process.browser) {
   //ts-ignore
   global.fetch = fetch
 }
 const create = token => {
   const httpLink = new BatchHttpLink({
-    uri: httpUri,
+    uri: process.env.API,
     credentials: 'same-origin'
   })
   link = httpLink
@@ -31,7 +30,7 @@ const create = token => {
   })
   // if(process.browser) {
   //   const wsLink = new WebSocketLink({
-  //     uri: httpUri,
+  //     uri: process.env.API,
   //     options: {
   //       reconnect: true,
   //       timeout: 60000
