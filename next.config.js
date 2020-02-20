@@ -1,5 +1,5 @@
-require('dotenv').config()
 const withSass = require('@zeit/next-sass')
+require('dotenv').config()
 
 module.exports = withSass({
   webpack(config) {
@@ -8,5 +8,8 @@ module.exports = withSass({
       return true;
     })
     return config
+  },
+  env: {
+    API: process.env.API
   }
 })

@@ -9,7 +9,7 @@ const SignIn = () => {
   return(
     <div>
       <input value = {email} placeholder = 'email' onChange = {e => setEmail(e.target.value) } />
-      <input value = {password} placeholder = 'password' onChange = {e => setPassword(e.target.value) } />
+      <input value = {password} placeholder = 'password' type = 'password' onChange = {e => setPassword(e.target.value) } />
       <button onClick = {() => {
         if(email && password) {
           signInMutation({

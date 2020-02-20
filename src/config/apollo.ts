@@ -17,7 +17,7 @@ if(!process.browser) {
 }
 const create = token => {
   const httpLink = new BatchHttpLink({
-    uri: process.env.API,
+    uri: 'http://localhost:8001',
     credentials: 'same-origin'
   })
   link = httpLink
@@ -30,7 +30,7 @@ const create = token => {
   })
   // if(process.browser) {
   //   const wsLink = new WebSocketLink({
-  //     uri: process.env.API,
+  //     uri: 'http://localhost:8001',
   //     options: {
   //       reconnect: true,
   //       timeout: 60000
