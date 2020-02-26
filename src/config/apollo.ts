@@ -21,14 +21,13 @@ const create = token => {
     credentials: 'same-origin'
   })
   link = httpLink
-  const authLink = setContext((_, { headers }) => {
+  const authLink = setContext(() => {
     const tkn = process.browser ? Cookies.get('token') : token
-    const requestHeaders = {
-      ...headers,
-      Authorization: tkn ? `Bearer ${tkn}` : ''
+    return {
+      headers: {
+        Authorization: tkn ? tkn : ''
+      }
     }
-    console.log('set headers', process.browser, token, requestHeaders)
-    return requestHeaders
   })
   // if(process.browser) {
   //   const wsLink = new WebSocketLink({
@@ -70,7 +69,6 @@ const create = token => {
 }
 
 export default token =>{
-  console.log('CREATE', token)
   if(!process.browser) return create(token)
   if(!apolloClient) apolloClient = create(token)
   return apolloClient

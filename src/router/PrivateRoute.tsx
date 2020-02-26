@@ -1,10 +1,11 @@
+import React, { useEffect } from 'react'
 import Cookies from 'js-cookie'
 import apollo from '../config/apollo'
 import Providers from './Providers'
 
 const PrivateRoute = (ComposedComponent) => {
-  const Component = props =>
-    <Providers>
+  const Component = props => 
+    <Providers token = {props.token}>
       <ComposedComponent { ...props } />
     </Providers>
 
@@ -19,8 +20,7 @@ const PrivateRoute = (ComposedComponent) => {
       token = Cookies.get('token')
     }
     if(!process.browser) apollo(token)
-    
-    return({ loggedIn: true })
+    return({ loggedIn: true, token })
   }
   return Component
   }
