@@ -22,11 +22,13 @@ const create = token => {
   })
   link = httpLink
   const authLink = setContext((_, { headers }) => {
-    const tkn = process.browser ? Cookies.get('access_token') : token
-    return {
+    const tkn = process.browser ? Cookies.get('token') : token
+    const requestHeaders = {
       ...headers,
-      authorization: tkn ? `Bearer ${tkn}` : ''
+      Authorization: tkn ? `Bearer ${tkn}` : ''
     }
+    console.log('set headers', process.browser, token, requestHeaders)
+    return requestHeaders
   })
   // if(process.browser) {
   //   const wsLink = new WebSocketLink({
@@ -68,6 +70,7 @@ const create = token => {
 }
 
 export default token =>{
+  console.log('CREATE', token)
   if(!process.browser) return create(token)
   if(!apolloClient) apolloClient = create(token)
   return apolloClient

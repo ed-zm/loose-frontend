@@ -10,7 +10,7 @@ const PublicRoute = (ComposedComponent) => {
   Component.getInitialProps = async ({ req }) => {
     return({ loggedIn: false })
   }
-  return (<Component />)
+  return Component
 }
   
 export default PublicRoute
