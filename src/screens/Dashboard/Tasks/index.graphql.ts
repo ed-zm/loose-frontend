@@ -3,14 +3,27 @@ import gql from 'graphql-tag'
 export const TASKS = gql`
   query {
     tasks {
-      id
+      iid
       title
+      description
+      createdBy {
+        id
+      }
+      assignedTo {
+        id
+      }
+      organization {
+        id
+      }
+      team {
+        id
+      }
       createdAt
     }
   }
 `
 
-export const CREATE_TASKS = gql`
+export const CREATE_TASK = gql`
   mutation(
     $title: String!,
     $description: String!,
@@ -58,6 +71,7 @@ export const CREATE_TASKS = gql`
       team {
         id
       }
+      createdAt
     }
   }
 `

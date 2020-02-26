@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Cookies from 'js-cookie'
 import { useMutation } from '@apollo/react-hooks'
 import router from 'next/router'
 import { SIGN_IN } from './index.graphql'
@@ -8,13 +9,14 @@ const SignIn = () => {
   const [password, setPassword] = useState('')
   const [signInMutation, { data }] = useMutation(SIGN_IN)
   const onSignIn = async () => {
-    const token = await signInMutation({
+    const response = await signInMutation({
       variables: {
         email,
         password
       }
     })
-    if(token) {
+    if(response && response.data && response.data.signIn) {
+      Cookies.set('token', response.data.signIn)
       router.push('/dashboard/tasks')
     } else {
       throw new Error('Invalid Credentials')
