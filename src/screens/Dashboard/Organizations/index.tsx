@@ -1,21 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { ORGANIZATIONS, CREATE_ORGANIZATION } from './index.graphql'
+import { UserContext } from '../../../contexts/User'
 
 const Organizations = () => {
+  const user = useContext(UserContext)
   const { data } = useQuery(ORGANIZATIONS)
   const [ createOrganization ] = useMutation(CREATE_ORGANIZATION)
   const [ name, setName ] = useState('')
   const onCreateOrganization = async () => {
     createOrganization({ variables: {
-      name
+      name,
+      userId: user.id
     },
     optimisticResponse: {
       __typename: 'Mutation',
       createOrganization: {
         __typename: "Organization",
         id: "-1",
-        name
+        name,
+        owner: {
+          id: user.id,
+          __typename: "User"
+        }
       }
     },
     update: (proxy, { data: { createOrganization }}) => {
@@ -35,7 +42,7 @@ const Organizations = () => {
       </div>
       <ul>
         {data && data.organizations && data.organizations.map(organization =>
-          <li>
+          <li key = {organization.id}>
             <div>{organization.name}</div>
           </li>  
         )}

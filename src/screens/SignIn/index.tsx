@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Cookies from 'js-cookie'
 import { useMutation } from '@apollo/react-hooks'
 import router from 'next/router'
 import { SIGN_IN } from './index.graphql'
+import { UserContext } from '../../contexts/User'
 
 const SignIn = () => {
+  const user = useContext(UserContext)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [signInMutation, { data }] = useMutation(SIGN_IN)
+  const [signInMutation] = useMutation(SIGN_IN)
   const onSignIn = async () => {
     const response = await signInMutation({
       variables: {

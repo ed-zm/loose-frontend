@@ -13,22 +13,15 @@ export const ORGANIZATIONS = gql`
 `
 
 export const CREATE_ORGANIZATION = gql`
-  mutation($name: String!) {
+  mutation($name: String!, $userId: ID!) {
     createOrganization(data: {
-      name: $name
-    }) {
-      id
-      name
-      owner {
-        id
+      name: $name,
+      owner: {
+        connect: {
+          id: $userId
+        }
       }
-    }
-  }
-`
-
-export const ORGANIZATION = gql`
-  query($id: ID!) {
-    organization(where: { id: $id }) {
+    }) {
       id
       name
       owner {
