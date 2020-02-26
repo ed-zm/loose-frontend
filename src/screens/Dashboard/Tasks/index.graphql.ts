@@ -9,13 +9,7 @@ export const TASKS = gql`
       createdBy {
         id
       }
-      assignedTo {
-        id
-      }
       organization {
-        id
-      }
-      team {
         id
       }
       createdAt
@@ -28,9 +22,7 @@ export const CREATE_TASK = gql`
     $title: String!,
     $description: String!,
     $creatorId: ID!,
-    $assignedId: ID,
-    $organizationId: ID!,
-    $teamId: ID
+    $organizationId: ID
   ) {
     createTask(data: {
       title: $title,
@@ -39,20 +31,10 @@ export const CREATE_TASK = gql`
         connect: {
           id: $creatorId
         }
-      },
-      assignedTo: {
-        connect: {
-          id: $assignedId
-        }
-      },
+      }
       organization: {
         connect: {
           id: $organizationId
-        }
-      },
-      team: {
-        connect: {
-          id: $teamId
         }
       }
     }) {
@@ -62,16 +44,19 @@ export const CREATE_TASK = gql`
       createdBy {
         id
       }
-      assignedTo {
-        id
-      }
       organization {
         id
       }
-      team {
-        id
-      }
       createdAt
+    }
+  }
+`
+
+export const ORGANIZATIONS = gql`
+  query {
+    organizations {
+      id
+      name
     }
   }
 `
