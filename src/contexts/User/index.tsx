@@ -32,7 +32,6 @@ export const UserContext = createContext<UserContextType>(initialState);
 
 export const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(rootReducer, initialState);
-  const token = Cookies.get('token')
   const { data } = useQuery(LOGGED_IN)
   const actions = actionsCreator(actionsForm, dispatch);
   const getInitialValues = async () => {

@@ -4,10 +4,14 @@ import apollo from '../config/apollo'
 import Providers from './Providers'
 
 const PrivateRoute = (ComposedComponent) => {
-  const Component = props => 
+  const Component = ({ token, ...props}) => {
+    if(!token && process.browser) props.url.push('/sign-in')
+    return(
     <Providers token = {props.token}>
       <ComposedComponent { ...props } />
     </Providers>
+    )
+  }
 
   Component.getInitialProps = async (ctx) => {
     let userAgent, token = ''
@@ -20,7 +24,7 @@ const PrivateRoute = (ComposedComponent) => {
       token = Cookies.get('token')
     }
     if(!process.browser) apollo(token)
-    return({ loggedIn: true, token })
+    return({ token })
   }
   return Component
   }

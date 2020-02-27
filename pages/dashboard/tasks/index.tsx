@@ -1,5 +1,5 @@
 import React from 'react'
 import Tasks from '../../../src/screens/Dashboard/Tasks'
-import PublicRoute from '../../../src/router/PublicRoute'
+import PrivateRoute from '../../../src/router/PrivateRoute'
 
-export default PublicRoute(props => <Tasks { ...props }/>)
+export default PrivateRoute(props => <Tasks { ...props }/>)

@@ -1,8 +1,8 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Cookies from 'js-cookie'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation, useLazyQuery } from '@apollo/react-hooks'
 import router from 'next/router'
-import { SIGN_IN } from './index.graphql'
+import { SIGN_IN, LOGGED_IN } from './index.graphql'
 import { UserContext } from '../../contexts/User'
 
 const SignIn = () => {
@@ -10,6 +10,16 @@ const SignIn = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [signInMutation] = useMutation(SIGN_IN)
+  const [loggedIn, { data }] = useLazyQuery(LOGGED_IN)
+  useEffect(() => {
+    const redirect = async () => {
+      await user.actions.setUser({ ...data.loggedIn })
+      await router.push('/dashboard/tasks')
+    }
+    if(data && data.loggedIn) {
+      redirect()
+    }
+  }, [data])
   const onSignIn = async () => {
     const response = await signInMutation({
       variables: {
@@ -19,7 +29,7 @@ const SignIn = () => {
     })
     if(response && response.data && response.data.signIn) {
       Cookies.set('token', response.data.signIn)
-      router.push('/dashboard/tasks')
+      await loggedIn()
     } else {
       throw new Error('Invalid Credentials')
     }

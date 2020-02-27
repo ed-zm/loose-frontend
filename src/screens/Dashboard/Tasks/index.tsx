@@ -15,7 +15,6 @@ const Tasks = () => {
   useEffect( () => {
     if(orgs && orgs.organizations && !!orgs.organizations.length) setOrganization(orgs.organizations[0].id)
   }, [orgs])
-  if(organization) console.log(organization)
   const onCreateTask = async () => {
     createTask({
       variables: {

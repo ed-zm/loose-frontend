@@ -8,3 +8,14 @@ export const SIGN_IN = gql`
     )
   }
 `
+
+export const LOGGED_IN = gql`
+  query {
+    loggedIn {
+      id
+      firstName
+      lastName
+      username
+    }
+  }
+`
