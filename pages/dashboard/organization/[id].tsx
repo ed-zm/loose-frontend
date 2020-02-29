@@ -1,5 +1,5 @@
 import React from 'react'
 import Organization from '../../../src/screens/Dashboard/Organization'
-import PublicRoute from '../../../src/router/PublicRoute'
+import PrivateRoute from '../../../src/router/PrivateRoute'
 
-export default PublicRoute(props => <Organization { ...props }/>)
+export default PrivateRoute(props => <Organization { ...props }/>)

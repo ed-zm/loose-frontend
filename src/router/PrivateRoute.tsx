@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import Cookies from 'js-cookie'
 import apollo from '../config/apollo'
 import Providers from './Providers'
+import Sidebar from '../components/Sidebar'
 import '../styles/index.scss'
 
 const PrivateRoute = (ComposedComponent) => {
@@ -9,7 +10,17 @@ const PrivateRoute = (ComposedComponent) => {
     if(!token && process.browser) props.url.push('/sign-in')
     return(
     <Providers token = {props.token}>
-      <ComposedComponent { ...props } />
+      <div className = 'main-layout'>
+        <div className = 'header-layout'>
+          <div>Header</div>
+        </div>
+        <div className = 'sidebar-layout'>
+          <Sidebar />
+        </div>
+        <div className = 'content-layout'>
+          <ComposedComponent { ...props } />
+        </div>
+      </div>
     </Providers>
     )
   }

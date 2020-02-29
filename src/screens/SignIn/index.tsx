@@ -14,7 +14,7 @@ const SignIn = () => {
   useEffect(() => {
     const redirect = async () => {
       await user.actions.setUser({ ...data.loggedIn })
-      await router.push('/dashboard/tasks')
+      await router.push('/dashboard')
     }
     if(data && data.loggedIn) {
       redirect()

@@ -1,5 +1,5 @@
 import React from 'react'
 import User from '../../../src/screens/Dashboard/User'
-import PublicRoute from '../../../src/router/PublicRoute'
+import PrivateRoute from '../../../src/router/PrivateRoute'
 
-export default PublicRoute(props => <User { ...props }/>)
+export default PrivateRoute(props => <User { ...props }/>)

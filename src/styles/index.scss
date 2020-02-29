@@ -2,7 +2,7 @@
 
 .main-layout {
   display: grid;
-  grid-template-rows: [header-start] 76px [header-end user-info-start] minmax(0px, max-content) [user-info-end content-start] minmax(calc(100vh - 76px), min-content) [content-end footer-start];
+  grid-template-rows: [header-start] 76px [header-end content-start] minmax(calc(100vh - 76px), min-content) [content-end footer-start];
   grid-template-columns: [sidebar-start] minmax(min-content, 20rem) [sidebar-end full-start] minmax(2rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(2rem, 1fr) [full-end];
   @media only screen and (max-width: $bp-medium) {
     grid-template-columns: [full-start] minmax(2rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(2rem, 1fr) [full-end];
