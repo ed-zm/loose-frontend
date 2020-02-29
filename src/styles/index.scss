@@ -1,0 +1,60 @@
+@import 'base';
+
+.main-layout {
+  display: grid;
+  grid-template-rows: [header-start] 76px [header-end user-info-start] minmax(0px, max-content) [user-info-end content-start] minmax(calc(100vh - 76px), min-content) [content-end footer-start];
+  grid-template-columns: [sidebar-start] minmax(min-content, 20rem) [sidebar-end full-start] minmax(2rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(2rem, 1fr) [full-end];
+  @media only screen and (max-width: $bp-medium) {
+    grid-template-columns: [full-start] minmax(2rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(2rem, 1fr) [full-end];
+  }
+}
+
+.header-layout {
+  grid-column: 1 / -1;
+  grid-row: header-start / header-end;
+  background-color: $primary-color;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+}
+
+.user-info-layout {
+  grid-column: 1 / -1;
+  grid-row: user-info-start / user-info-end;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.content-layout {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  grid-column: center-start / center-end;
+  grid-row: content-start / content-end;
+  display: grid;
+  grid-template-rows: auto;
+  grid-auto-columns: auto;
+  // align-items: center;
+  justify-items: center;
+}
+
+.sidebar-layout {
+  grid-column: sidebar-start / sidebar-end;
+  grid-row: content-start / content-end;
+  background-color: #ffffff;
+  border-right: 1px solid #e8e8e8;
+
+  .ant-menu-inline {
+    border-right: 0;
+  }
+
+}
+
+.sidebar-icon {
+  font-size: 32px !important;
+  display: none;
+  padding-left: 5px;
+  color:white;
+  @media only screen and (max-width: $bp-medium) {
+    display: inline;
+  }
+}

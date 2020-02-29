@@ -1,5 +1,6 @@
 import React from 'react'
 import Providers from './Providers'
+import '../styles/index.scss'
 
 const PublicRoute = (ComposedComponent) => {
   const Component = props =>

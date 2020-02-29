@@ -1,0 +1,26 @@
+// COLOR VARIABLES
+
+$primary-color: rgb(90, 180, 60);
+$secondary-text: rgba(0, 0, 0, 0.65);
+$footer-color: #F2711C;
+
+// FONT VARIABLES
+
+$font-primary: 'Nunito', sans-serif;
+$font-display: 'Josefin Sans', sans-serif;
+$font-sidebar: 'Alegreya Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+
+// RESPONSIVE BREAKPOINTS
+
+$bp-largest: 75em; // 1200px
+$bp-large: 62.5em; // 1000px
+$bp-medium: 50em; // 800px
+$bp-small: 37.5em; // 600px
+$bp-xsmall: 25em; // 400px
+
+// GRID
+
+%basic-grid-column {
+  display: grid;
+  grid-template-columns: repeat(8, [col-start] minmax(min-content, 14rem) [col-end]);
+}

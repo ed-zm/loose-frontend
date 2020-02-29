@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import Cookies from 'js-cookie'
 import apollo from '../config/apollo'
 import Providers from './Providers'
+import '../styles/index.scss'
 
 const PrivateRoute = (ComposedComponent) => {
   const Component = ({ token, ...props}) => {
