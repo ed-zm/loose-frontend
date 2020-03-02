@@ -4,6 +4,13 @@ import { useQuery, useMutation } from '@apollo/react-hooks'
 import { TASKS, CREATE_TASK, ORGANIZATIONS } from './index.graphql'
 import { UserContext } from '../../../contexts/User'
 
+interface CreateTaskVariables {
+  title: string
+  description: string
+  createdBy: any
+  organization?: any
+}
+
 const Tasks = () => {
   const user = useContext(UserContext)
   const { data } = useQuery(TASKS)
@@ -12,17 +19,15 @@ const Tasks = () => {
   const [ title, setTitle ] = useState('')
   const [ description, setDescription ] = useState('')
   const [ organization, setOrganization ] = useState('')
-  useEffect( () => {
-    if(orgs && orgs.organizations && !!orgs.organizations.length) setOrganization(orgs.organizations[0].id)
-  }, [orgs])
   const onCreateTask = async () => {
+    const variables: CreateTaskVariables = {
+      title,
+      description,
+      createdBy: { connect: { id: user.id } },
+    }
+    if(organization) variables.organization = { connect: { id: organization }}
     createTask({
-      variables: {
-        title,
-        description,
-        creatorId: user.id,
-        organizationId: organization
-      },
+      variables: { data: variables },
       optimisticResponse: {
         __typename: "Mutation",
         createTask: {
@@ -34,7 +39,7 @@ const Tasks = () => {
             __typename: "User",
             id: user.id
           },
-          organization: {
+          organization: !organization ? null : {
             __typename: "Organization",
             id: organization
           },
@@ -56,6 +61,7 @@ const Tasks = () => {
         <input type = 'text' placeholder = 'title' value = {title} onChange = { e => setTitle(e.target.value) }/>
         <input type = 'textarea' placeholder = 'description' value = {description} onChange = { e => setDescription(e.target.value) }/>
         <select onChange = {e => setOrganization(e.target.value)} value = {organization}>
+          <option key = 'personal-task-select' value = {''}>Personal</option>
           { orgs &&
             orgs.organizations &&
             orgs.organizations.map(o =>

@@ -18,26 +18,8 @@ export const TASKS = gql`
 `
 
 export const CREATE_TASK = gql`
-  mutation(
-    $title: String!,
-    $description: String!,
-    $creatorId: ID!,
-    $organizationId: ID
-  ) {
-    createTask(data: {
-      title: $title,
-      description: $description,
-      createdBy: {
-        connect: {
-          id: $creatorId
-        }
-      }
-      organization: {
-        connect: {
-          id: $organizationId
-        }
-      }
-    }) {
+  mutation($data: TaskCreateInput!) {
+    createTask(data: $data) {
       id
       title
       description
