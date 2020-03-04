@@ -1,11 +1,14 @@
 import gql from 'graphql-tag'
 
 export const TASKS = gql`
-  query {
-    tasks {
+  query($state: Int) {
+    tasks(where: {
+      state: $state
+    }) {
       id
       title
       description
+      state
       createdBy {
         id
       }
@@ -23,6 +26,7 @@ export const CREATE_TASK = gql`
       id
       title
       description
+      state
       createdBy {
         id
       }

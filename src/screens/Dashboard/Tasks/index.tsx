@@ -7,6 +7,7 @@ import { UserContext } from '../../../contexts/User'
 interface CreateTaskVariables {
   title: string
   description: string
+  state: Number
   createdBy: any
   organization?: any
 }
@@ -23,6 +24,7 @@ const Tasks = () => {
     const variables: CreateTaskVariables = {
       title,
       description,
+      state: 0,
       createdBy: { connect: { id: user.id } },
     }
     if(organization) variables.organization = { connect: { id: organization }}
@@ -34,6 +36,7 @@ const Tasks = () => {
           __typename: "Task",
           id: "-1",
           title,
+          status: 0,
           description,
           createdBy: {
             __typename: "User",
