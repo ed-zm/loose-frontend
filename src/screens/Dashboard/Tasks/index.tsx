@@ -38,6 +38,7 @@ const Tasks = () => {
           id: "-1",
           title,
           status: 0,
+          code: 'AAAA',
           description,
           createdBy: {
             __typename: "User",

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
+import Link from 'next/link'
 import moment from 'moment'
 import { UPDATE_TASK } from './index.graphql'
 
@@ -28,6 +29,7 @@ const TaskCard = ({ task }) => {
             }
           })
         }}/>
+      <Link href = {`/dashboard/task/${task.code}`}><a>{task.code}</a></Link>
       <div onClick = { () => setShowDescription(!showDescription) }>{task.title}</div>
       { showDescription && <div>{task.description}</div>}
       <div>{moment(task.createdAt).format('DD/MMM/YYYY HH:mm')}</div>
