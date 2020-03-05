@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react'
-import moment from 'moment'
+import React, { useState, useContext } from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { TASKS, CREATE_TASK, ORGANIZATIONS } from './index.graphql'
 import { UserContext } from '../../../contexts/User'
+import TaskCard from '../../../components/TaskCard'
 
 interface CreateTaskVariables {
   title: string
@@ -20,6 +20,7 @@ const Tasks = () => {
   const [ title, setTitle ] = useState('')
   const [ description, setDescription ] = useState('')
   const [ organization, setOrganization ] = useState('')
+  const sortedTasks = data && data.tasks ? data.tasks.sort((a, b) => a.state - b.state) : []
   const onCreateTask = async () => {
     const variables: CreateTaskVariables = {
       title,
@@ -52,7 +53,7 @@ const Tasks = () => {
       update: (proxy, { data: { createTask }}) => {
         const data = proxy.readQuery({ query: TASKS })
         //@ts-ignore
-        const newTasks = data.tasks.slice()
+        const newTasks = sortedTasks.slice()
         newTasks.push(createTask)
         proxy.writeQuery({ query: TASKS, data: { tasks: newTasks } })
       }
@@ -73,15 +74,11 @@ const Tasks = () => {
         </select>
         <button onClick = { onCreateTask }>Create Task</button>
       </div>
-      <ul>
-        {data && data.tasks && data.tasks.map(task =>
-          <li key = {task.id}>
-            <div>{task.title}</div>
-            <div>{task.description}</div>
-            <div>{moment(task.createdAt).format('DD/MMM/YYYY HH:mm')}</div>
-          </li>  
+      <div>
+        {sortedTasks.map(task =>
+          <TaskCard task = { task } />
         )}
-      </ul>
+      </div>
     </div>
   )
 }
