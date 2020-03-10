@@ -8,6 +8,7 @@ export const TASKS = gql`
       id
       title
       description
+      estimated
       state
       code
       createdBy {
@@ -27,6 +28,7 @@ export const CREATE_TASK = gql`
       id
       title
       description
+      estimated
       state
       code
       createdBy {

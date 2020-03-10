@@ -8,6 +8,10 @@ export const TASK = gql`
       description
       state
       code
+      labels {
+        id
+        color
+      }
       createdBy {
         id
       }

@@ -8,6 +8,7 @@ interface CreateTaskVariables {
   title: string
   description: string
   state: Number
+  estimated: Number
   createdBy: any
   organization?: any
 }
@@ -20,12 +21,14 @@ const Tasks = () => {
   const [ title, setTitle ] = useState('')
   const [ description, setDescription ] = useState('')
   const [ organization, setOrganization ] = useState('')
+  const [ estimated, setEstimated ] = useState(0)
   const sortedTasks = data && data.tasks ? data.tasks.sort((a, b) => a.state - b.state) : []
   const onCreateTask = async () => {
     const variables: CreateTaskVariables = {
       title,
       description,
       state: 0,
+      estimated,
       createdBy: { connect: { id: user.id } },
     }
     if(organization) variables.organization = { connect: { id: organization }}
@@ -37,7 +40,8 @@ const Tasks = () => {
           __typename: "Task",
           id: "-1",
           title,
-          status: 0,
+          state: 0,
+          estimated,
           code: 'AAAA',
           description,
           createdBy: {
@@ -64,6 +68,7 @@ const Tasks = () => {
     <div>
       <div>
         <input type = 'text' placeholder = 'title' value = {title} onChange = { e => setTitle(e.target.value) }/>
+        <input type = 'number' placeholder = 'estimated' value = {estimated} onChange = { e => setEstimated(parseInt(e.target.value, 10)) }/>
         <input type = 'textarea' placeholder = 'description' value = {description} onChange = { e => setDescription(e.target.value) }/>
         <select onChange = {e => setOrganization(e.target.value)} value = {organization}>
           <option key = 'personal-task-select' value = {''}>Personal</option>
