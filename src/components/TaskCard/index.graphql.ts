@@ -5,6 +5,11 @@ export const UPDATE_TASK = gql`
     updateTask(where: { id: $id }, data: { state: $state }) {
       id
       state
+      assignedTo {
+        id
+        firstName
+        lastName
+      }
     }
   }
 `
