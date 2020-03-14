@@ -23,30 +23,37 @@ export const COMMENTS = gql`
 `
 
 export const CREATE_COMMENT = gql`
-  mutation createComment($text: String!, $taskId: ID!, $userId: ID!) {
-    createComment(data: {
-      text: $text,
-      user: {
-        connect: {
-          id: $userId
+  mutation createComment($text: String!, $taskId: ID!, $userId: ID!, $mentions: [ResponseRequestCreateWithoutTaskInput!]) {
+    updateTask(
+      where: { id: $taskId }
+      data: {
+        comments: {
+          create: [{
+            text: $text,
+            user: {
+              connect: {
+                id: $userId
+              }
+            }
+          }]
+        },
+        responseRequests: {
+          create: $mentions
         }
-      },
-      task:{
-        connect: {
-          id: $taskId
-        }
-      }
     }) {
       id
-      text
-      createdAt
-      task {
+      comments {
         id
-      }
-      user {
-        id
-        firstName
-        lastName
+        text
+        createdAt
+        task {
+          id
+        }
+        user {
+          id
+          firstName
+          lastName
+        }
       }
     }
   }
