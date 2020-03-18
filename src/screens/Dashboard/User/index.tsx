@@ -4,6 +4,7 @@ import FileReaderInput from 'react-file-reader-input'
 import { useRouter } from 'next/router'
 import { useQuery, useLazyQuery, useMutation } from '@apollo/react-hooks'
 import { USER, GET_S3_SIGNED_URL, CHANGE_PICTURE } from './index.graphql'
+import Cropper from '../../../components/Cropper'
 
 const User = () => {
   const router = useRouter()
@@ -12,6 +13,8 @@ const User = () => {
     currentPicture: null,
     fileType: 'image/jpg',
   })
+  const [ openCropper, setOpenCropper ] = useState(false)
+  const { currentPicture, fileType } = picture
   const { data } = useQuery(USER, { variables: { id } })
   const [ getS3SignedUrl, { data: s3Url, error, loading }] = useLazyQuery(GET_S3_SIGNED_URL)
   const [ changePicture ] = useMutation(CHANGE_PICTURE)
@@ -21,7 +24,7 @@ const User = () => {
       const extension = picture.fileType.split('/')
       s3Key = `${data.user.id}.${extension[1]}`
       new Promise( async resolve => {
-        await axios.put(s3Url, picture.currentPicture, { headers: { 'Content-Type': 'image/jpeg' } })
+        await axios.put(s3Url.getS3SignedUrl, picture.currentPicture, { headers: { 'Content-Type': 'image/jpeg' } })
       })
       .then((res: any) => {
         if(res.status === 200) {
@@ -34,7 +37,6 @@ const User = () => {
         } else {
           throw new Error('An error occured uploading your image')
         }
-        console.log("Network Error")
       })
       .then(async res => {
         await setPicture({currentPicture: null, fileType: 'image/jpg',})
@@ -47,19 +49,11 @@ const User = () => {
     }
   }, [s3Url])
 
-  const changeProfilePicture = (e, results) => {
-    results.forEach(result => {
-      const [e, file] = result;
-      console.log(result, e)
-      setPicture({currentPicture: e.target.result, fileType: file.type,}),
-      console.log(`Successfully uploaded ${file.name}!`);
-    });
+  const changeProfilePicture = picture => {
+    const file = picture.map(res => res[0].target.result)
+    const currentPicture = file && file[0]
+    setPicture({currentPicture, fileType: picture[0][1].type})
   }
-  // const changeProfilePicture = picture => {
-  //   const file = picture.map(res => res[0].target.result)
-  //   const currentPicture = file && file[0]
-  //   setPicture({currentPicture, fileType: picture[0][1].type})
-  // }
 
   const savePicture = async (blob) => {
     await getS3SignedUrl({
@@ -69,8 +63,6 @@ const User = () => {
         id: data.user.id
       }
     })
-    
-    
   }
   return(
     <div>
@@ -80,14 +72,12 @@ const User = () => {
             <div>{ data.user.username }</div>
             <div>{ data.user.firstName }</div>
             <div>{ data.user.lastName }</div>
-              <FileReaderInput type='file' onChange={ changeProfilePicture } />
-              <button
-                onClick = { () => savePicture() }
-              >
-                Save Picture
-              </button>
+              <FileReaderInput type='file' onChange={ (e, pic) => changeProfilePicture(pic) } />
           </div>
         }
+        { currentPicture && fileType && <Cropper closeCropper = { async () => {
+          setOpenCropper(false)
+        } } src = { currentPicture } fileType = { fileType } savePicture = { savePicture }/> }
     </div>
   )
 }
