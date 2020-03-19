@@ -4,6 +4,7 @@ export const USER = gql`
   query($id: ID!) {
     user(where: { id: $id }) {
       id
+      avatar
       username
       firstName
       lastName

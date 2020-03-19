@@ -24,14 +24,15 @@ const User = () => {
       const extension = picture.fileType.split('/')
       s3Key = `${data.user.id}.${extension[1]}`
       new Promise( async resolve => {
-        await axios.put(s3Url.getS3SignedUrl, picture.currentPicture, { headers: { 'Content-Type': 'image/jpeg' } })
+        const res = await axios.put(s3Url.getS3SignedUrl, picture.currentPicture, { headers: { 'Content-Type': fileType } })
+        resolve(res)
       })
       .then((res: any) => {
         if(res.status === 200) {
           return changePicture({
             variables: {
               id: data.user.id,
-              url: `https://s3.eu-central-1.amazonaws.com/loose/${s3Key}`
+              avatar: `https://s3.eu-central-1.amazonaws.com/dev.loose.www.avatars/${s3Key}`
             }
           })
         } else {
@@ -39,10 +40,7 @@ const User = () => {
         }
       })
       .then(async res => {
-        await setPicture({currentPicture: null, fileType: 'image/jpg',})
-        // if(res.data.updateUser) {
-        //   updatePicture(res.data.updateUser.picture)
-        // }
+        await setPicture({currentPicture: null, fileType: 'image/jpg'})
       console.log('Success')
       })
       .catch(() => {})
@@ -59,7 +57,7 @@ const User = () => {
     await getS3SignedUrl({
       variables: {
         operation: 'putObject',
-        fileType: picture.fileType,
+        fileType: fileType,
         id: data.user.id
       }
     })
@@ -68,6 +66,7 @@ const User = () => {
     <div>
         {data && data.user &&
           <div>
+            <img src = {data.user.avatar || '/static/default_profile.png'} width = {30} height = {30}/>
             <div>{ data.user.email }</div>
             <div>{ data.user.username }</div>
             <div>{ data.user.firstName }</div>
@@ -76,7 +75,7 @@ const User = () => {
           </div>
         }
         { currentPicture && fileType && <Cropper closeCropper = { async () => {
-          setOpenCropper(false)
+          setPicture({currentPicture: null, fileType: 'image/jpg'})
         } } src = { currentPicture } fileType = { fileType } savePicture = { savePicture }/> }
     </div>
   )
