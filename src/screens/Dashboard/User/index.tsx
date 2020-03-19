@@ -32,7 +32,7 @@ const User = () => {
           return changePicture({
             variables: {
               id: data.user.id,
-              avatar: `https://s3.eu-central-1.amazonaws.com/dev.loose.www.avatars/${s3Key}`
+              avatar: `https://s3.eu-west-1.amazonaws.com/dev.loose.www.avatars/${s3Key}`
             }
           })
         } else {
