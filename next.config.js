@@ -1,8 +1,9 @@
 const withSass = require('@zeit/next-sass')
+const withCss = require('@zeit/next-css')
 const path = require('path')
 require('dotenv').config()
 
-module.exports = withSass({
+module.exports = withCss(withSass({
   sassLoaderOptions: {
     includePaths: [ path.resolve(__dirname, './src/styles') ],
       // Provide path to the file with resources
@@ -18,4 +19,4 @@ module.exports = withSass({
   env: {
     API: process.env.API
   }
-})
+}))
