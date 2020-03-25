@@ -26,7 +26,7 @@ const Assign = ({ task }) => {
           onClick = {async () => {
             await assignTask({
               variables: {
-                id: data.task.id,
+                id: task.id,
                 userId: assignTo
               }
             })
