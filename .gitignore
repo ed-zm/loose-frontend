@@ -6,3 +6,4 @@ src/**/*.jsx
 src/**/*.map
 yarn-error.log
 .env
+.now

@@ -4,12 +4,12 @@ import { ApolloProvider } from 'react-apollo'
 import { ApolloProvider as ApolloHooksProvider } from '@apollo/react-hooks'
 import Contexts from '../contexts'
 
-const Providers = ({ token, children }) => {
+const Providers = ({ token, user, children }) => {
   const client = apollo(token)
   return(
     <ApolloProvider client = { client }>
     <ApolloHooksProvider client = { client }>
-      <Contexts>
+      <Contexts user = { user }>
         { children }
       </Contexts>
     </ApolloHooksProvider>

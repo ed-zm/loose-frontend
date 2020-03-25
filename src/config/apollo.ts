@@ -17,7 +17,7 @@ if(!process.browser) {
 }
 const create = token => {
   const httpLink = new BatchHttpLink({
-    uri: 'http://localhost:8001',
+    uri: 'http://localhost',
     credentials: 'same-origin'
   })
   link = httpLink
