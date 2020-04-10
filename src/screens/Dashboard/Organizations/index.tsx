@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { ORGANIZATIONS, CREATE_ORGANIZATION } from './index.graphql'
-import { UserContext } from '../../../contexts/User'
+import { UserContext } from 'loose-components/src/contexts/User'
 
 const Organizations = () => {
   const user = useContext(UserContext)

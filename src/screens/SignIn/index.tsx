@@ -3,7 +3,7 @@ import Cookies from 'js-cookie'
 import { useMutation, useLazyQuery } from '@apollo/react-hooks'
 import router from 'next/router'
 import { SIGN_IN, LOGGED_IN } from './index.graphql'
-import { UserContext } from '../../contexts/User'
+import { UserContext } from 'loose-components/src/contexts/User'
 
 const SignIn = () => {
   const user = useContext(UserContext)

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import router from 'next/router'
 import Link from 'next/link'
-import { UserContext } from '../../contexts/User'
+import { UserContext } from 'loose-components/src/contexts/User'
 
 const Sidebar = () => {
   const user = useContext(UserContext)

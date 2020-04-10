@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import Link from 'next/link'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { TEAMS, CREATE_TEAM, ORGANIZATIONS } from './index.graphql'
-import { UserContext } from '../../../contexts/User'
+import { UserContext } from 'loose-components/src/contexts/User'
 
 const Teams = () => {
   const user = useContext(UserContext)
