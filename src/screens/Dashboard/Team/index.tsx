@@ -1,28 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useRouter } from 'next/router'
 import moment from 'moment'
-import { useQuery, useLazyQuery, useMutation } from '@apollo/react-hooks'
-import { TEAM, ORGANIZATION_MEMBERS, ADD_MEMBER, REMOVE_MEMBER } from './index.graphql'
+import useTeam from 'loose-components/src/screens/Dashboard/Team'
 
 const Team = () => {
   const router = useRouter()
-  const [ member, setMember ] = useState('')
   const { id } = router.query
-  const { data } = useQuery(TEAM, { variables: { id }})
-  const [ addMember, { loading: addingMember }] = useMutation(ADD_MEMBER)
-  const [ removeMember, { loading: removingMember }] = useMutation(REMOVE_MEMBER)
-  const [ organizationMembersQuery, { data: members, refetch: refetchOrganizationMembers }] = useLazyQuery(ORGANIZATION_MEMBERS)
-  useEffect(() => {
-    if(data && data.team) {
-      organizationMembersQuery({ variables: {
-        teamId: data.team.id,
-        organizationId: data.team.organization.id
-      }})
-    }
-  }, [data])
-  useEffect(() => {
-    if(members && !!members.users.length) setMember(members.users[0].id)
-  }, [members])
+  const {
+		data,
+		removingMember,
+		addingMember,
+		onRemoveMember,
+		onAddMember,
+		member,
+		setMember,
+		members
+  } = useTeam({ id })
   return(
     <div>
       { data && data.team &&
@@ -35,15 +28,7 @@ const Team = () => {
               <div>
                 <span>{member.firstName} {member.lastName}</span>
                 <button
-                  onClick = {async () => {
-                    await removeMember({ variables: {
-                      teamId: data.team.id,
-                      memberId: member.id
-                    }})
-                    await refetchOrganizationMembers({
-                      fetchPolicy: 'cache-and-network'
-                    })
-                  }}
+                  onClick = {onRemoveMember}
                   disabled = { removingMember }
                 >
                   remove
@@ -60,18 +45,7 @@ const Team = () => {
               )}
             </select>
             <button
-              onClick = {async () => {
-                await addMember({
-                  variables: {
-                    teamId: data.team.id,
-                    memberId: member
-                  }
-                })
-                await setMember('')
-                await refetchOrganizationMembers({
-                  fetchPolicy: 'cache-and-network'
-                })
-              }}
+              onClick = {onAddMember}
               disabled = { addingMember }
             >
               Add Member

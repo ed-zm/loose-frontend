@@ -1,17 +1,19 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import moment from 'moment'
-import { useQuery } from '@apollo/react-hooks'
 import Assign from './components/Assign'
 import Labels from './components/Labels'
 import Comments from './components/Comments'
-import { TASK } from './index.graphql'
+import useTask from 'loose-components/src/screens/Dashboard/Task'
 
 const Task = () => {
   const router = useRouter()
   const { id } = router.query
-  const where = id.length > 6 ? { id } : { code: id } 
-  const { data } = useQuery(TASK, { variables: { where } })
+  const {
+    data,
+    loading,
+    error
+  } = useTask({ id })
   return(
     <div>
       { data && data.task &&

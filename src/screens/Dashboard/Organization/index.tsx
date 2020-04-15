@@ -1,12 +1,13 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { useQuery } from '@apollo/react-hooks'
-import { ORGANIZATION } from './index.graphql'
+import useOrganization from 'loose-components/src/screens/Dashboard/Organization'
 
 const Organization = () => {
   const router = useRouter()
   const { id } = router.query
-  const { data } = useQuery(ORGANIZATION, { variables: { id } })
+  const {
+    data
+  } = useOrganization({ id })
   return(
     <div>
       <ul>

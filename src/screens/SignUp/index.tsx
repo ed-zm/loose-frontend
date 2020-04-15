@@ -1,29 +1,23 @@
-import React, { useState } from 'react'
-import { useMutation } from '@apollo/react-hooks'
-import { SIGN_UP } from './index.graphql'
-import router from 'next/router';
+import React from 'react'
+import router from 'next/router'
+import useSignUp from 'loose-components/src/screens/SignUp'
 
 const SignUp = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [username, setUsername] = useState('')
-  const [signUpMutation, { data }] = useMutation(SIGN_UP)
-  const onSignUp = async () => {
-    const signedUp = await signUpMutation({
-      variables: {
-        email,
-        password,
-        firstName,
-        lastName,
-        username
-      }
-    })
-    if(signedUp) {
-      router.push('/sign-in')
-    }
-  }
+  const {
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
+    username,
+    setUsername,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    onSignUp
+  } = useSignUp({
+    callback: () => router.push('/sign-in')
+  })
   return(
     <div>
       <input value = {firstName} placeholder = 'firstName' onChange = {e => setFirstName(e.target.value) } />
