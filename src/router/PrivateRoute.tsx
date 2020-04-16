@@ -46,15 +46,13 @@ const PrivateRoute = (ComposedComponent) => {
       userAgent = navigator.userAgent
       token = Cookies.get('token')
     }
-    if(!process.browser) {
-      const apollo = initApollo(token)
-      try {
-        user = await apollo.query({
-          query: LOGGED_IN
-        })
-      } catch(e) {
-        console.log(e)
-      }
+    const apollo = initApollo(token)
+    try {
+      user = await apollo.query({
+        query: LOGGED_IN
+      })
+    } catch(e) {
+      console.log(e)
     }
     return({ token, user })
   }

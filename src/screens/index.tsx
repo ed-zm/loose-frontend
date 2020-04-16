@@ -2,7 +2,7 @@ import React from 'react'
 import router from 'next/router'
 
 const Home = (props) => {
-  console.log('props', props)
+  console.log('DASHBOARD-----------------------------------------', props)
   return(
     <div>
       <div onClick = { () => router.push('/sign-in')}>sign in</div>

@@ -59,7 +59,7 @@ class PhotoCropperModal extends React.Component {
 //   }
 
   render () {
-    const { show, closeCropper } = this.props
+    const { closeCropper } = this.props
     const { zoom, rotate, src } = this.state
     return (
       <Modal

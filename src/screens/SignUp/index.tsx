@@ -14,20 +14,28 @@ const SignUp = () => {
     setEmail,
     password,
     setPassword,
-    onSignUp
+    onSignUp,
+    data
   } = useSignUp({
-    callback: () => router.push('/sign-in')
+    callback: () => null // router.push('/sign-in')
   })
   return(
     <div>
-      <input value = {firstName} placeholder = 'firstName' onChange = {e => setFirstName(e.target.value) } />
-      <input value = {lastName} placeholder = 'lastName' onChange = {e => setLastName(e.target.value) } />
-      <input value = {username} placeholder = 'username' onChange = {e => setUsername(e.target.value) } />
-      <input value = {email} placeholder = 'email' onChange = {e => setEmail(e.target.value) } />
-      <input value = {password} placeholder = 'password' type = 'password' onChange = {e => setPassword(e.target.value) } />
-      <button onClick = {onSignUp}>
-        Sign Up
-      </button>
+      <div>
+        {data && <span>
+          Account created successfully, please log in to continue
+        </span>}
+      </div>
+      <div>
+        <input value = {firstName} placeholder = 'firstName' onChange = {e => setFirstName(e.target.value) } />
+        <input value = {lastName} placeholder = 'lastName' onChange = {e => setLastName(e.target.value) } />
+        <input value = {username} placeholder = 'username' onChange = {e => setUsername(e.target.value) } />
+        <input value = {email} placeholder = 'email' onChange = {e => setEmail(e.target.value) } />
+        <input value = {password} placeholder = 'password' type = 'password' onChange = {e => setPassword(e.target.value) } />
+        <button onClick = {onSignUp}>
+          Sign Up
+        </button>
+      </div>
     </div>
   )
 }
