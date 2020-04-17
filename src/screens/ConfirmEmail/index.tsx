@@ -1,17 +1,15 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useRouter } from 'next/router'
-import { useMutation } from '@apollo/react-hooks'
-import { CONFIRM_EMAIL } from './index.graphql'
+import useConfirmEmail from 'loose-components/src/screens/ConfirmEmail'
 
 const ConfirmEmail = () => {
   const router = useRouter()
   const { code } = router.query
-  const [ confirmEmail, { data, error, loading } ] = useMutation(CONFIRM_EMAIL)
-  useEffect(() => {
-    confirmEmail({ variables: {
-      emailVerificationCode: code
-    }})
-  }, [])
+  const {
+    data,
+    error,
+    loading
+  } = useConfirmEmail({code})
   return(
     <div>
       { data && data.confirmEmail ?

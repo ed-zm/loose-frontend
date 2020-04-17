@@ -4310,9 +4310,9 @@ lodash@^4.0.0, lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.1
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
 
-"loose-components@git+ssh://git@github.com:loose-dev/loose-components.git#1.0.1":
+"loose-components@git+ssh://git@github.com:loose-dev/loose-components.git#1.0.4":
   version "1.0.0"
-  resolved "git+ssh://git@github.com:loose-dev/loose-components.git#eb21ee65f0af64cd7cd0c766c8633391ed63c663"
+  resolved "git+ssh://git@github.com:loose-dev/loose-components.git#84eba427db9a73f90c14c5959d0b47a532299ea3"
 
 loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.4.0:
   version "1.4.0"
