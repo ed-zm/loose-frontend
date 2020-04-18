@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import gql from 'graphql-tag'
+import nextCookies from 'next-cookies'
 import Cookies from 'js-cookie'
 import initApollo from '../config/apollo'
 import Providers from './Providers'
@@ -37,11 +38,10 @@ const PrivateRoute = (ComposedComponent) => {
   }
 
   Component.getInitialProps = async (ctx) => {
-    let userAgent, token = '', user = null
+    let userAgent, user = null, token = ''
     if(!process.browser) {
       userAgent = ctx.req ? ctx.req.headers['user-agent'] : navigator.userAgent
-      token = ctx && ctx.req && ctx.req.cookies && ctx.req.cookies.token ?
-      ctx.req.cookies.token : ''
+      token = nextCookies(ctx).token
     } else {
       userAgent = navigator.userAgent
       token = Cookies.get('token')

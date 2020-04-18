@@ -29,7 +29,7 @@ const TaskCard = ({ task }) => {
             }
           })
         }}/>
-      <Link href = {`/dashboard/task/${task.code}`}><a>{task.code}</a></Link>
+      <Link href = '/dashboard/task/[id]' as = {`/dashboard/task/${task.code}`}><a>{task.code}</a></Link>
       <div onClick = { () => setShowDescription(!showDescription) }>{task.title}</div>
       { showDescription && <div>{task.description}</div>}
       <div>{moment(task.createdAt).format('DD/MMM/YYYY HH:mm')}</div>

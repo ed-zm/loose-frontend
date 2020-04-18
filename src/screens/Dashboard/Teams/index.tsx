@@ -27,7 +27,7 @@ const Teams = () => {
       <div>
         { data && data.teams && data.teams.map(team =>
           <div>
-            <Link href = {`/dashboard/team/${team.id}`}><a>{team.name}</a></Link>
+            <Link href = '/dashboard/team/[id]' as = {`/dashboard/team/${team.id}`}><a>{team.name}</a></Link>
           </div>
         )}
       </div>
