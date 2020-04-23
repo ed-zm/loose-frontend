@@ -12,24 +12,34 @@ const Task = () => {
   const {
     data,
     loading,
-    error
+    error,
+    isMember
   } = useTask({ id })
   return(
     <div>
       { data && data.task &&
         <div>
+          <div>
+            <img src = '/copy.png' onClick = { async () => {
+            if(navigator && navigator.clipboard) {
+              await navigator.clipboard.writeText(data.task.code)
+              alert('copied to clipboard')
+            }
+          }} />
+          <span>{data.task.code}</span>
+          </div>
           <div>{data.task.title}</div>
           <div>{data.task.description}</div>
-          <div>
+          { isMember && <div>
             {data.task.assignedTo ?
               <div>
                 Assigned To: {data.task.assignedTo.firstName} {data.task.assignedTo.lastName}
               </div> :
               <div>UNASSIGNED</div>
             }
-          </div>
+          </div>}
           <div>{moment(data.task.createdAt).format('DD/MMM/YYYY HH:mm')}</div>
-          <Assign task = { data.task } />
+          { isMember && <Assign task = { data.task } />}
           <Labels task = { data.task } />
           <Comments task = { data.task } />
         </div>

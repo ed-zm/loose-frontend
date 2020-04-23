@@ -18,7 +18,7 @@ const Labels = ({ task }) => {
           <div key = {label.id}>{ label.text.split('-')[0] } </div>
         )}
       </div>
-      <input type = 'text' value = {label} onChange = { e => setLabel(e.target.value)} />
+      { organizationId && <input type = 'text' value = {label} onChange = { e => setLabel(e.target.value)} /> }
       { organizationId && <button
         onClick = {onAddLabel}
         disabled = { creatingLabel }
