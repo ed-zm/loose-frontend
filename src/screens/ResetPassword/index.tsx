@@ -6,7 +6,7 @@ const ResetPassword = () => {
     email,
     setEmail,
     data,
-    onConfirmPassword
+    onResetPassword
   } = useResetPassword()
   return(
     <div>
@@ -14,7 +14,7 @@ const ResetPassword = () => {
         <div> We've sent you an Email With Instructions to reset your password </div> :
         <div>
         <input type = 'text' placeholder = 'Introduce email' value = {email} onChange = {e => setEmail(e.target.value)} />
-        <button onClick = {onConfirmPassword}>
+        <button onClick = {onResetPassword}>
           Reset Password
         </button>
       </div>}
