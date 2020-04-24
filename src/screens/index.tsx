@@ -1,7 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
+import router from 'next/router'
 import Button from '../components/Button'
 import './index.scss'
+import { Router } from 'next/router'
 
 const Home = (props) => {
   return(
@@ -12,7 +14,7 @@ const Home = (props) => {
             <a className = 'home-header-logo'>Loose Dev</a>
           </Link>
           <Link href = '/sign-in'>
-            <Button text = 'Sign In' onClick = { () => {}} submitting = {false}/>
+            <Button text = 'Sign In' onClick = { () => {router.push('/sign-in')}} submitting = {false}/>
           </Link>
         </div>
         <div className = 'home-content'>
