@@ -1,0 +1,20 @@
+.tasks-container {
+  @extend %basic-grid-column;
+  grid-row-gap: 3rem;
+}
+
+.tasks-cards-container {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(auto-fit,minmax(1rem, max-content));
+  grid-column-gap: 2rem;
+  grid-row-gap: 2rem;
+}
+
+.tasks-create-task {
+  grid-column: 1 / -1;
+}
+
+.task-wrapper {
+}

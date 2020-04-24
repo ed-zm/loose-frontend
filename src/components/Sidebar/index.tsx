@@ -2,19 +2,34 @@ import React, { useContext } from 'react'
 import router from 'next/router'
 import Link from 'next/link'
 import { UserContext } from 'loose-components/src/contexts/User'
+import './index.scss'
 
 const Sidebar = () => {
   const user = useContext(UserContext)
   return(
-    <ul>
-      <li><Link href = {`/dashboard`}>Home</Link></li>
-      <li><Link href = '/dashboard/user/[id]' as = {`/dashboard/user/${user.id}`}>My Profile</Link></li>
-      <li><Link href = '/dashboard/organizations'>My Organizations</Link></li>
-      <li><Link href = '/dashboard/teams'>My Teams</Link></li>
-      <li><div onClick = { () => {
-        user.actions.logout()
-        router.push('/sign-in')
-      }}>Log Out</div></li>
+    <ul className = 'sidebar-container'>
+      <li className = 'sidebar-item'>
+        <Link href = {`/dashboard`}><a className = 'sidebar-item-link'>Home</a></Link>
+      </li>
+      <li className = 'sidebar-item'>
+        <Link href = '/dashboard/user/[id]' as = {`/dashboard/user/${user.id}`}><a className = 'sidebar-item-link'>My Profile</a></Link>
+      </li>
+      <li className = 'sidebar-item'>
+        <Link href = '/dashboard/organizations'><a className = 'sidebar-item-link'>My Organizations</a></Link>
+      </li>
+      <li className = 'sidebar-item'>
+        <Link href = '/dashboard/teams'><a className = 'sidebar-item-link'>My Teams</a></Link>
+      </li>
+      <li className = 'sidebar-item'>
+        <div 
+          onClick = { () => {
+            user.actions.logout()
+            router.push('/sign-in')
+          }}
+        >
+          <a className = 'sidebar-item-link'>Log Out</a>
+        </div>
+      </li>
     </ul>
   )
 }

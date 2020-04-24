@@ -5,6 +5,7 @@ import Cookies from 'js-cookie'
 import initApollo from '../config/apollo'
 import Providers from './Providers'
 import Sidebar from '../components/Sidebar'
+import Header from '../components/Header'
 import '../styles/index.scss'
 
 const LOGGED_IN = gql`
@@ -24,7 +25,7 @@ const PrivateRoute = (ComposedComponent) => {
     <Providers user = {user ? user.data.loggedIn : null } token = {props.token}>
       <div className = 'main-layout'>
         <div className = 'header-layout'>
-          <div>Header</div>
+          <Header />
         </div>
         <div className = 'sidebar-layout'>
           <Sidebar />

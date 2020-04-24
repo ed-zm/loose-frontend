@@ -3,36 +3,50 @@ import { useMutation } from '@apollo/react-hooks'
 import Link from 'next/link'
 import moment from 'moment'
 import { UPDATE_TASK } from './index.graphql'
+import './index.scss'
 
 const TaskCard = ({ task }) => {
   const [ showDescription, setShowDescription ] = useState(false)
   const [ updateTask ] = useMutation(UPDATE_TASK)
   return(
-    <div style = {{ backgroundColor: task.state === 0? 'transparent' : 'lightgray' }}>
-      <input
-        type = 'checkbox'
-        checked = {task.state === 1 ? true : false }
-        onChange = { () => {
-          const state = task.state === 0 ? 1 : 0
-          updateTask({
-            variables: {
-              id: task.id,
-              state
-            },
-            optimisticResponse: {
-              __typename: "Mutation",
-              updateTask: {
-                __typename: "Task",
+    <div className = 'task-card-container' style = {{ backgroundColor: task.state === 0? 'transparent' : 'lightgray' }}>
+      <div className = 'task-card-id'>
+        <input
+          type = 'checkbox'
+          checked = {task.state === 1 ? true : false }
+          onChange = { () => {
+            const state = task.state === 0 ? 1 : 0
+            updateTask({
+              variables: {
                 id: task.id,
                 state
+              },
+              optimisticResponse: {
+                __typename: "Mutation",
+                updateTask: {
+                  __typename: "Task",
+                  id: task.id,
+                  state
+                }
               }
-            }
-          })
-        }}/>
-      <Link href = '/dashboard/task/[id]' as = {`/dashboard/task/${task.code}`}><a>{task.code}</a></Link>
-      <div onClick = { () => setShowDescription(!showDescription) }>{task.title}</div>
-      { showDescription && <div>{task.description}</div>}
-      <div>{moment(task.createdAt).format('DD/MMM/YYYY HH:mm')}</div>
+            })
+          }}/>
+        <Link href = '/dashboard/task/[id]' as = {`/dashboard/task/${task.code}`}>
+          <a className = 'task-card-id-link'>
+            {`${' '}${task.code}`}
+          </a>
+        </Link>
+      </div>
+      <div className = 'task-card-content'>
+        <span
+        className = 'task-card-title'
+          onClick = { () => setShowDescription(!showDescription) }
+        >
+          {task.title}
+        </span>
+          <p className = 'task-description'>{ showDescription ? task.description : '' } </p>
+        <span className = 'task-card-date'>{moment(task.createdAt).format('DD/MMM/YYYY HH:mm')}</span>
+      </div>
     </div> 
   )
 }

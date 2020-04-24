@@ -1,0 +1,51 @@
+.task-card-container {
+  display: grid;
+  width: 100%;
+  height: 20rem;
+  grid-template-rows: repeat(auto-fit, minmax(1rem, max-content));
+  @include BoxShadow(3);
+  &:hover {
+    @include BoxShadow(12)
+  }
+}
+.task-card-content {
+  display: grid;
+  height: 100%;
+  grid-template-rows: repeat(auto-fit, minmax(0rem, max-content));
+  padding: 2rem 3rem 3rem 3rem;
+  grid-row-gap: 1.5rem;
+}
+
+.task-card-title {
+  display: block;
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.task-description {
+  font-size: 1.3rem;
+  color: $secondary-text;
+}
+
+.task-card-id {
+  padding: 3rem;
+  background-color: $primary-color;
+  display: flex;
+  align-items: center;
+}
+
+.task-card-id-link {
+  color: $text-icons;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
+.task-card-date {
+  display: block;
+  align-self: end;
+  font-size: 1rem;
+  color: $secondary-text;
+  text-align: end;
+}

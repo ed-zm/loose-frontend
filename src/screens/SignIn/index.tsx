@@ -5,6 +5,7 @@ import useSignIn from 'loose-components/src/screens/SignIn'
 import parseError from 'loose-components/src/utils/parseError'
 import { useRouter } from 'next/router'
 import errors from 'loose-components/src/utils/errors'
+import './index.scss'
 
 const SignIn = () => {
   const router = useRouter()
@@ -27,24 +28,26 @@ const SignIn = () => {
   })
   const parsedError = parseError(error)
   return(
-    <div>
-      <div>
-        { accountCreated && <span>Account Created Please Log In </span>}
-        {parsedError && <div>
-          <span>{parsedError}</span>
-          {(parsedError === errors.CONFIRM_EMAIL) &&
-            <div>
-              { resendVerificationEmailError && <span>{parseError(resendVerificationEmailError)}</span>}
-              { resendVerificationEmailSent ?
-                <span>{errors.VERIFICATION_EMAIL_SENT}</span> :
-              <Button text = 'Resend Verification Email' onClick = {onResendVerificationEmail} submitting = {resendingVerificationEmail} />}
-            </div>
-          }
-        </div>}
-      </div>
-      <div>
-        <input value = {email} placeholder = 'email' onChange = {e => setEmail(e.target.value) } />
+    <div className = 'sign-in-container'>
+      <div className = 'sign-in-form-container'>
+        <div>
+          { accountCreated && <span>Account Created Please Log In </span>}
+          {parsedError && <div>
+            <span>{parsedError}</span>
+            {(parsedError === errors.CONFIRM_EMAIL) &&
+              <div>
+                { resendVerificationEmailError && <span>{parseError(resendVerificationEmailError)}</span>}
+                { resendVerificationEmailSent ?
+                  <span>{errors.VERIFICATION_EMAIL_SENT}</span> :
+                <Button text = 'Resend Verification Email' onClick = {onResendVerificationEmail} submitting = {resendingVerificationEmail} />}
+              </div>
+            }
+          </div>}
+        </div>
+        <span className = 'sign-in-title'>Sign In</span>
+        <input className = 'sign-in-form-input' value = {email} placeholder = 'email' onChange = {e => setEmail(e.target.value) } />
         <input
+          className = 'sign-in-form-input'
           value = {password}
           placeholder = 'password'
           type = 'password'

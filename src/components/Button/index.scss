@@ -1,0 +1,19 @@
+.button-container {
+  padding: 1rem 2rem 1rem 2rem;
+  border: none;
+  font-size: 1.6rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  background-color: $accent-color;
+  color: $text-icons;
+  @include BoxShadow(3);
+  &:hover {
+    @include BoxShadow(12);
+  }
+  &:focus {
+    @include BoxShadow(12);
+    background-color: $text-icons;
+    color: $accent-color;
+    outline: 0px !important;
+  }
+}

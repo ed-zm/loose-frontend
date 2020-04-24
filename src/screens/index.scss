@@ -1,0 +1,52 @@
+.home-wrapper {
+  background-color: $primary-color;
+  width: 100vw;
+  height: 100vh;
+}
+
+.home-container {
+  display: grid;
+  justify-items: center;
+  grid-template-rows: 10rem calc(100vh - 10rem);
+  
+}
+
+.home-header {
+  width: $bp-largest;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.home-header-logo {
+  text-decoration: none;
+  font-size: 3.2rem;
+  color: $text-icons;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.home-content {
+  width: $bp-largest;
+}
+
+.home-cta {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  height: 100%;
+}
+
+.home-cta-text-container {
+  margin-top: -10rem;
+}
+
+.home-cta-text-1 {
+  font-size: 6rem;
+  color: $text-icons;
+}
+
+.home-cta-text-2 {
+  font-size: 6rem;
+  color: $accent-color;
+}

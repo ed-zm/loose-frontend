@@ -1,0 +1,41 @@
+.sign-in-container {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  align-items: center;
+  justify-items: center;
+  background-color: $primary-color;
+}
+
+.sign-in-title {
+  width: 100%;
+  margin-left: -3rem;
+  margin-right: -3rem;
+  text-align: center;
+  font-size: 3.2rem;
+  color: $primary-text;
+  font-weight: bold;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid $divider-color;
+}
+
+.sign-in-form-container {
+  @include BoxShadow(6);
+  padding: 3rem;
+  display: grid;
+  grid-row-gap: 2rem;
+  justify-items: center;
+  grid-template-rows: repeat(auto-fit, minmax(1rem, max-content));
+  background-color: $text-icons;
+}
+
+.sign-in-form-input {
+  padding: 1rem;
+  border: 1px solid $divider-color;
+  font-size: 1.6rem;
+  border-radius: 0.5rem;
+  width: 30rem;
+  outline-color: $accent-color;
+  outline: 0;
+}
