@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
+import Markdown from 'react-markdown'
 import Link from 'next/link'
 import moment from 'moment'
 import { UPDATE_TASK } from './index.graphql'
@@ -44,7 +45,9 @@ const TaskCard = ({ task }) => {
         >
           {task.title}
         </span>
-          <p className = 'task-description'>{ showDescription ? task.description : '' } </p>
+          <div className = 'task-description'>
+            { showDescription && <Markdown className = '' source = {task.description} /> }
+          </div>
         <span className = 'task-card-date'>{moment(task.createdAt).format('DD/MMM/YYYY HH:mm')}</span>
       </div>
     </div> 

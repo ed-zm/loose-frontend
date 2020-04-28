@@ -1,5 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
+import Markdown from 'react-markdown'
 import moment from 'moment'
 import Assign from './components/Assign'
 import Labels from './components/Labels'
@@ -29,7 +30,7 @@ const Task = () => {
           <span>{data.task.code}</span>
           </div>
           <div>{data.task.title}</div>
-          <div>{data.task.description}</div>
+          <Markdown className = '' source = {data.task.description} />
           { isMember && <div>
             {data.task.assignedTo ?
               <div>

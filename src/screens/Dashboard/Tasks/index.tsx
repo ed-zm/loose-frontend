@@ -25,7 +25,7 @@ const Tasks = () => {
       <div className = 'tasks-create-task'>
         <Input type = 'text' placeholder = 'title' value = {title} onChange = { e => setTitle(e.target.value) }/>
         <Input type = 'number' placeholder = 'estimated' value = {estimated} onChange = { e => setEstimated(parseInt(e.target.value, 10)) }/>
-        <TextAreaMD placeholder = 'description' value = {description} onChange = { e => setDescription(e.target.value) }/>
+        <TextAreaMD placeholder = 'description' value = {description} onChange = { e =>  setDescription(e.target.value) }/>
         <select onChange = {e => setOrganization(e.target.value)} value = {organization}>
           <option key = 'personal-task-select' value = {''}>Personal</option>
           { orgs &&

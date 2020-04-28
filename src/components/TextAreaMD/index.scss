@@ -3,11 +3,35 @@
 }
 
 .textarea-md-header {
-  background-color: $light-primary-color;
+  background-color: $primary-color;
   padding: 0.8rem 0.8rem 0 0.8rem;
   display: grid;
   align-items: end;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 2fr;
+}
+
+.textarea-md-attach {
+  display: block;
+  text-align: left;
+  padding: 0.8rem;
+  font-size: 1.3rem;
+  border-left: 1px solid $divider-color;
+  border-bottom: 1px solid $divider-color;
+  border-right: 1px solid $divider-color;
+  margin-top: -4px;
+  cursor: pointer;
+}
+
+.textarea-md-header-tabs {
+  display: grid;
+  align-items: end;
+  grid-template-columns: repeat(2, minmax(1rem, max-content));
+}
+
+.textarea-md-header-icons {
+  display: grid;
+  align-items: end;
+  grid-template-columns: repeat(auto-fit, 1fr);
 }
 
 .textarea-md-tab {
@@ -16,10 +40,16 @@
   cursor: pointer;
   font-size: 1.6rem;
   margin-bottom: -1px;
+  color: $text-icons;
+  font-weight: 400;
+  text-align: center;
+  &:hover {
+    background-color: $dark-primary-color;
+  }
 }
 
 .textarea-md-markdown-wrapper {
-  min-height: 10.8rem;
+  min-height: 14.3rem;
 }
 
 .textarea-md-markdown {
@@ -29,9 +59,16 @@
 .textarea-md-tab-selected {
   background-color: $text-icons !important;
   border-bottom: 1px solid $text-icons;
+  color: $primary-text !important;
 }
 
 .textarea-md-content-container {
   padding: 0.8rem;
   border: 1px solid $divider-color;
+}
+
+.textarea-md-textarea {
+  border-bottom: 1px dashed $divider-color;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
 }
