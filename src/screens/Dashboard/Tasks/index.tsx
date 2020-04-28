@@ -1,6 +1,9 @@
 import React from 'react'
 import useTasks from 'loose-components/src/screens/Dashboard/Tasks'
+import TextAreaMD from '../../../components/TextAreaMD'
+import Input from '../../../components/Input'
 import TaskCard from '../../../components/TaskCard'
+import Button from '../../../components/Button'
 import './index.scss'
 
 const Tasks = () => {
@@ -20,9 +23,9 @@ const Tasks = () => {
   return(
     <div className = 'tasks-container'>
       <div className = 'tasks-create-task'>
-        <input type = 'text' placeholder = 'title' value = {title} onChange = { e => setTitle(e.target.value) }/>
-        <input type = 'number' placeholder = 'estimated' value = {estimated} onChange = { e => setEstimated(parseInt(e.target.value, 10)) }/>
-        <input type = 'textarea' placeholder = 'description' value = {description} onChange = { e => setDescription(e.target.value) }/>
+        <Input type = 'text' placeholder = 'title' value = {title} onChange = { e => setTitle(e.target.value) }/>
+        <Input type = 'number' placeholder = 'estimated' value = {estimated} onChange = { e => setEstimated(parseInt(e.target.value, 10)) }/>
+        <TextAreaMD placeholder = 'description' value = {description} onChange = { e => setDescription(e.target.value) }/>
         <select onChange = {e => setOrganization(e.target.value)} value = {organization}>
           <option key = 'personal-task-select' value = {''}>Personal</option>
           { orgs &&
@@ -31,7 +34,7 @@ const Tasks = () => {
               <option key = {o.id} value = {o.id}>{o.name}</option>
           )}
         </select>
-        <button onClick = { onCreateTask }>Create Task</button>
+        <Button onClick = { onCreateTask }>Create Task</Button>
       </div>
       <div className = 'tasks-cards-container'>
         {sortedTasks.map(task =>

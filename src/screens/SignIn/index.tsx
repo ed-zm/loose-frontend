@@ -56,7 +56,9 @@ const SignIn = () => {
             if(e.key === 'Enter') onSignIn()
           }}
         />
-        <Button text = 'Sign In' onClick = {onSignIn} submitting = {signingIn} />
+        <Button onClick = {onSignIn} disabled = {signingIn}>
+          Sign In
+        </Button>
       </div>
     </div>
   )
