@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import useOrganizations from 'loose-components/src/screens/Dashboard/Organizations'
 
 const Organizations = () => {
@@ -16,9 +17,11 @@ const Organizations = () => {
       </div>
       <ul>
         {data && data.organizations && data.organizations.map(organization =>
-          <li key = {organization.id}>
-            <div>{organization.name}</div>
-          </li>  
+          <Link key = {organization.id} href = '/dashboard/organization/[id]' as = {`/dashboard/organization/${organization.id}`}>
+            <a>
+              {organization.name}
+            </a>
+          </Link> 
         )}
       </ul>
     </div>

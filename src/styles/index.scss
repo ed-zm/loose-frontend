@@ -3,7 +3,7 @@
 .main-layout {
   display: grid;
   grid-template-rows: [header-start] 10rem [header-end content-start] minmax(calc(100vh - 76px), min-content) [content-end footer-start];
-  grid-template-columns: [sidebar-start] minmax(min-content, 20rem) [sidebar-end full-start] minmax(2rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(2rem, 1fr) [full-end];
+  grid-template-columns: [sidebar-start] 20rem [sidebar-end full-start] minmax(2rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(2rem, 1fr) [full-end];
   @media only screen and (max-width: $bp-medium) {
     grid-template-columns: [full-start] minmax(2rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(2rem, 1fr) [full-end];
   }
@@ -18,11 +18,14 @@
   width: 100%;
   display: grid;
   justify-items: center;
+  @include BoxShadow(6);
 }
 
 .content-layout {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  @include BoxShadow(6);
+  padding: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   grid-column: center-start / center-end;
   grid-row: content-start / content-end;
   display: grid;
@@ -37,10 +40,7 @@
   grid-row: content-start / content-end;
   background-color: #ffffff;
   border-right: 1px solid #e8e8e8;
-
-  .ant-menu-inline {
-    border-right: 0;
-  }
+  @include BoxShadow(6);
 
 }
 

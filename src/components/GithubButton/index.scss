@@ -1,0 +1,27 @@
+.github-button {
+    display: flex;
+    white-space: nowrap;
+    align-items: center;
+    padding: 1rem 2rem 1rem 2rem;
+    cursor: pointer;
+    outline: 0;
+    border: none;
+    font-size: 1.6rem;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    background-color: #24292e;
+    color: $text-icons;
+    transition: background .3s ease-in-out, box-shadow .2s ease-in-out;
+    @include BoxShadow(3);
+    &:hover {
+      @include BoxShadow(12);
+      background-color: #2ebc4f;
+    }
+    &:focus {
+      @include BoxShadow(12);
+      outline: 0px !important;
+    }
+    &-image {
+      margin-right: 1rem;
+    }
+  }

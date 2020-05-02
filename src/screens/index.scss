@@ -7,12 +7,14 @@
 .home-container {
   display: grid;
   justify-items: center;
+  grid-template-columns: minmax(2rem, 1fr) repeat(8, 1fr) minmax(2rem, 1fr);
   grid-template-rows: 10rem calc(100vh - 10rem);
   
 }
 
 .home-header {
-  width: $bp-largest;
+  grid-column: 2 / 10;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -27,7 +29,9 @@
 }
 
 .home-content {
-  width: $bp-largest;
+  grid-column: 2 / 10;
+  justify-items: center;
+  align-items: center;
 }
 
 .home-cta {

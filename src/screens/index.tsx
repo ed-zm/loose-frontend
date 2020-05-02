@@ -14,7 +14,9 @@ const Home = (props) => {
             <a className = 'home-header-logo'>Loose Dev</a>
           </Link>
           <Link href = '/sign-in'>
-            <Button text = 'Sign In' onClick = { () => {router.push('/sign-in')}} submitting = {false}/>
+            <Button text = 'Sign In' onClick = { () => {router.push('/sign-in')}} submitting = {false}>
+              Sign In
+            </Button>
           </Link>
         </div>
         <div className = 'home-content'>
