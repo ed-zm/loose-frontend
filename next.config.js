@@ -22,6 +22,9 @@ module.exports = withPlugins([
   }],
   [withCss],
   [withTM, {
-    transpileModules: ['loose-components']
+    transpileModules: ['loose-components'],
+    env: {
+      GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID
+    }
   }]
 ])

@@ -74,7 +74,7 @@ const Organization = () => {
           clientId = {process.env.GITHUB_CLIENT_ID}
           onSuccess = { onSuccess}
           onError = { console.log }
-          redirectUri = { `http://localhost:3000/oauth` }
+          redirectUri = { `https://alpha.loose.dev/oauth` }
           scope = 'repo user:email'
         >
           <GithubButton disabled = {data.organization.githubToken}>
