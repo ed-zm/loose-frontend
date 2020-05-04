@@ -15,20 +15,20 @@ const RepositoryCard = ({ repo, importButton, organization }) => {
           <span className = 'repository-card-content-title-private'>{repo.private ? 'PRIVATE' : 'PUBLIC'}</span>
         </div>
         <p className = 'repository-card-content-description'>{repo.description ? repo.description : 'No Description'}</p>
-        <span className = 'repository-card-content-metadata-key'>{moment(repo.updated_at).fromNow()}</span>
+        <span className = 'repository-card-content-metadata-key'>{moment(repo.updatedAt).fromNow()}</span>
         <div className = 'repository-card-content-metadata'>
           <span className = 'repository-card-content-metadata-key'>{repo.language}</span>
           <div>
             <span className = 'repository-card-content-metadata-key'>Open:{' '}</span>
-            <span className = 'repository-card-content-metadata-value'>{repo.open_issues_count}</span>
+            <span className = 'repository-card-content-metadata-value'>{repo.openIssuesCount}</span>
           </div>
           {/* <div>
             <span className = 'repository-card-content-metadata-key'>Stars:{' '}</span>
-            <span className = 'repository-card-content-metadata-value'>{repo.stargazers_count}</span>
+            <span className = 'repository-card-content-metadata-value'>{repo.stargazersCount}</span>
           </div>
           <div>
             <span className = 'repository-card-content-metadata-key'>Forks:{' '}</span>
-            <span className = 'repository-card-content-metadata-value'>{repo.forks_count}</span>
+            <span className = 'repository-card-content-metadata-value'>{repo.forksCount}</span>
           </div> */}
         </div>
         

@@ -1,34 +1,47 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React from 'react'
+import { useQuery } from '@apollo/react-hooks'
+import gql from 'graphql-tag'
+import ClipLoader from "react-spinners/ClipLoader";
 import GithubButton from '../../GithubButton'
 import './index.scss'
 import Button from '../../Button'
 
+const GITHUB_ISSUES = gql`
+  query($organizationId: ID!, $repository: String!) {
+    issues(organizationId: $organizationId, repository: $repository) {
+      id
+      title
+      state
+      number
+      updatedAt
+      createdAt
+      closedAt
+      url
+      body
+      comments
+    }
+  }
+`
+
 const GithubIssues = ({ repo, organization, closeModal }) => {
-  const [ issues, setIssues ] = useState([])
-  const open = issues.filter(issue => !issue.closedAt)
-  const closed = issues.filter(issue => !!issue.closedAt)
-  useEffect(() => {
-    new Promise(async resolve => {
-      const response = await axios.get(
-        `https://api.github.com/repos/${repo.full_name}/issues`,
-        {
-          headers: {
-            Authorization: `token ${organization.githubToken}`
-          }
-        }
-      )
-      if(response && response.status === 200) {
-        setIssues(response.data)
-      }
-      resolve()
-    })
+  const { data, loading: loadingIssues } = useQuery(GITHUB_ISSUES, {
+    variables: {
+      repository: repo.fullName,
+      organizationId: organization.id
+    }
   })
+  const open = data && data.issues ? data.issues.filter(issue => !issue.closedAt) : []
+  const closed = data && data.issues ? data.issues.filter(issue => !!issue.closedAt) : []
+  if(loadingIssues) return <ClipLoader
+    size={20}
+    color={"333333"}
+    loading={true}
+  />
   return(
     <div className = 'github-issues-modal'>
       <div>
         <span className = 'github-issues-modal-key'>Found:{' '}</span>
-        <span className = 'github-issues-modal-value'>{issues.length}</span>
+        <span className = 'github-issues-modal-value'>{data && data.issues ? data.issues.length : 0}</span>
       </div>
       <div>
         <span className = 'github-issues-modal-key'>Open:{' '}</span>

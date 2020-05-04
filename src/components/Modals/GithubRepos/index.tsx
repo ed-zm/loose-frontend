@@ -4,12 +4,12 @@ import Button from '../../Button'
 import RepositoryCard from '../../RepositoryCard'
 import './index.scss'
 
-const GithubRepos = ({ repos = [], closeModal }) => {
+const GithubRepos = ({ repos = [], organization, closeModal }) => {
   return(
     <div className = 'github-repos-modal'>
       <List
         items = {repos}
-        renderItem = { repo => <RepositoryCard repo = {repo} importButton/>}
+        renderItem = { repo => <RepositoryCard repo = {repo} organization = {organization} importButton/>}
       />
       <Button className = 'github-repos-modal-button' onClick = { closeModal }>
         Cancel
