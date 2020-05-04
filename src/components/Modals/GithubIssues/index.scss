@@ -1,0 +1,23 @@
+.github-issues-modal {
+  display: grid;
+  grid-row-gap: 2rem;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(5, minmax(1rem, max-content));
+  &-import-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  &-key {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: $primary-text;
+  }
+  &-value {
+    @extend .github-issues-modal-key;
+    color: $primary-color;
+  }
+  &-button {
+    justify-self: center;
+    align-self: end;
+  }
+}

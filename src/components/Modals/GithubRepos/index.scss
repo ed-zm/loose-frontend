@@ -1,0 +1,10 @@
+.github-repos-modal {
+  display: grid;
+  grid-row-gap: 2rem;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, minmax(1rem, max-content));
+  &-button {
+    justify-self: center;
+    align-self: end;
+  }
+}

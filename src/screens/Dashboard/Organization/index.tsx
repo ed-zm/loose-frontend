@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import Button from '../../../components/Button'
 import useOrganization from 'loose-components/src/screens/Dashboard/Organization'
 import GithubLogin from 'react-github-login'
 import { useMutation } from '@apollo/react-hooks'
@@ -13,13 +12,14 @@ import gql from 'graphql-tag'
 import './index.scss'
 
 const GITHUB_LOGIN = gql`
-  mutation($code: String!) {
-    githubLogin(code: $code)
+  mutation($code: String!, $organizationId: ID!) {
+    githubLogin(code: $code, organizationId: $organizationId)
   }
 `
 
 const Organization = () => {
   const router = useRouter()
+  const { actions } = useContext(ModalContext);
   const [ token, setToken ] = useState('')
   const [ repos, setRepos ] = useState([])
   const [ githubLogin, { data: github }] = useMutation(GITHUB_LOGIN)
@@ -29,7 +29,7 @@ const Organization = () => {
   } = useOrganization({ id })
   const onSuccess = async ({ code }) => {
     if(code) {
-      await githubLogin({ variables: { code }})
+      await githubLogin({ variables: { code, organizationId: data.organization.id }})
     }
   }
   useEffect(() => {
@@ -39,24 +39,26 @@ const Organization = () => {
   }, [github])
 
   useEffect(() => {
-    new Promise(async resolve => {
-      const response = await axios.get(
-        // 'https://api.github.com/repos/ed-zm/au_test/issues',
-        'https://api.github.com/user/repos',
-        {
-          headers: {
-            Authorization: `token ${token}`
+    if(token || (data && data.organization && data.organization.githubToken )) {
+      const githubToken = data.organization.githubToken || token
+      new Promise(async resolve => {
+        const response = await axios.get(
+          'https://api.github.com/user/repos',
+          {
+            headers: {
+              Authorization: `token ${githubToken}`
+            }
           }
+        )
+        if(response && response.status === 200) {
+          setRepos(response.data)
+          // actions.openModal({ modal: "GithubRepos", params: { repos: response.data }, title: 'Import Issues from Github' })
         }
-      )
-      if(response && response.status === 200) {
-        // setRepos(response.data)
-        actions.openModal({ modal: "GithubRepos", params: { repos: response.data }, title: 'Import Issues from Github' })
-      }
-      resolve()
-    })
-  }, [token])
-  const { actions } = useContext(ModalContext);
+        resolve()
+      })
+    }
+  }, [token, data])
+  console.log(repos)
   if(!data) return null
   return(
     <div className = 'organization'>
@@ -70,8 +72,8 @@ const Organization = () => {
           redirectUri = { `http://localhost:3000/oauth` }
           scope = 'repo user:email'
         >
-          <GithubButton>
-            LOGIN
+          <GithubButton disabled = {data.organization.githubToken}>
+            { data.organization.githubToken ? 'Connected' : 'Connect' }
           </GithubButton>
         </GithubLogin>
         <div>Teams</div>
@@ -80,14 +82,14 @@ const Organization = () => {
       <div className = 'organization-content'>
         <List
           items = {repos}
-          renderItem = { repo => <RepositoryCard repo = {repo} />}
+          renderItem = { repo => <RepositoryCard repo = {repo} importButton organization = {data.organization} />}
         />
 
-        {!!repos.length && false && <Button onClick = { async () => {
-          await actions.openModal({ modal: "GithubRepos", params: { repos }, title: 'Import Issues from Github' })
+        {!!repos.length && <GithubButton onClick = { async () => {
+          await actions.openModal({ modal: "GithubRepos", params: { repos }, title: 'Repositories' })
         }}>
           Import Issues
-        </Button>}
+        </GithubButton>}
       </div>
       </div>
   )

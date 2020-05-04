@@ -1,6 +1,8 @@
 import React from 'react'
 import useTeams from 'loose-components/src/screens/Dashboard/Teams'
-import Link from 'next/link'
+import List from '../../../components/List'
+import TeamCard from '../../../components/TeamCard'
+import './index.scss'
 
 const Teams = () => {
   const {
@@ -14,7 +16,7 @@ const Teams = () => {
     data
   } = useTeams()
   return(
-    <div>
+    <div className = 'teams'>
       <input type = 'text' placeholder = 'name' value = {name} onChange = { e => setName(e.target.value) }/>
       <select onChange = {e => setOrganization(e.target.value)} value = {organization}>
         { orgs &&
@@ -24,13 +26,10 @@ const Teams = () => {
         )}
       </select>
       <button onClick = { onCreateTeam } disabled = { creatingTeam || !organization }>Create Team</button>
-      <div>
-        { data && data.teams && data.teams.map(team =>
-          <div>
-            <Link href = '/dashboard/team/[id]' as = {`/dashboard/team/${team.id}`}><a>{team.name}</a></Link>
-          </div>
-        )}
-      </div>
+      <List
+        items = {data && data.teams}
+        renderItem = { team => <TeamCard team = {team} />}
+      />
     </div>
   )
 }

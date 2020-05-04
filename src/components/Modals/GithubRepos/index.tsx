@@ -1,24 +1,19 @@
 import React from 'react'
-import axios from 'axios'
 import List from '../../List'
 import Button from '../../Button'
 import RepositoryCard from '../../RepositoryCard'
+import './index.scss'
 
-const GithubRepos = ({ repos = [] }) => {
-  console.log('GITHUB')
-  const importIssues = async (repo) => {
-    const response = await axios.get(
-      `https://api.github.com/repos/${repo.full_name}/issues`
-    )
-    if(response && response.status === 200) {
-    }
-  }
+const GithubRepos = ({ repos = [], closeModal }) => {
   return(
-    <div>
+    <div className = 'github-repos-modal'>
       <List
         items = {repos}
         renderItem = { repo => <RepositoryCard repo = {repo} importButton/>}
       />
+      <Button className = 'github-repos-modal-button' onClick = { closeModal }>
+        Cancel
+      </Button>
     </div>
   )
 }

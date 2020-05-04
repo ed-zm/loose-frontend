@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import moment from 'moment'
+import { ModalContext } from "loose-components/src/contexts/UI/Modal";
 import GithubButton from '../GithubButton'
 import './index.scss'
 
-const RepositoryCard = ({ repo, importButton }) => {
+const RepositoryCard = ({ repo, importButton, organization }) => {
+  const { actions } = useContext(ModalContext);
   return(
     <div className = 'repository-card'>
       <div className = 'repository-card-content'>
@@ -12,7 +15,7 @@ const RepositoryCard = ({ repo, importButton }) => {
           <span className = 'repository-card-content-title-private'>{repo.private ? 'PRIVATE' : 'PUBLIC'}</span>
         </div>
         <p className = 'repository-card-content-description'>{repo.description ? repo.description : 'No Description'}</p>
-        <span className = 'repository-card-content-metadata-key'>Updated 16 days ago</span>
+        <span className = 'repository-card-content-metadata-key'>{moment(repo.updated_at).fromNow()}</span>
         <div className = 'repository-card-content-metadata'>
           <span className = 'repository-card-content-metadata-key'>{repo.language}</span>
           <div>
@@ -31,8 +34,10 @@ const RepositoryCard = ({ repo, importButton }) => {
         
       </div>
       <div className = 'repository-card-actions'>
-        {importButton && <GithubButton onClick = {() => {}}>
-          Import Issues
+        {importButton && <GithubButton onClick = {async () => {
+          await actions.openModal({ modal: "GithubIssues", params: { repo, organization }, title: 'Issues' })
+        }}>
+          Import
         </GithubButton>}
       </div>
     </div>

@@ -1,6 +1,8 @@
 import React from 'react'
-import Link from 'next/link'
+import OrganizationCard from '../../../components/OrganizationCard'
 import useOrganizations from 'loose-components/src/screens/Dashboard/Organizations'
+import List from '../../../components/List'
+import './index.scss'
 
 const Organizations = () => {
   const {
@@ -10,20 +12,15 @@ const Organizations = () => {
     data
   } = useOrganizations()
   return(
-    <div>
+    <div className = 'organizations'>
       <div>
         <input type = 'text' placeholder = 'organization name' value = {name} onChange = { e => setName(e.target.value)}/>
         <button onClick = { onCreateOrganization }> Create Organization </button>
       </div>
-      <ul>
-        {data && data.organizations && data.organizations.map(organization =>
-          <Link key = {organization.id} href = '/dashboard/organization/[id]' as = {`/dashboard/organization/${organization.id}`}>
-            <a>
-              {organization.name}
-            </a>
-          </Link> 
-        )}
-      </ul>
+      <List
+        items = {data && data.organizations}
+        renderItem = { organization => <OrganizationCard organization = {organization} />}
+      />
     </div>
   )
 }
