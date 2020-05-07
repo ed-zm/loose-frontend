@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import router from 'next/router'
 import Link from 'next/link'
+import Cookies from 'js-cookie'
 import { UserContext } from 'loose-components/src/contexts/User'
 import './index.scss'
 
@@ -22,9 +23,10 @@ const Sidebar = () => {
       </li>
       <li className = 'sidebar-item'>
         <div 
-          onClick = { () => {
-            user.actions.logout()
-            router.push('/sign-in')
+          onClick = { async () => {
+            await Cookies.remove('token')
+            await user.actions.logout()
+            await router.push('/sign-in')
           }}
         >
           <a className = 'sidebar-item-link'>Log Out</a>
