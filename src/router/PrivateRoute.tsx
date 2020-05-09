@@ -6,6 +6,7 @@ import initApollo from '../config/apollo'
 import Providers from './Providers'
 import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
+import getEnv from '../utils/getEnv'
 import '../styles/index.scss'
 
 const LOGGED_IN = gql`
@@ -55,7 +56,9 @@ const PrivateRoute = (ComposedComponent) => {
     } catch(e) {
       console.log(e)
     }
-    return({ token, user })
+    const env = getEnv(process.env)
+    console.log('ENV', env, process.env)
+    return({ token, user, env })
   }
   return Component
   }

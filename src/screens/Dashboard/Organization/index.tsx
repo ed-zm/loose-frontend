@@ -51,7 +51,7 @@ const GITHUB_PROJECTS = gql`
   }
 `
 
-const Organization = () => {
+const Organization = ({ env }) => {
   const router = useRouter()
   const { actions } = useContext(ModalContext);
   const [ token, setToken ] = useState('')
@@ -79,7 +79,6 @@ const Organization = () => {
       }})
     }
   }, [token, data])
-  console.log(repos)
   if(!data) return null
   return(
     <div className = 'organization'>
@@ -87,10 +86,10 @@ const Organization = () => {
         <img src = '/default_profile.png' className = 'organization-profile-avatar'/>
         <span className = 'organization-profile-name-text'>{data.organization.name.toUpperCase()}</span>
         <GithubLogin 
-          clientId = {process.env.GITHUB_CLIENT_ID}
+          clientId = {env.GITHUB_CLIENT_ID}
           onSuccess = { onSuccess}
           onError = { console.log }
-          redirectUri = { `${process.env.HOST}/oauth` }
+          redirectUri = { `${env.HOST}/oauth` }
           scope = 'repo read:user read:org'
         >
           <GithubButton disabled = {data.organization.githubToken}>

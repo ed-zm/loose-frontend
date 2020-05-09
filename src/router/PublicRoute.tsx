@@ -1,5 +1,6 @@
 import React from 'react'
 import Providers from './Providers'
+import getEnv from '../utils/getEnv'
 import '../styles/index.scss'
 
 const PublicRoute = (ComposedComponent) => {
@@ -9,7 +10,8 @@ const PublicRoute = (ComposedComponent) => {
     </Providers>
 
   Component.getInitialProps = async ({ req }) => {
-    return({ loggedIn: false })
+    const env = getEnv(process.env)
+    return({ loggedIn: false, env })
   }
   return Component
 }

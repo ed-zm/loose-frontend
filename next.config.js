@@ -6,7 +6,8 @@ const path = require('path')
 require('dotenv').config()
 
 module.exports = withPlugins([
-  [withSass, {
+  [
+    withSass, {
     sassLoaderOptions: {
       includePaths: [ path.resolve(__dirname, './src/styles') ],
         // Provide path to the file with resources
@@ -19,12 +20,10 @@ module.exports = withPlugins([
       })
       return config
     }
-  }],
-  [withCss],
-  [withTM, {
-    transpileModules: ['loose-components'],
-    env: {
-      GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID
-    }
-  }]
-])
+    }],
+    [withCss],
+    [withTM, {
+      transpileModules: ['loose-components'],
+    }],
+  ]
+)
