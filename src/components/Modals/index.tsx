@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { ModalContext } from "loose-components/src/contexts/UI/Modal";
+import GithubOrganizations from './GithubOrganizations'
 import GithubRepos from './GithubRepos'
 import GithubIssues from './GithubIssues'
 import CreateTask from './CreateTask'
@@ -30,6 +31,7 @@ const Modal = () => {
           <div>
             { modal === 'GithubIssues' && <GithubIssues { ...params } closeModal = { actions.closeModal } />}
             { modal === 'GithubRepos' && <GithubRepos { ...params } closeModal = { actions.closeModal } />}
+            { modal === 'GithubOrganizations' && <GithubOrganizations { ...params } closeModal = { actions.closeModal } />}
             { modal === 'CreateTask' && <CreateTask { ...params } closeModal = { actions.closeModal } /> }
 
           </div>

@@ -72,5 +72,6 @@ export default token =>{
   if(!process.browser) return create(token)
   if(!apolloClient) apolloClient = create(token)
   return apolloClient
+  // return create(token)
 }
  

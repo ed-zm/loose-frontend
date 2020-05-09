@@ -74,11 +74,12 @@ const Organization = ({ env }) => {
 
   useEffect(() => {
     if(data && data.organization) {
-      fetchRepos({ variables: {
-        organizationId: data.organization.id
-      }})
+      actions.openModal({ modal: 'GithubOrganizations', title: '', params: { organization: data.organization} })
+      // fetchRepos({ variables: {
+      //   organizationId: data.organization.id
+      // }})
     }
-  }, [token, data])
+  }, [token])
   if(!data) return null
   return(
     <div className = 'organization'>
