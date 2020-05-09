@@ -19,7 +19,24 @@ const GITHUB_LOGIN = gql`
 
 const GITHUB_REPOS = gql`
   query($organizationId: ID!) {
-    repositories(organizationId: $organizationId) {
+    githubRepositories(organizationId: $organizationId) {
+      id
+      name
+      fullName
+      private
+      updatedAt
+      language
+      openIssuesCount
+      description
+      stargazersCount
+      forksCount
+    }
+  }
+`
+
+const GITHUB_PROJECTS = gql`
+  query($organizationId: ID!) {
+    githubProjects(organizationId: $organizationId) {
       id
       name
       fullName
@@ -38,7 +55,6 @@ const Organization = () => {
   const router = useRouter()
   const { actions } = useContext(ModalContext);
   const [ token, setToken ] = useState('')
-  // const [ repos, setRepos ] = useState([])
   const [ githubLogin, { data: github }] = useMutation(GITHUB_LOGIN)
   const [fetchRepos, { data: repos, loading: loadingRepos }] = useLazyQuery(GITHUB_REPOS)
   const { id } = router.query
@@ -74,8 +90,8 @@ const Organization = () => {
           clientId = {process.env.GITHUB_CLIENT_ID}
           onSuccess = { onSuccess}
           onError = { console.log }
-          redirectUri = { `https://alpha.loose.dev/oauth` }
-          scope = 'repo user:email'
+          redirectUri = { `${process.env.HOST}/oauth` }
+          scope = 'repo read:user read:org'
         >
           <GithubButton disabled = {data.organization.githubToken}>
             { data.organization.githubToken ? 'Connected' : 'Connect' }
@@ -92,16 +108,16 @@ const Organization = () => {
             loading={true}
           /> :
           <List
-            items = {repos && repos.repositories}
+            items = {repos && repos.githubRepositories}
             renderItem = { repo => <RepositoryCard repo = {repo} importButton organization = {data.organization} />}
           />
         }
 
-        {repos && repos.repositories && !!repos.repositories.length && <GithubButton onClick = { async () => {
-          await actions.openModal({ modal: "GithubRepos", params: { repos: repos.repositories, organization: data.organization }, title: 'Repositories' })
-        }}>
-          Import Issues
-        </GithubButton>}
+        { repos && repos.githubRepositories && !!repos.githubRepositories.length && <GithubButton onClick = { async () => {
+          await actions.openModal({ modal: "GithubRepos", params: { repos: repos.githubRepositories, organization: data.organization }, title: 'Repositories' })
+          }}>
+            Import Issues
+        </GithubButton> }
       </div>
       </div>
   )
