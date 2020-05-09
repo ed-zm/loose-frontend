@@ -7,6 +7,7 @@ import Providers from './Providers'
 import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
 import getEnv from '../utils/getEnv'
+import getConfig from 'next/config'
 import '../styles/index.scss'
 
 const LOGGED_IN = gql`
@@ -56,8 +57,8 @@ const PrivateRoute = (ComposedComponent) => {
     } catch(e) {
       console.log(e)
     }
-    const env = getEnv(process.env)
-    console.log('ENV', env, process.env)
+    const config = getConfig()
+    const env = getEnv(config)
     return({ token, user, env })
   }
   return Component

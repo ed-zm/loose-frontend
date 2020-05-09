@@ -1,6 +1,7 @@
 import React from 'react'
 import Providers from './Providers'
 import getEnv from '../utils/getEnv'
+import getConfig from 'next/config'
 import '../styles/index.scss'
 
 const PublicRoute = (ComposedComponent) => {
@@ -10,7 +11,8 @@ const PublicRoute = (ComposedComponent) => {
     </Providers>
 
   Component.getInitialProps = async ({ req }) => {
-    const env = getEnv(process.env)
+    const config = getConfig()
+    const env = getEnv(config)
     return({ loggedIn: false, env })
   }
   return Component

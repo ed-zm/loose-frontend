@@ -25,5 +25,11 @@ module.exports = withPlugins([
     [withTM, {
       transpileModules: ['loose-components'],
     }],
-  ]
+  ],
+  {
+    publicRuntimeConfig: {
+      GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
+      HOST: process.env.HOST
+    }
+  }
 )
