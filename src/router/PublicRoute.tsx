@@ -11,8 +11,8 @@ const PublicRoute = (ComposedComponent) => {
     </Providers>
 
   Component.getInitialProps = async ({ req }) => {
-    const config = getConfig()
-    const env = getEnv(config)
+    const { publicRuntimeConfig } = getConfig()
+    const env = getEnv(publicRuntimeConfig)
     return({ loggedIn: false, env })
   }
   return Component

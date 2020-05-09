@@ -57,8 +57,8 @@ const PrivateRoute = (ComposedComponent) => {
     } catch(e) {
       console.log(e)
     }
-    const config = getConfig()
-    const env = getEnv(config)
+    const { publicRuntimeConfig } = getConfig()
+    const env = getEnv(publicRuntimeConfig)
     return({ token, user, env })
   }
   return Component
