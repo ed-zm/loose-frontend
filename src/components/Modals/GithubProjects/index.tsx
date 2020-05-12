@@ -1,15 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { ModalContext } from "loose-components/src/contexts/UI/Modal";
 import List from '../../List'
 import Button from '../../Button'
-import RepositoryCard from '../../RepositoryCard'
+import GithubButton from '../../GithubButton'
 import './index.scss'
 
-const GithubRepos = ({ repos = [], organization, closeModal }) => {
+const GithubProjects = ({ projects = [], organization, closeModal }) => {
+    const { actions } = useContext(ModalContext);
   return(
     <div className = 'github-repos-modal'>
       <List
-        items = {repos}
-        renderItem = { repo => <li>{JSON.stringify(repo)}</li>}
+        items = {projects}
+        renderItem = { project =>
+            <li>{project.name}
+            <GithubButton onClick = {() => {
+                actions.openModal({ modal: "GithubColumns", title: `${project.name} cards`, params: { project, organization }})
+            }}>
+                Show Columns
+            </GithubButton>
+            </li>
+        }
       />
       <Button className = 'github-repos-modal-button' onClick = { closeModal }>
         Cancel
@@ -18,4 +28,4 @@ const GithubRepos = ({ repos = [], organization, closeModal }) => {
   )
 }
 
-export default GithubRepos
+export default GithubProjects
