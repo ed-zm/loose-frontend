@@ -30,7 +30,6 @@ const Organization = ({ env }) => {
     setTab,
     onUnlinkOrganization
   } = useOrganization({ id })
-  console.log('TAB', tab)
   if(!organization) return null
   return(
     <div className = 'organization'>
