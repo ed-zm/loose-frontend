@@ -1,11 +1,11 @@
 .sign-in-container {
   display: grid;
   height: 100vh;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
+  grid-template-columns: minmax(1px, max-content);
+  grid-template-rows: minmax(1px, max-content);
   align-items: center;
   justify-items: center;
-  background-color: $primary-color;
+  background-color: #f9f9f9;
 }
 
 .sign-in-title {
@@ -21,7 +21,6 @@
 }
 
 .sign-in-form-container {
-  @include BoxShadow(6);
   padding: 3rem;
   display: grid;
   grid-row-gap: 2rem;

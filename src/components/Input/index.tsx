@@ -1,9 +1,9 @@
 import React from 'react'
-import './index.scss'
+// import './index.scss'
 
 const Input = ({ className, ...props }) => {
   return(
-    <input className = {`input ${className}`} {...props } />
+    <input className = {`form-control ${className}`} {...props } />
   )
 }
 export default Input

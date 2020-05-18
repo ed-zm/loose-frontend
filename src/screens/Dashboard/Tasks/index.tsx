@@ -11,7 +11,7 @@ const Tasks = () => {
     sortedTasks
   } = useTasks()
   return(
-    <div className = 'tasks-container'>
+    <div className = 'Box tasks-container'>
       <Button
         onClick = { () => {
           modal.actions.openModal({ modal: "CreateTask", title: "Add Task", params: { tasks: sortedTasks } })

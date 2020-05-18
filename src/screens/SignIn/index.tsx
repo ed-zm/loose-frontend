@@ -1,6 +1,8 @@
 import React from 'react'
 import Cookies from 'js-cookie'
+import Link from 'next/link'
 import Button from '../../components/Button'
+import Input from '../../components/Input'
 import useSignIn from 'loose-components/src/screens/SignIn'
 import parseError from 'loose-components/src/utils/parseError'
 import { useRouter } from 'next/router'
@@ -29,25 +31,38 @@ const SignIn = () => {
   const parsedError = parseError(error)
   return(
     <div className = 'sign-in-container'>
-      <div className = 'sign-in-form-container'>
-        <div>
-          { accountCreated && <span>Account Created Please Log In </span>}
-          {parsedError && <div>
-            <span>{parsedError}</span>
-            {(parsedError === errors.CONFIRM_EMAIL) &&
-              <div>
-                { resendVerificationEmailError && <span>{parseError(resendVerificationEmailError)}</span>}
-                { resendVerificationEmailSent ?
-                  <span>{errors.VERIFICATION_EMAIL_SENT}</span> :
-                <Button text = 'Resend Verification Email' onClick = {onResendVerificationEmail} submitting = {resendingVerificationEmail} />}
-              </div>
-            }
-          </div>}
-        </div>
-        <span className = 'sign-in-title'>Sign In</span>
-        <input className = 'sign-in-form-input' value = {email} placeholder = 'email' onChange = {e => setEmail(e.target.value) } />
-        <input
-          className = 'sign-in-form-input'
+      {parsedError && <div>
+        <span>{parsedError}</span>
+        {(parsedError === errors.CONFIRM_EMAIL) &&
+          <div>
+            { resendVerificationEmailError && <span>{parseError(resendVerificationEmailError)}</span>}
+            { resendVerificationEmailSent ?
+              <span>{errors.VERIFICATION_EMAIL_SENT}</span> :
+            <Button text = 'Resend Verification Email' onClick = {onResendVerificationEmail} submitting = {resendingVerificationEmail} />}
+          </div>
+        }
+      </div>}
+      <div className = 'auth-form-body'>
+        {/* <span className = 'sign-in-title'>Sign In</span> */}
+        <label for = 'email-field'>
+          Email Address
+        </label>
+        <Input
+          id = 'email-field'
+          className = 'input-block'
+          value = {email}
+          placeholder = 'email'
+          onChange = {e => setEmail(e.target.value) }
+        />
+        <label for = 'password-field'>
+          Password
+          <Link href = '/reset-password'>
+            <a className = 'label-link'>Forgot Password?</a>
+          </Link>
+        </label>
+        <Input
+          id = 'password-field'
+          className = 'input-block'
           value = {password}
           placeholder = 'password'
           type = 'password'
@@ -59,7 +74,7 @@ const SignIn = () => {
         <Button onClick = {onSignIn} disabled = {signingIn}>
           Sign In
         </Button>
-      </div>
+        </div>
     </div>
   )
 }

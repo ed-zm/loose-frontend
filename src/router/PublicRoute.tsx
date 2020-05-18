@@ -2,7 +2,6 @@ import React from 'react'
 import Providers from './Providers'
 import getEnv from '../utils/getEnv'
 import getConfig from 'next/config'
-import '../styles/index.scss'
 
 const PublicRoute = (ComposedComponent) => {
   const Component = props =>

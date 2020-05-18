@@ -1,16 +1,17 @@
 import React from 'react'
 import ClipLoader from "react-spinners/ClipLoader";
-import './index.scss'
+// import './index.scss'
 
 const Button = ({ className, children, ...props }) => {
-  if(props.disabled) return <ClipLoader
-    size={20}
-    color={"333333"}
-    loading={true}
-  />
   return(
-    <button className = {`button-container ${className}`} { ...props }>
-      { children }
+    <button className = {`btn btn-primary ${className}`} type = 'button' { ...props }>
+      { props.disabled ?
+        <React.Fragment>
+          <span>Loading</span>
+          <span className="AnimatedEllipsis" />
+        </React.Fragment> :
+        children
+      }
     </button>
   )
 }
