@@ -1,0 +1,20 @@
+.sign-up {
+  &-container {
+    margin-top: 64px;
+    padding: 0 16px 0 16px;
+  }
+  &-form {
+    &-container {
+      display: grid;
+      max-width: 544px;
+      margin: 0 auto;
+    }
+    &-label {
+      display: block;
+      margin-bottom:  6px;
+    }
+    &-input {
+      margin-bottom: 15px;
+    }
+  }
+}

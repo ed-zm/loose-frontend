@@ -1,32 +1,71 @@
-.sign-in-container {
-  display: grid;
-  height: 100vh;
-  grid-template-columns: minmax(1px, max-content);
-  grid-template-rows: minmax(1px, max-content);
-  align-items: center;
-  justify-items: center;
-  background-color: #f9f9f9;
+.sign-in {
+  &-container {
+    width: 100%;
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, minmax(2rem, min-content)) minmax(2rem, max-content);
+    // align-items: center;
+    justify-items: center;
+    background-color: #f9f9f9;
+  }
+  &-title {
+    margin-bottom: 15px;
+    font-size: 20px;
+    text-align: center;
+  }
+  &-logo {
+    padding-top: 32px;
+    padding-bottom: 24px;
+    &-text {
+      font-size: 32px;
+    }
+  }
+  &-error {
+    margin-bottom: 16px;
+    // width: 100%;
+  }
+  &-sign-up-box {
+    background-color: transparent;
+    margin-top: 16px;
+    padding: 15px 20px;
+    text-align: center;
+    &-text {
+
+    }
+    &-link {
+      color: $blue-500;
+      text-decoration: none;
+    }
+  }
 }
 
-.sign-in-title {
-  width: 100%;
-  margin-left: -3rem;
-  margin-right: -3rem;
-  text-align: center;
-  font-size: 3.2rem;
-  color: $primary-text;
-  font-weight: bold;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid $divider-color;
+.sign-in-form-wrapper {
+  width: 340px;
+  padding-right: 16px;
+  padding-left: 16px;
+  justify-items: center;
+}
+
+.sign-in-form-label {
+ margin-bottom: 7px;
+ margin-top: 15px;
+}
+
+.sign-in-form-button {
+  margin-top: 15px;
 }
 
 .sign-in-form-container {
-  padding: 3rem;
+  padding: 20px;
   display: grid;
-  grid-row-gap: 2rem;
-  justify-items: center;
-  grid-template-rows: repeat(auto-fit, minmax(1rem, max-content));
+  // grid-row-gap: 1.2rem;
+  // justify-items: center;
+  // grid-template-rows: repeat(auto-fit, minmax(1rem, max-content));
   background-color: $text-icons;
+  &:first-child {
+    margin-top: 0;
+  }
 }
 
 .sign-in-form-input {
