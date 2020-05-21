@@ -1,0 +1,10 @@
+.confirm-email {
+  &-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    margin-top: 200px;
+    justify-items: center;
+    align-items: center;
+  }
+}

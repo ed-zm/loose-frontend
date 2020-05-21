@@ -25,13 +25,13 @@ const SignUp = () => {
   } = useSignUp({
     callback: () => router.push("/sign-in?accountCreated=true"),
   });
+  const parsedError = parseError(error);
   return (
     <div className="sign-up-container">
       <div className="mb-4 mb-md-8 container-md">
         <div className="text-mono text-center text-gray-light text-normal mb-3">Join Loose Dev</div>
         <h1 className="d-none d-md-block mt-0 mb-3 text-center h00-mktg lh-condensed-ultra">Create Your Account</h1>
       </div>
-      <div>{error && <span>{parseError(error)}</span>}</div>
       <div className="sign-up-form-container">
         <label className="sign-up-form-label" for="first-name-field">
           First Name:
@@ -87,6 +87,7 @@ const SignUp = () => {
             if (e.key === "Enter") onSignUp();
           }}
         />
+        {parsedError && <div className="sign-in-error flash flash-full flash-error">{parsedError}</div>}
         <Button
           className="btn-mktg signup-btn  js-octocaptcha-form-submit width-full"
           onClick={onSignUp}
