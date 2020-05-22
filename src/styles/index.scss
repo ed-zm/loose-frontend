@@ -18,11 +18,11 @@
   width: 100%;
   display: grid;
   justify-items: center;
-  @include BoxShadow(6);
+  // @include BoxShadow(6);
 }
 
 .content-layout {
-  @include BoxShadow(6);
+  // @include BoxShadow(6);
   padding: 2rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -40,7 +40,7 @@
   grid-row: content-start / content-end;
   background-color: #ffffff;
   border-right: 1px solid #e8e8e8;
-  @include BoxShadow(6);
+  // @include BoxShadow(6);
 
 }
 

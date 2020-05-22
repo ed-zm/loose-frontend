@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from "graphql-tag";
 
 export const UPDATE_TASK = gql`
   mutation($id: ID!, $state: Int!) {
@@ -12,4 +12,4 @@ export const UPDATE_TASK = gql`
       }
     }
   }
-`
+`;
