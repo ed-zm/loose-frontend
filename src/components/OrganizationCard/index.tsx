@@ -1,11 +1,10 @@
 import React from "react";
 import Link from "next/link";
 import "./index.scss";
-import Button from "../Button";
 
 const OrganizationCard = ({ organization }) => {
   return (
-    <li className="Box-body organization-card">
+    <div className="organization-card">
       <Link key={organization.id} href="/dashboard/organization/[id]" as={`/dashboard/organization/${organization.id}`}>
         <a className="lh-condensed f4">
           <span className="css-truncate-target nested-team-name">{organization.name}</span>
@@ -18,7 +17,7 @@ const OrganizationCard = ({ organization }) => {
       </div>
       <div>{`${organization.users.length} members`}</div>
       <div>{`${organization.teams.length} teams`}</div>
-    </li>
+    </div>
   );
 };
 

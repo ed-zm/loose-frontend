@@ -26,17 +26,16 @@ const Teams = () => {
         </div>
       )}
       <ul className="Box">
-        <li className="Box-header">
+        <li className="teams-list-item Box-header">
           <h3 className="Box-title">Filters</h3>
         </li>
         {data &&
           data.teams.map((team) => (
-            <li className="Box-body">
+            <li className="teams-list-item Box-body">
               <TeamCard team={team} />
             </li>
           ))}
       </ul>
-      <List items={data && data.teams} renderItem={(team) => <TeamCard team={team} />} />
     </div>
   );
 };

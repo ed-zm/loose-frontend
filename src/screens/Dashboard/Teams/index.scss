@@ -3,5 +3,8 @@
     width: 100%;
     &-list {
       width: 100%;
+      &-item {
+        list-style: none;
+      }
     }
   }

@@ -38,11 +38,13 @@ const Organizations = () => {
         </div>
       )}
       <ul className="Box">
-        <li className="Box-header">
+        <li className="organizations-list-item Box-header">
           <h3 className="Box-title">Filters</h3>
         </li>
         {organizations.map((organization) => (
-          <OrganizationCard organization={organization} />
+          <li className="organizations-list-item Box-body">
+            <OrganizationCard organization={organization} />
+          </li>
         ))}
       </ul>
     </div>
