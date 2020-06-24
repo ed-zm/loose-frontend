@@ -1,37 +1,25 @@
-import React from 'react'
-import Link from 'next/link'
-import './index.scss'
-import Button from '../Button'
+import React from "react";
+import Link from "next/link";
+import "./index.scss";
+import Button from "../Button";
 
 const OrganizationCard = ({ organization }) => {
-  return(
-    <div className = 'organization-card'>
-      <div className = 'organization-card-content'>
-        <div className = 'organization-card-content-title'>
-        <img src = '/default_profile.png' className = 'organization-card-content-title-avatar'/>
-          <Link key = {organization.id} href = '/dashboard/organization/[id]' as = {`/dashboard/organization/${organization.id}`}> 
-            <a className = 'organization-card-content-title-name'>{organization.name}</a>
-          </Link>
-        </div>
-        <p className = 'organization-card-content-description'>
-          No description
-        </p>
-        <div className = 'organization-card-content-members'>
-          {['', '', '', '', ''].map(member =>
-            <div className = 'organization-card-content-members-member'>
-              <img src = '/default_profile.png' className = 'organization-card-content-members-member-avatar'/>
-              <a className = 'organization-card-content-members-member-name'>Name L.</a>
-            </div>  
-          )}
-        </div>
-      </div>
+  return (
+    <li className="Box-body organization-card">
+      <Link key={organization.id} href="/dashboard/organization/[id]" as={`/dashboard/organization/${organization.id}`}>
+        <a className="lh-condensed f4">
+          <span className="css-truncate-target nested-team-name">{organization.name}</span>
+        </a>
+      </Link>
       <div>
-        <Button onClick = { () => {}}>
-          Action
-        </Button>
+        {organization.users.map((user) => (
+          <img className="avatar avatar-small" alt={user.name} src={user.avatar} width="32" height="32" />
+        ))}
       </div>
-    </div>
-  )
-}
+      <div>{`${organization.users.length} members`}</div>
+      <div>{`${organization.teams.length} teams`}</div>
+    </li>
+  );
+};
 
-export default OrganizationCard
+export default OrganizationCard;
