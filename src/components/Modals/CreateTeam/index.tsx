@@ -1,6 +1,8 @@
 import React from "react";
+import useTeams from "loose-components/src/screens/Dashboard/Teams";
 
 const CreateTeam = () => {
+  const { name, setName, organization, setOrganization, orgs, onCreateTeam, creatingTeam } = useTeams();
   return (
     <div>
       <input type="text" placeholder="name" value={name} onChange={(e) => setName(e.target.value)} />

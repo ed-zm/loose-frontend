@@ -1,6 +1,10 @@
 import React from "react";
+import useOrganizations from "loose-components/src/screens/Dashboard/Organizations";
+import Input from "../../../components/Input";
+import Button from "../../../components/Button";
 
 const CreateOrganization = () => {
+  const { onCreateOrganization, name, setName, organizations } = useOrganizations();
   return (
     <div>
       <div>
