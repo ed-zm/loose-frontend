@@ -1,16 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import moment from "moment";
 import useTeam from "loose-components/src/screens/Dashboard/Team";
+import TaskCard from "../../../components/TaskCard";
 import "./index.scss";
 
 const Team = () => {
   const router = useRouter();
   const { id } = router.query;
-  const { data, removingMember, addingMember, onRemoveMember, onAddMember, member, setMember, members } = useTeam({
+  const {
+    data,
+    teamTasks,
+    tab,
+    setTab,
+    removingMember,
+    addingMember,
+    onRemoveMember,
+    onAddMember,
+    member,
+    setMember,
+    members,
+  } = useTeam({
     id,
   });
-  const [tab, setTab] = useState("TASKS");
+  console.log("TEAM TASKS DATA", teamTasks);
   return (
     <div className="team">
       {data && data.team && (
@@ -59,6 +72,18 @@ const Team = () => {
             </a>
           </div>
         </nav>
+        {!!teamTasks.length && (
+          <ul className="Box">
+            <li className="teams-list-item Box-header">
+              <h3 className="Box-title">Filters</h3>
+            </li>
+            {teamTasks.map((task) => (
+              <li className="tasks-list-item Box-body">
+                <TaskCard task={task} />
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );

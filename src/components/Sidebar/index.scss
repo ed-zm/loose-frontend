@@ -13,10 +13,10 @@
   padding-bottom: 1rem;
   font-weight: 400;
   &:hover {
-    @include BoxShadow(3);
+    // @include BoxShadow(3);
     margin: 0 -1.5rem 0 -1.5rem;
     padding: 1rem 1.5rem 1rem 1.5rem;
-    background-color: $primary-color;
+    background-color: $gray-900;
     color: $text-icons !important;
     font-weight: bold;
   }
