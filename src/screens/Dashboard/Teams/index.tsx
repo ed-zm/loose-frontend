@@ -1,11 +1,10 @@
 import React from "react";
 import useTeams from "loose-components/src/screens/Dashboard/Teams";
-import List from "../../../components/List";
 import TeamCard from "../../../components/TeamCard";
 import "./index.scss";
 
 const Teams = () => {
-  const { name, setName, organization, setOrganization, orgs, onCreateTeam, creatingTeam, data } = useTeams();
+  const { data } = useTeams();
   return (
     <div className="teams">
       <ul className="Box">

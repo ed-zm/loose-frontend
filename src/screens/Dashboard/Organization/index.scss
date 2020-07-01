@@ -1,19 +1,29 @@
 .organization {
   @extend %basic-grid-column;
   grid-column-gap: 5rem;
+  &-repository {
+    &-list-item {
+      list-style: none;
+    }
+  }
   &-profile {
     grid-column: 1 / 3;
     display: grid;
-    grid-row-gap: 1rem;
+    grid-row-gap: 2rem;
+    grid-template-rows: minmax(1rem, max-content) repeat(auto-fit, minmax(1rem, min-content));
     justify-items: center;
     align-items: center;
     grid-template-columns: 1fr;
-    grid-template-rows: 10rem 3rem repeat(2, minmax(1rem, max-content));
     border-right: 1px solid $divider-color;
     &-avatar {
       height: 10rem;
       width: 10rem;
       border-radius: 50%;
+    }
+    &-description {
+      line-height: 2.4rem;
+      font-size: 1.6rem;
+      text-align: center;
     }
     &-name-text {
       font-size: 2rem;

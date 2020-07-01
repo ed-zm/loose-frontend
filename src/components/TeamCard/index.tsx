@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import "./index.scss";
-import Button from "../Button";
 
 const TeamCard = ({ team }) => {
   return (
@@ -12,7 +11,13 @@ const TeamCard = ({ team }) => {
       <div className="team-card-avatars">
         {["", ""].map((member) => (
           <div className="team-card-content-members-member">
-            <img className="avatar avatar-small" alt={team.name} src={team.avatar} width="32" height="32" />
+            <img
+              className="avatar avatar-small"
+              alt={team.name}
+              src={team.avatar || "/default_profile.png"}
+              width="32"
+              height="32"
+            />
           </div>
         ))}
       </div>
