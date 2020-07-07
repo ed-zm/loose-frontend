@@ -3,11 +3,12 @@
   grid-row-gap: 3rem;
 }
 
-.tasks-cards-container {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(auto-fit,minmax(1rem, max-content));
-  // grid-column-gap: 2rem;
-  // grid-row-gap: 2rem;
+.tasks {
+  width: 100%;
+  &-create-button {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 2rem;
+  }
 }

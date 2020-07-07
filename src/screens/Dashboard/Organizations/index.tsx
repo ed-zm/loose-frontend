@@ -10,7 +10,7 @@ const Organizations = () => {
   const modal = useContext(ModalContext);
   return (
     <div className="organizations">
-      <div>
+      <div className="organizations-create-button">
         <Button
           onClick={() => {
             modal.actions.openModal({ modal: "CreateOrganization", title: "Create Organization" });

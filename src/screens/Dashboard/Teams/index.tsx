@@ -10,7 +10,7 @@ const Teams = () => {
   const modal = useContext(ModalContext);
   return (
     <div className="teams">
-      <div>
+      <div className="teams-create-button">
         <Button
           onClick={() => {
             modal.actions.openModal({ modal: "CreateTeam", title: "Create Team" });

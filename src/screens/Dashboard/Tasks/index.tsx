@@ -11,22 +11,15 @@ const Tasks = () => {
   const modal = useContext(ModalContext);
   const { tasks, state, setState } = useTasks();
   return (
-    <div className="js-check-all-container">
-      <div className="subnav org-toolbar org-toolbar-next">
-        <div className="subnav-search float-left">
-          <div className="auto-search-group">
-            <Input className="subnav-search-input input-contrast auto-search-input js-team-search-field" />
-          </div>
-        </div>
-        <div className="float-right">
-          <Button
-            onClick={() => {
-              modal.actions.openModal({ modal: "CreateTask", title: "Add Task", params: { tasks } });
-            }}
-          >
-            Add Task
-          </Button>
-        </div>
+    <div className="tasks">
+      <div className="tasks-create-button">
+        <Button
+          onClick={() => {
+            modal.actions.openModal({ modal: "CreateTask", title: "Add Task", params: { tasks } });
+          }}
+        >
+          Add Task
+        </Button>
       </div>
       <div className="Box">
         <div className="Box-header d-flex flex-justify-between">
