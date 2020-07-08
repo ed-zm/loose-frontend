@@ -1,7 +1,18 @@
 .task {
   width: 100%;
   display: grid;
+  grid-row-gap: 2rem;
   &-title {
-    display: grid;
+    display: flex;
+
+  }
+  &-description {
+  }
+  &-created-by {
+    display: flex;
+    align-items: center;
+  }
+  &-divider {
+    border-bottom: 1px solid $divider-color;
   }
 }

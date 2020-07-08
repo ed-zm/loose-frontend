@@ -15,8 +15,8 @@ const Task = () => {
   return (
     <div className="task">
       {data && data.task && (
-        <div>
-          <div>
+        <React.Fragment>
+          <div className="task-title">
             <img
               src="/copy.png"
               onClick={async () => {
@@ -26,12 +26,12 @@ const Task = () => {
                 }
               }}
             />
-            <span>{data.task.code}</span>
-          </div>
-          <div className="task-title">
             <span>{data.task.title}</span>
+            <span>{` #${data.task.code}`}</span>
+          </div>
+          <div className="task-created-by">
             <div>
-              <span title="Status: open" class="State State--green State--small mr-2">
+              <span title="Status: open" className="State State--green State--small mr-2">
                 <svg
                   className="octicon octicon-issue-opened"
                   viewBox="0 0 14 16"
@@ -48,6 +48,8 @@ const Task = () => {
                 Open
               </span>
             </div>
+            {`${data.task.createdBy.firstName} ${data.task.createdBy.lastName}`} created this task on{" "}
+            {moment(data.task.createdAt).format("MMM DD")}
           </div>
           <Markdown className="" source={data.task.description} />
           {isMember && (
@@ -61,11 +63,11 @@ const Task = () => {
               )}
             </div>
           )}
-          <div>{moment(data.task.createdAt).format("DD/MMM/YYYY HH:mm")}</div>
-          {isMember && <Assign task={data.task} />}
           <Labels task={data.task} />
+          <div className="task-divider" />
+          {isMember && <Assign task={data.task} />}
           <Comments task={data.task} />
-        </div>
+        </React.Fragment>
       )}
     </div>
   );
