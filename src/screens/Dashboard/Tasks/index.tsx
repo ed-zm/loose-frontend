@@ -21,7 +21,7 @@ const Tasks = () => {
           Add Task
         </Button>
       </div>
-      <div className="Box">
+      <ul className="Box">
         <div className="Box-header d-flex flex-justify-between">
           <input type="checkbox" checked={false} onChange={() => {}} />
           <div className="table-list-filters flex-auto d-flex min-width-0">
@@ -66,14 +66,12 @@ const Tasks = () => {
             </a>
           </div>
         </div>
-        <div className="tasks-cards-container">
-          {tasks.map((task) => (
-            // <div>
+        {tasks.map((task) => (
+          <li className="tasks-list-item Box-body">
             <TaskCard task={task} />
-            // </div>
-          ))}
-        </div>
-      </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
