@@ -26,8 +26,8 @@ const Task = () => {
                 }
               }}
             />
-            <span>{data.task.title}</span>
-            <span>{` #${data.task.code}`}</span>
+            <span className="h1">{data.task.title}</span>
+            <span className="h1">{` #${data.task.code}`}</span>
           </div>
           <div className="task-created-by">
             <div>
@@ -48,8 +48,8 @@ const Task = () => {
                 Open
               </span>
             </div>
-            {`${data.task.createdBy.firstName} ${data.task.createdBy.lastName}`} created this task on{" "}
-            {moment(data.task.createdAt).format("MMM DD")}
+            <span className="h5">{`${data.task.createdBy.firstName} ${data.task.createdBy.lastName}`}</span>&nbsp;
+            <span> created this task on {moment(data.task.createdAt).format("MMM DD")}</span>
           </div>
           <Markdown className="" source={data.task.description} />
           {isMember && (
