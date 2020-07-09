@@ -9,6 +9,7 @@ import Header from "../components/Header";
 import getEnv from "../utils/getEnv";
 import getConfig from "next/config";
 import { UIContext } from "loose-components/src/contexts/UI";
+import Loading from "../components/Loading";
 import "../styles/index.scss";
 
 const LOGGED_IN = gql`
@@ -23,10 +24,13 @@ const LOGGED_IN = gql`
 `;
 
 const LoadingComponent = ({ children }) => {
-  const ui = useContext(UIContext);
-  // console.log("UI CONTEXT", ui);
-  if (ui.loading) return <span> LOADING</span>;
-  return children;
+  const { loading } = useContext(UIContext);
+  return (
+    <React.Fragment>
+      {loading && <Loading style={{ position: "fixed" }} />}
+      {children}
+    </React.Fragment>
+  );
 };
 
 const PrivateRoute = (ComposedComponent) => {

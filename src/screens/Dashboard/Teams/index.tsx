@@ -3,10 +3,11 @@ import useTeams from "loose-components/src/screens/Dashboard/Teams";
 import TeamCard from "../../../components/TeamCard";
 import Button from "../../../components/Button";
 import { ModalContext } from "loose-components/src/contexts/UI/Modal";
+import Loading from "../../../components/Loading";
 import "./index.scss";
 
 const Teams = () => {
-  const { data } = useTeams();
+  const { teams, loading } = useTeams();
   const modal = useContext(ModalContext);
   return (
     <div className="teams">
@@ -19,17 +20,20 @@ const Teams = () => {
           Create Team
         </Button>
       </div>
-      <ul className="Box">
-        <li className="teams-list-item Box-header">
-          <h3 className="Box-title">Filters</h3>
-        </li>
-        {data &&
-          data.teams.map((team) => (
+      {loading ? (
+        <Loading />
+      ) : (
+        <ul className="Box">
+          <li className="teams-list-item Box-header">
+            <h3 className="Box-title">Filters</h3>
+          </li>
+          {teams.map((team) => (
             <li className="teams-list-item Box-body">
               <TeamCard team={team} />
             </li>
           ))}
-      </ul>
+        </ul>
+      )}
     </div>
   );
 };

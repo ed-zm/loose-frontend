@@ -9,7 +9,17 @@ import "./index.scss";
 const User = () => {
   const router = useRouter();
   const { id } = router.query;
-  const { user, currentPicture, fileType, closeCropper, savePicture, changeProfilePicture, tab, setTab } = useUser({
+  const {
+    user,
+    teams,
+    currentPicture,
+    fileType,
+    closeCropper,
+    savePicture,
+    changeProfilePicture,
+    tab,
+    setTab,
+  } = useUser({
     id,
   });
 
@@ -57,17 +67,22 @@ const User = () => {
             </a>
           </div>
         </nav>
-        <ul className="Box">
-          <li className="teams-list-item Box-header">
-            <h3 className="Box-title">Filters</h3>
-          </li>
-          {user &&
-            ["repository1", "repository2"].map((repository) => (
-              <li className="repositorys-list-item Box-body">
-                <span>Repository</span>
+        {tab === "TEAMS" && (
+          <ul className="Box">
+            {!!teams.length ? (
+              <li className="teams-list-item Box-header">
+                <h3 className="Box-title">Filters</h3>
+              </li>
+            ) : (
+              <span> No Teams Available</span>
+            )}
+            {teams.map((team) => (
+              <li className="teamss-list-item Box-body">
+                <span>{team.name}</span>
               </li>
             ))}
-        </ul>
+          </ul>
+        )}
       </div>
       {currentPicture && fileType && (
         <Cropper closeCropper={closeCropper} src={currentPicture} fileType={fileType} savePicture={savePicture} />

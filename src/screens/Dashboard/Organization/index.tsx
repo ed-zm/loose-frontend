@@ -9,6 +9,7 @@ import GithubButton from "../../../components/GithubButton";
 import List from "../../../components/List";
 import RepositoryCard from "../../../components/RepositoryCard";
 import "./index.scss";
+import Loading from "../../../components/Loading";
 
 const Organization = ({ env }) => {
   const router = useRouter();
@@ -100,61 +101,67 @@ const Organization = ({ env }) => {
             </a>
           </div>
         </nav>
-        {tab === "REPOSITORIES" && (
-          <div>
-            {loadingRepositories ? (
-              <ClipLoader size={20} color={"333333"} loading={true} />
-            ) : (
-              <ul className="Box">
-                <li className="teams-list-item Box-header">
-                  <h3 className="Box-title">Filters</h3>
-                </li>
-                {repositories &&
-                  repositories.map((repo) => (
-                    <li className="organization-repository-list-item Box-body">
-                      <RepositoryCard repo={repo} importButton organization={organization} />
+        {loadingRepositories || loadingProjects ? (
+          <Loading />
+        ) : (
+          <React.Fragment>
+            {tab === "REPOSITORIES" && (
+              <div>
+                {loadingRepositories ? (
+                  <ClipLoader size={20} color={"333333"} loading={true} />
+                ) : (
+                  <ul className="Box">
+                    <li className="teams-list-item Box-header">
+                      <h3 className="Box-title">Filters</h3>
                     </li>
-                  ))}
-              </ul>
-            )}
+                    {repositories &&
+                      repositories.map((repo) => (
+                        <li className="organization-repository-list-item Box-body">
+                          <RepositoryCard repo={repo} importButton organization={organization} />
+                        </li>
+                      ))}
+                  </ul>
+                )}
 
-            {repositories && (
-              <GithubButton
-                onClick={async () => {
-                  await actions.openModal({
-                    modal: "GithubRepos",
-                    params: { repos: repositories, organization },
-                    title: "Repositories",
-                  });
-                }}
-              >
-                Import Issues
-              </GithubButton>
+                {repositories && (
+                  <GithubButton
+                    onClick={async () => {
+                      await actions.openModal({
+                        modal: "GithubRepos",
+                        params: { repos: repositories, organization },
+                        title: "Repositories",
+                      });
+                    }}
+                  >
+                    Import Issues
+                  </GithubButton>
+                )}
+              </div>
             )}
-          </div>
-        )}
-        {tab === "PROJECTS" && (
-          <div>
-            {loadingProjects ? (
-              <ClipLoader size={20} color={"333333"} loading={true} />
-            ) : (
-              <List items={projects} renderItem={(project) => <li>{project.name}</li>} />
-            )}
+            {tab === "PROJECTS" && (
+              <div>
+                {loadingProjects ? (
+                  <ClipLoader size={20} color={"333333"} loading={true} />
+                ) : (
+                  <List items={projects} renderItem={(project) => <li>{project.name}</li>} />
+                )}
 
-            {repositories && (
-              <GithubButton
-                onClick={async () => {
-                  await actions.openModal({
-                    modal: "GithubProjects",
-                    params: { organization, projects },
-                    title: "Projects",
-                  });
-                }}
-              >
-                Import Cards
-              </GithubButton>
+                {repositories && (
+                  <GithubButton
+                    onClick={async () => {
+                      await actions.openModal({
+                        modal: "GithubProjects",
+                        params: { organization, projects },
+                        title: "Projects",
+                      });
+                    }}
+                  >
+                    Import Cards
+                  </GithubButton>
+                )}
+              </div>
             )}
-          </div>
+          </React.Fragment>
         )}
       </div>
     </div>
