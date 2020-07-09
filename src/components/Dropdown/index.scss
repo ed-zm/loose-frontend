@@ -1,0 +1,24 @@
+.dropdown {
+  &-list {
+    &-item {
+      
+      span, a {
+        color: $gray-900;
+        cursor: pointer;
+        display: block;
+        text-decoration: none;
+        color: $gray-900;
+        font-weight: 400;
+        padding: 0.4rem 1.6rem 0.4rem 1.6rem;
+        &:hover {
+          // @include BoxShadow(3);
+          // margin: 0 -1.5rem 0 -1.5rem;
+          // padding: 1rem 1.5rem 1rem 1.5rem;
+          background-color: $gray-900;
+          color: $text-icons !important;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
