@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext } from "react";
 import gql from "graphql-tag";
 import nextCookies from "next-cookies";
 import Cookies from "js-cookie";
@@ -8,6 +8,7 @@ import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import getEnv from "../utils/getEnv";
 import getConfig from "next/config";
+import { UIContext } from "loose-components/src/contexts/UI";
 import "../styles/index.scss";
 
 const LOGGED_IN = gql`
@@ -20,6 +21,13 @@ const LOGGED_IN = gql`
     }
   }
 `;
+
+const LoadingComponent = ({ children }) => {
+  const ui = useContext(UIContext);
+  // console.log("UI CONTEXT", ui);
+  if (ui.loading) return <span> LOADING</span>;
+  return children;
+};
 
 const PrivateRoute = (ComposedComponent) => {
   const Component = ({ token, user, ...props }) => {
@@ -34,7 +42,9 @@ const PrivateRoute = (ComposedComponent) => {
           <Sidebar />
         </div> */}
           <div className="content-layout">
-            <ComposedComponent {...props} />
+            <LoadingComponent>
+              <ComposedComponent {...props} />
+            </LoadingComponent>
           </div>
         </div>
       </Providers>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import FileReaderInput from "react-file-reader-input";
 import { useRouter } from "next/router";
 import Cropper from "../../../components/Cropper";
@@ -9,20 +9,22 @@ import "./index.scss";
 const User = () => {
   const router = useRouter();
   const { id } = router.query;
-  const { data, currentPicture, fileType, closeCropper, savePicture, changeProfilePicture } = useUser({ id });
-  const [tab, setTab] = useState("TEAMS");
+  const { user, currentPicture, fileType, closeCropper, savePicture, changeProfilePicture, tab, setTab } = useUser({
+    id,
+  });
+
   return (
     <div className="user">
-      {data && data.user && (
+      {user && (
         <div className="user-profile">
-          <img className="avatar" src={data.user.avatar || "/default_profile.png"} width={260} height={260} />
+          <img className="avatar" src={user.avatar || "/default_profile.png"} width={260} height={260} />
           <FileReaderInput type="file" onChange={async (e, pic) => await changeProfilePicture(pic)}>
             <Button>Choose Picture</Button>
           </FileReaderInput>
-          {/* <div>{data.user.email}</div> */}
+          {/* <div>{user.email}</div> */}
           <div className="user-profile-name-container">
-            <span className="h2 user-profile-name">{`${data.user.firstName} ${data.user.lastName}`}</span>
-            <span className="h3 user-profile-username">{data.user.username}</span>
+            <span className="h2 user-profile-name">{`${user.firstName} ${user.lastName}`}</span>
+            <span className="h3 user-profile-username">{user.username}</span>
           </div>
           <p className="user-profile-biography">
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
@@ -34,7 +36,7 @@ const User = () => {
           </button>
         </div>
       )}
-      <div>
+      <div className="user-content">
         <nav className="UnderlineNav" aria-label="Foo bar">
           <div className="UnderlineNav-body">
             <a onClick={() => setTab("TEAMS")} className="UnderlineNav-item" aria-current={tab === "TEAMS"}>
@@ -59,7 +61,7 @@ const User = () => {
           <li className="teams-list-item Box-header">
             <h3 className="Box-title">Filters</h3>
           </li>
-          {data &&
+          {user &&
             ["repository1", "repository2"].map((repository) => (
               <li className="repositorys-list-item Box-body">
                 <span>Repository</span>
