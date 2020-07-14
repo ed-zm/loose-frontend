@@ -6,6 +6,10 @@
       list-style: none;
     }
   }
+  &-buttons {
+    display: flex;
+    justify-content: flex-end;
+  }
   &-profile {
     @media(max-width: $bp-medium) {
       grid-column: 1 / -1;

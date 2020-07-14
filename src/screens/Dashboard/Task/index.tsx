@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useRouter } from "next/router";
 import Markdown from "react-markdown";
 import moment from "moment";
@@ -6,28 +6,60 @@ import Assign from "./components/Assign";
 import Labels from "./components/Labels";
 import Comments from "./components/Comments";
 import useTask from "loose-components/src/screens/Dashboard/Task";
+import { ModalContext } from "loose-components/src/contexts/UI/Modal";
 import "./index.scss";
+import Button from "../../../components/Button";
 
 const Task = () => {
   const router = useRouter();
+  const modal = useContext(ModalContext);
   const { id } = router.query;
-  const { data, loading, error, isMember } = useTask({ id });
+  const { data, loading, error, onDeleteTask, isMember } = useTask({ id });
   return (
     <div className="task">
       {data && data.task && (
         <React.Fragment>
           <div className="task-title">
-            <img
-              src="/copy.png"
-              onClick={async () => {
-                if (navigator && navigator.clipboard) {
-                  await navigator.clipboard.writeText(data.task.code);
-                  alert("copied to clipboard");
-                }
-              }}
-            />
-            <span className="h1">{data.task.title}</span>
-            <span className="h1">{` #${data.task.code}`}</span>
+            <div>
+              <img
+                src="/copy.png"
+                onClick={async () => {
+                  if (navigator && navigator.clipboard) {
+                    await navigator.clipboard.writeText(data.task.code);
+                    alert("copied to clipboard");
+                  }
+                }}
+              />
+              <span className="h1">{data.task.title}</span>
+              <span className="h1">{` #${data.task.code}`}</span>
+            </div>
+            <div className="task-title-buttons">
+              <Button
+                onClick={() => {
+                  modal.actions.openModal({ modal: "EditTask", title: "Edit Task", params: { task: data.task } });
+                }}
+              >
+                Edit
+              </Button>
+              <Button
+                onClick={() => {
+                  modal.actions.openModal({
+                    modal: "Confirm",
+                    title: "Delete Task",
+                    params: {
+                      onOKText: "Delete",
+                      onOK: async () => {
+                        await onDeleteTask();
+                        await router.push("/dashboard");
+                      },
+                      description: "Are you sure to delete this task?",
+                    },
+                  });
+                }}
+              >
+                Delete
+              </Button>
+            </div>
           </div>
           <div className="task-created-by">
             <div>

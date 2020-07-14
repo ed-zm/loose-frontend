@@ -4,10 +4,13 @@ import GithubOrganizations from "./GithubOrganizations";
 import GithubRepos from "./GithubRepos";
 import GithubIssues from "./GithubIssues";
 import CreateTask from "./CreateTask";
+import EditTask from "./EditTask";
 import CreateOrganization from "./CreateOrganization";
+import EditOrganization from "./EditOrganization";
 import CreateTeam from "./CreateTeam";
 import GithubProjects from "./GithubProjects";
 import GithubColumns from "./GithubColumns";
+import Confirm from "./Confirm";
 import "./index.scss";
 
 const Modal = () => {
@@ -39,10 +42,13 @@ const Modal = () => {
           {modal === "GithubRepos" && <GithubRepos {...params} closeModal={actions.closeModal} />}
           {modal === "GithubOrganizations" && <GithubOrganizations {...params} closeModal={actions.closeModal} />}
           {modal === "CreateTask" && <CreateTask {...params} closeModal={actions.closeModal} />}
+          {modal === "EditTask" && <EditTask {...params} closeModal={actions.closeModal} />}
           {modal === "CreateTeam" && <CreateTeam {...params} closeModal={actions.closeModal} />}
           {modal === "CreateOrganization" && <CreateOrganization {...params} closeModal={actions.closeModal} />}
+          {modal === "EditOrganization" && <EditOrganization {...params} closeModal={actions.closeModal} />}
           {modal === "GithubProjects" && <GithubProjects {...params} closeModal={actions.closeModal} />}
           {modal === "GithubColumns" && <GithubColumns {...params} closeModal={actions.closeModal} />}
+          {modal === "Confirm" && <Confirm {...params} closeModal={actions.closeModal} />}
         </div>
       </div>
       {/* </div> */}

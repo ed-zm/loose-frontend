@@ -6,6 +6,7 @@ import useOrganization from "loose-components/src/screens/Dashboard/Organization
 import GithubLogin from "react-github-login";
 import { ModalContext } from "loose-components/src/contexts/UI/Modal";
 import GithubButton from "../../../components/GithubButton";
+import Button from "../../../components/Button";
 import List from "../../../components/List";
 import RepositoryCard from "../../../components/RepositoryCard";
 import "./index.scss";
@@ -30,6 +31,7 @@ const Organization = ({ env }) => {
     tab,
     setTab,
     onUnlinkOrganization,
+    onDeleteOrganization,
   } = useOrganization({ id });
   if (!organization) return null;
   return (
@@ -68,6 +70,33 @@ const Organization = ({ env }) => {
         </div>
       </div>
       <div className="organization-content">
+        <div className="organization-buttons">
+          <Button
+            onClick={() => {
+              actions.openModal({ modal: "EditOrganization", title: "Edit Organization", params: { organization } });
+            }}
+          >
+            Edit
+          </Button>
+          <Button
+            onClick={() => {
+              actions.openModal({
+                modal: "Confirm",
+                title: "Delete Organization",
+                params: {
+                  onOKText: "Delete",
+                  onOK: async () => {
+                    await onDeleteOrganization();
+                    await router.push("/dashboard/organizations");
+                  },
+                  description: "Are you sure to delete this organization?",
+                },
+              });
+            }}
+          >
+            Delete
+          </Button>
+        </div>
         <nav className="UnderlineNav" aria-label="Foo bar">
           <div className="UnderlineNav-body">
             <a
