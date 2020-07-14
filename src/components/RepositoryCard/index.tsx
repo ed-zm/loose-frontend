@@ -10,18 +10,16 @@ const RepositoryCard = ({ repo, importButton, organization }) => {
     <div className="repository-card">
       <div className="repository-card-content">
         <div className="repository-card-content-title">
-          {/* <span className = 'repository-card-content-title-owner'>@ed-zm</span> */}
-          <span className="repository-card-content-title-name">{repo.name}</span>
-          <span className="repository-card-content-title-private">{repo.private ? "PRIVATE" : "PUBLIC"}</span>
+          <a className="repository-card-content-title-name">{repo.name}</a>
+          <span className="Label Label--outline">{repo.private ? "Private" : "Public"}</span>
         </div>
-        <p className="repository-card-content-description">{repo.description ? repo.description : "No Description"}</p>
-        <span className="repository-card-content-metadata-key">{moment(repo.updatedAt).fromNow()}</span>
         <div className="repository-card-content-metadata">
           <span className="repository-card-content-metadata-key">{repo.language}</span>
           <div>
-            <span className="repository-card-content-metadata-key">Open: </span>
+            <span className="repository-card-content-metadata-key">Open </span>
             <span className="repository-card-content-metadata-value">{repo.openIssuesCount}</span>
           </div>
+          <span className="">Updated at &nbsp;{moment(repo.updatedAt).fromNow()}</span>
           {/* <div>
             <span className = 'repository-card-content-metadata-key'>Stars:{' '}</span>
             <span className = 'repository-card-content-metadata-value'>{repo.stargazersCount}</span>

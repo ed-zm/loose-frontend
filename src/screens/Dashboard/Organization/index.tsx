@@ -11,6 +11,7 @@ import List from "../../../components/List";
 import RepositoryCard from "../../../components/RepositoryCard";
 import "./index.scss";
 import Loading from "../../../components/Loading";
+import ProjectCard from "../../../components/ProjectCard";
 
 const Organization = ({ env }) => {
   const router = useRouter();
@@ -36,41 +37,22 @@ const Organization = ({ env }) => {
   if (!organization) return null;
   return (
     <div className="organization">
-      <div className="organization-profile">
-        <img src="/default_profile.png" className="organization-profile-avatar" />
-        <span className="organization-profile-name-text">{organization.name.toUpperCase()}</span>
-        <GithubLogin
-          clientId={env.GITHUB_CLIENT_ID}
-          onSuccess={onSuccess}
-          onError={onError}
-          redirectUri={`${env.HOST}/oauth`}
-          scope="repo read:user read:org"
-        >
-          <GithubButton>{organization.githubOrganization ? organization.githubOrganization : "Connect"}</GithubButton>
-        </GithubLogin>
-        {organization.githubOrganization && <a onClick={onUnlinkOrganization}>Disconnect</a>}
-        <p className="organization-profile-description">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-          make a type specimen book.
-        </p>
-        <div>
-          <span className="h4">Teams</span>
-          <br />
-          {["", ""].map((team) => (
-            <img className="avatar avatar-small" src={"/default_profile.png"} width="32" height="32" />
-          ))}
+      <div className="organization-profile pagehead orghead">
+        <div className="organization-profile-info">
+          <img src="/default_profile.png" className="avatar organization-profile-avatar" />
+          <span className="organization-profile-name-text">{organization.name}</span>
+          <GithubLogin
+            clientId={env.GITHUB_CLIENT_ID}
+            onSuccess={onSuccess}
+            onError={onError}
+            redirectUri={`${env.HOST}/oauth`}
+            scope="repo read:user read:org"
+          >
+            <GithubButton>{organization.githubOrganization ? organization.githubOrganization : "Connect"}</GithubButton>
+          </GithubLogin>
+          {organization.githubOrganization && <a onClick={onUnlinkOrganization}>Disconnect</a>}
         </div>
-        <div>
-          <span className="h4">Users</span>
-          <br />
-          {["", ""].map((team) => (
-            <img className="avatar avatar-small" src={"/default_profile.png"} width="32" height="32" />
-          ))}
-        </div>
-      </div>
-      <div className="organization-content">
-        <div className="organization-buttons">
+        <div className="organization-profile-buttons">
           <Button
             onClick={() => {
               actions.openModal({ modal: "EditOrganization", title: "Edit Organization", params: { organization } });
@@ -79,6 +61,7 @@ const Organization = ({ env }) => {
             Edit
           </Button>
           <Button
+            deleteButton
             onClick={() => {
               actions.openModal({
                 modal: "Confirm",
@@ -97,6 +80,8 @@ const Organization = ({ env }) => {
             Delete
           </Button>
         </div>
+      </div>
+      <div className="organization-content">
         <nav className="UnderlineNav" aria-label="Foo bar">
           <div className="UnderlineNav-body">
             <a
@@ -133,23 +118,16 @@ const Organization = ({ env }) => {
         {loadingRepositories || loadingProjects ? (
           <Loading />
         ) : (
-          <React.Fragment>
+          <div className="organization-content-render">
             {tab === "REPOSITORIES" && (
-              <div>
+              <div className="organization-content-render-child">
                 {loadingRepositories ? (
                   <ClipLoader size={20} color={"333333"} loading={true} />
                 ) : (
-                  <ul className="Box">
-                    <li className="teams-list-item Box-header">
-                      <h3 className="Box-title">Filters</h3>
-                    </li>
-                    {repositories &&
-                      repositories.map((repo) => (
-                        <li className="organization-repository-list-item Box-body">
-                          <RepositoryCard repo={repo} importButton organization={organization} />
-                        </li>
-                      ))}
-                  </ul>
+                  <List
+                    items={repositories}
+                    renderItem={(repository) => <RepositoryCard repo={repository} organization={organization} />}
+                  />
                 )}
 
                 {repositories && (
@@ -168,11 +146,11 @@ const Organization = ({ env }) => {
               </div>
             )}
             {tab === "PROJECTS" && (
-              <div>
+              <div className="organization-content-render-child">
                 {loadingProjects ? (
                   <ClipLoader size={20} color={"333333"} loading={true} />
                 ) : (
-                  <List items={projects} renderItem={(project) => <li>{project.name}</li>} />
+                  <List items={projects} renderItem={(project) => <ProjectCard project={project} />} />
                 )}
 
                 {repositories && (
@@ -190,7 +168,7 @@ const Organization = ({ env }) => {
                 )}
               </div>
             )}
-          </React.Fragment>
+          </div>
         )}
       </div>
     </div>

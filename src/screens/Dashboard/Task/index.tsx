@@ -42,6 +42,7 @@ const Task = () => {
                 Edit
               </Button>
               <Button
+                deleteButton
                 onClick={() => {
                   modal.actions.openModal({
                     modal: "Confirm",

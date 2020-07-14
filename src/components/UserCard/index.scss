@@ -1,0 +1,28 @@
+.user-card {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  &-profile {
+    display: flex;
+    align-items: center;
+    &-names {
+      padding: 0 0 0 1.6rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      line-height: 2.1rem;
+      &-name {
+        font-size: 1.6rem;
+        line-height: 2.4rem;
+      }
+      &-username {
+        font-size: 1.4rem;
+        line-height: 2.1rem;
+      }
+    }
+    &-avatar {
+      height: 48px;
+      width: 48px;
+      border-radius: 50%;
+    }
+  }
+}

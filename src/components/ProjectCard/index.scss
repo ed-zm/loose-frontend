@@ -1,0 +1,27 @@
+.project-card {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 4rem;
+  margin: 0 0.6rem 0 0.6rem;
+  &-profile {
+    display: flex;
+    flex-direction: column;
+    &-name {
+      display: flex;
+      align-items: center;
+      font-size: 1.6rem;
+      line-height: 2.4rem;
+      font-weight: 600;
+      color: $gray-900;
+    }
+    &-updated {
+      width: 100%;
+      font-size: 1.2rem;
+      line-height: 1.8rem;
+      display: grid;
+      align-items: center;
+      grid-column-gap: 0.5rem;
+      grid-template-columns: repeat(2, minmax(1px, max-content));
+    }
+  }
+}

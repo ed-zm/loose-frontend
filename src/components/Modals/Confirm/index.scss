@@ -1,0 +1,11 @@
+.confirm {
+  display: grid;
+  width: 100%;
+  justify-items: center;
+  &-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(1px, min-content));
+    grid-column-gap: 2rem;
+    margin-top: 3rem;
+  }
+}
