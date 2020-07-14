@@ -20,6 +20,7 @@
       border-right: 1px solid $divider-color;
     }
     &-content {
+      grid-column: 3 / -1;
       @media(max-width: $bp-medium) {
         grid-column: 1 / -1;
       }

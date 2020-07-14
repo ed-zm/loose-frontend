@@ -11,6 +11,7 @@ import CreateTeam from "./CreateTeam";
 import GithubProjects from "./GithubProjects";
 import GithubColumns from "./GithubColumns";
 import Confirm from "./Confirm";
+import ManageTeamMembers from "./ManageTeamMembers";
 import "./index.scss";
 
 const Modal = () => {
@@ -49,6 +50,7 @@ const Modal = () => {
           {modal === "GithubProjects" && <GithubProjects {...params} closeModal={actions.closeModal} />}
           {modal === "GithubColumns" && <GithubColumns {...params} closeModal={actions.closeModal} />}
           {modal === "Confirm" && <Confirm {...params} closeModal={actions.closeModal} />}
+          {modal === "ManageTeamMembers" && <ManageTeamMembers {...params} closeModal={actions.closeModal} />}
         </div>
       </div>
       {/* </div> */}

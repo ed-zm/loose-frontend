@@ -1,29 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useRouter } from "next/router";
 import moment from "moment";
 import useTeam from "loose-components/src/screens/Dashboard/Team";
 import TaskCard from "../../../components/TaskCard";
+import Button from "../../../components/Button";
+import { ModalContext } from "loose-components/src/contexts/UI/Modal";
 import "./index.scss";
 
 const Team = () => {
   const router = useRouter();
+  const modal = useContext(ModalContext);
   const { id } = router.query;
-  const {
-    data,
-    teamTasks,
-    tab,
-    setTab,
-    removingMember,
-    addingMember,
-    onRemoveMember,
-    onAddMember,
-    member,
-    setMember,
-    members,
-  } = useTeam({
+  const { data, teamTasks, tab, setTab } = useTeam({
     id,
   });
-  console.log("TEAM TASKS DATA", teamTasks);
   return (
     <div className="team">
       {data && data.team && (
@@ -31,37 +21,9 @@ const Team = () => {
           <img className="avatar" src={"/default_profile.png"} width={260} height={260} />
           <span className="h2">{data.team.name}</span>
           <div>{moment(data.team.createdAt).format("DD/MMM/YYYY HH:mm")}</div>
-          {/* {/* <div>Members</div> */}
-          <div>
-            {data.team.users &&
-              data.team.users.map((member) => (
-                <div>
-                  <span>
-                    {member.firstName} {member.lastName}
-                  </span>
-                  <button onClick={onRemoveMember} disabled={removingMember}>
-                    remove
-                  </button>
-                </div>
-              ))}
-          </div>
-          {/* <div>
-            <select onChange={(e) => setMember(e.target.value)} value={member}>
-              {members &&
-                members.users &&
-                members.users.map((m) => (
-                  <option key={m.id} value={m.id}>
-                    {m.firstName} {m.lastName}
-                  </option>
-                ))}
-            </select>
-            <button onClick={onAddMember} disabled={addingMember}>
-              Add Member
-            </button>
-          </div> */}
         </div>
       )}
-      <div>
+      <div className="team-content">
         <nav className="UnderlineNav" aria-label="Foo bar">
           <div className="UnderlineNav-body">
             <a onClick={() => setTab("TASKS")} className="UnderlineNav-item" aria-current={tab === "TASKS"}>
@@ -83,6 +45,21 @@ const Team = () => {
               </li>
             ))}
           </ul>
+        )}
+        {tab === "USERS" && (
+          <div>
+            <Button
+              onClick={() => {
+                modal.actions.openModal({
+                  modal: "ManageTeamMembers",
+                  title: "Manage Team Members",
+                  params: { team: data.team },
+                });
+              }}
+            >
+              Manage Members
+            </Button>
+          </div>
         )}
       </div>
     </div>

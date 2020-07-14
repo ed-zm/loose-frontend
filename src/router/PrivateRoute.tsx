@@ -71,9 +71,7 @@ const PrivateRoute = (ComposedComponent) => {
       user = await apollo.query({
         query: LOGGED_IN,
       });
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
     const { publicRuntimeConfig } = getConfig();
     const env = getEnv(publicRuntimeConfig);
     return { token, user, env };

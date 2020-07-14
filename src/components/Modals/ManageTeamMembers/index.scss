@@ -1,0 +1,18 @@
+.manage-team-members {
+  width: 100%;
+  display: grid;
+  grid-row-gap: 1rem;
+  align-items: center;
+  justify-items: center;
+  &-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &-select {
+    display: grid;
+    grid-row-gap: 1rem;
+    align-items: center;
+    justify-items: center;
+  }
+}
