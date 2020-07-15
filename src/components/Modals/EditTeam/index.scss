@@ -1,0 +1,14 @@
+.edit-team {
+    width: 100%;
+    display: grid;
+    grid-row-gap: 2rem;
+    align-items: center;
+    &-buttons {
+      justify-self: center;
+      display: grid;
+      justify-items: center;
+      align-items: center;
+      grid-template-columns: repeat(2, minmax(1px, max-content));
+      grid-column-gap: 2rem;
+    }
+  }
