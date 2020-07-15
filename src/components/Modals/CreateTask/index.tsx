@@ -51,15 +51,16 @@ const CreateTask = ({ tasks, variables, closeModal }) => {
       </Select>
       {organization && (
         <React.Fragment>
-          <input
-            name="team-task"
-            type="checkbox"
-            checked={teamTask}
-            onChange={() => {
-              setTeamTask(!teamTask);
-            }}
-          />
-          <label for="team-task">Team Task</label>
+          <div style={{ display: "flex" }}>
+            <input
+              type="checkbox"
+              checked={teamTask}
+              onChange={() => {
+                setTeamTask(!teamTask);
+              }}
+            />
+            <span>Team Task</span>
+          </div>
           {teamTask && (
             <Select
               onChange={(e) => setTeam(e.target.value)}
