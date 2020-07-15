@@ -8,6 +8,7 @@ import EditTask from "./EditTask";
 import CreateOrganization from "./CreateOrganization";
 import EditOrganization from "./EditOrganization";
 import CreateTeam from "./CreateTeam";
+import EditTeam from "./EditTeam";
 import GithubProjects from "./GithubProjects";
 import GithubColumns from "./GithubColumns";
 import Confirm from "./Confirm";
@@ -45,6 +46,7 @@ const Modal = () => {
           {modal === "CreateTask" && <CreateTask {...params} closeModal={actions.closeModal} />}
           {modal === "EditTask" && <EditTask {...params} closeModal={actions.closeModal} />}
           {modal === "CreateTeam" && <CreateTeam {...params} closeModal={actions.closeModal} />}
+          {modal === "EditTeam" && <EditTeam {...params} closeModal={actions.closeModal} />}
           {modal === "CreateOrganization" && <CreateOrganization {...params} closeModal={actions.closeModal} />}
           {modal === "EditOrganization" && <EditOrganization {...params} closeModal={actions.closeModal} />}
           {modal === "GithubProjects" && <GithubProjects {...params} closeModal={actions.closeModal} />}

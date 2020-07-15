@@ -9,13 +9,13 @@ import "./index.scss";
 
 const Tasks = () => {
   const modal = useContext(ModalContext);
-  const { tasks, state, setState } = useTasks();
+  const { tasks, state, variables, setState } = useTasks();
   return (
     <div className="tasks">
       <div className="tasks-create-button">
         <Button
           onClick={() => {
-            modal.actions.openModal({ modal: "CreateTask", title: "Add Task", params: { tasks } });
+            modal.actions.openModal({ modal: "CreateTask", title: "Add Task", params: { tasks, variables } });
           }}
         >
           Add Task
