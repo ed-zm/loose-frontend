@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import useOrganization from "loose-components/src/screens/Dashboard/Organization";
 import GithubLogin from "react-github-login";
 import { ModalContext } from "loose-components/src/contexts/UI/Modal";
+import { UserContext } from "loose-components/src/contexts/User";
 import GithubButton from "../../../components/GithubButton";
 import Button from "../../../components/Button";
 import List from "../../../components/List";
@@ -17,6 +18,7 @@ const Organization = ({ env }) => {
   const router = useRouter();
   const { id } = router.query;
   const { actions } = useContext(ModalContext);
+  const user = useContext(UserContext);
   const {
     organization,
     loading,
@@ -52,34 +54,36 @@ const Organization = ({ env }) => {
           </GithubLogin>
           {organization.githubOrganization && <a onClick={onUnlinkOrganization}>Disconnect</a>}
         </div>
-        <div className="organization-profile-buttons">
-          <Button
-            onClick={() => {
-              actions.openModal({ modal: "EditOrganization", title: "Edit Organization", params: { organization } });
-            }}
-          >
-            Edit
-          </Button>
-          <Button
-            deleteButton
-            onClick={() => {
-              actions.openModal({
-                modal: "Confirm",
-                title: "Delete Organization",
-                params: {
-                  onOKText: "Delete",
-                  onOK: async () => {
-                    await onDeleteOrganization();
-                    await router.push("/dashboard/organizations");
+        {organization.owner.id === user.id && (
+          <div className="organization-profile-buttons">
+            <Button
+              onClick={() => {
+                actions.openModal({ modal: "EditOrganization", title: "Edit Organization", params: { organization } });
+              }}
+            >
+              Edit
+            </Button>
+            <Button
+              deleteButton
+              onClick={() => {
+                actions.openModal({
+                  modal: "Confirm",
+                  title: "Delete Organization",
+                  params: {
+                    onOKText: "Delete",
+                    onOK: async () => {
+                      await onDeleteOrganization();
+                      await router.push("/dashboard/organizations");
+                    },
+                    description: "Are you sure to delete this organization?",
                   },
-                  description: "Are you sure to delete this organization?",
-                },
-              });
-            }}
-          >
-            Delete
-          </Button>
-        </div>
+                });
+              }}
+            >
+              Delete
+            </Button>
+          </div>
+        )}
       </div>
       <div className="organization-content">
         <nav className="UnderlineNav" aria-label="Foo bar">

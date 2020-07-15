@@ -69,18 +69,11 @@ const Team = () => {
               </div>
             </nav>
             <div className="team-content-render">
-              {/* {!!teamTasks.length && (
-              <ul className="Box">
-                <li className="teams-list-item Box-header">
-                  <h3 className="Box-title">Filters</h3>
-                </li>
-                {teamTasks.map((task) => (
-                  <li className="tasks-list-item Box-body">
-                    <TaskCard task={task} />
-                  </li>
-                ))}
-              </ul>
-            )} */}
+              {tab === "TASKS" && (
+                <div className="team-content-render-tasks">
+                  <List items={teamTasks} renderItem={(task) => <TaskCard task={task} />} />
+                </div>
+              )}
               {tab === "USERS" && (
                 <div className="team-content-render-users">
                   <List items={data.team.users} renderItem={(member) => <UserCard user={member} />} />

@@ -20,6 +20,12 @@
       border-right: 1px solid $divider-color;
     }
     &-content {
+      &-buttons {
+        width: 100%;
+        justify-content: flex-end;
+        align-items: center;
+        display: flex;
+      }
       &-render {
         margin-top: 2rem;
         &-users {
