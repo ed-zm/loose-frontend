@@ -23,7 +23,7 @@ const SignUp = () => {
     error,
     signingUp,
   } = useSignUp({
-    callback: () => router.push("/sign-in?accountCreated=true"),
+    callback: () => router.push(`/sign-in?accountCreated=true&mail=${email}`),
   });
   const parsedError = parseError(error);
   return (

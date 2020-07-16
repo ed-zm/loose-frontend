@@ -11,7 +11,7 @@ import "./index.scss";
 
 const SignIn = () => {
   const router = useRouter();
-  const { accountCreated } = router.query;
+  const { accountCreated, mail } = router.query;
   const {
     email,
     setEmail,
@@ -34,6 +34,19 @@ const SignIn = () => {
       <div className="sign-in-logo">
         <span className="sign-in-logo-text">Loose Dev</span>
       </div>
+      {accountCreated && (
+        <div className="Toast Toast--success">
+          <span className="Toast-icon">
+            <svg width="12" height="16" viewBox="0 0 12 16" className="octicon octicon-check" aria-hidden="true">
+              <path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z" />
+            </svg>
+          </span>
+          <span className="Toast-content">
+            Account created successfully. Please check your {mail ? "" : "e-mail"} address {mail} to verify your e-mail
+            before signing in.{" "}
+          </span>
+        </div>
+      )}
       <div className="sign-in-form-wrapper">
         <div className="sign-in-title">Sign In to Loose Dev</div>
         {parsedError && (
