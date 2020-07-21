@@ -5,6 +5,7 @@ import Cropper from "../../../components/Cropper";
 import Button from "../../../components/Button";
 import useUser from "loose-components/src/screens/Dashboard/User";
 import "./index.scss";
+import TextArea from "../../../components/TextArea";
 
 const User = () => {
   const router = useRouter();
@@ -19,6 +20,13 @@ const User = () => {
     changeProfilePicture,
     tab,
     setTab,
+    isYou,
+    edit,
+    setEdit,
+    bio,
+    setBio,
+    onUpdateProfile,
+    updatingProfile,
   } = useUser({
     id,
   });
@@ -36,14 +44,30 @@ const User = () => {
             <span className="h2 user-profile-name">{`${user.firstName} ${user.lastName}`}</span>
             <span className="h3 user-profile-username">{user.username}</span>
           </div>
-          <p className="user-profile-biography">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-            scrambled it to make a type specimen book.
-          </p>
-          <button className="user-profile-button btn mr-2" type="button">
-            Edit Profile
-          </button>
+          {edit ? (
+            <TextArea value={bio} onChange={(e) => setBio(e.target.value)} />
+          ) : (
+            <p className="user-profile-biography">{user.biography}</p>
+          )}
+          {isYou && (
+            <React.Fragment>
+              {edit && (
+                <Button onClick={onUpdateProfile} disabled={updatingProfile}>
+                  Update
+                </Button>
+              )}
+              <button
+                className="user-profile-button btn mr-2"
+                type="button"
+                onClick={() => {
+                  setEdit(!edit);
+                }}
+                disabled={updatingProfile}
+              >
+                {edit ? "Cancel" : "Edit Profile"}
+              </button>
+            </React.Fragment>
+          )}
         </div>
       )}
       <div className="user-content">

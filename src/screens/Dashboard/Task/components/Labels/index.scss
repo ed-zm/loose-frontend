@@ -1,0 +1,16 @@
+.labels {
+  display: grid;
+  width: 100%;
+  align-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(1px, max-content));
+  grid-template-rows: repeat(auto-fit, minmax(1px, max-content));
+  &-label {
+    display: flex;
+    align-items: center;
+    min-height: 34px;
+    margin-right: 0.5rem;
+    &-delete {
+      cursor: pointer;
+    }
+  }
+}
