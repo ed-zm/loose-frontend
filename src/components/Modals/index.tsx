@@ -12,6 +12,7 @@ import EditTeam from "./EditTeam";
 import GithubProjects from "./GithubProjects";
 import GithubColumns from "./GithubColumns";
 import Confirm from "./Confirm";
+import Invite from "./Invite";
 import ManageTeamMembers from "./ManageTeamMembers";
 import "./index.scss";
 
@@ -51,6 +52,7 @@ const Modal = () => {
           {modal === "EditOrganization" && <EditOrganization {...params} closeModal={actions.closeModal} />}
           {modal === "GithubProjects" && <GithubProjects {...params} closeModal={actions.closeModal} />}
           {modal === "GithubColumns" && <GithubColumns {...params} closeModal={actions.closeModal} />}
+          {modal === "Invite" && <Invite {...params} closeModal={actions.closeModal} />}
           {modal === "Confirm" && <Confirm {...params} closeModal={actions.closeModal} />}
           {modal === "ManageTeamMembers" && <ManageTeamMembers {...params} closeModal={actions.closeModal} />}
         </div>

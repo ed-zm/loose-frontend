@@ -35,6 +35,7 @@ const Organization = ({ env }) => {
     setTab,
     onUnlinkOrganization,
     onDeleteOrganization,
+    onInviteToOrganization,
   } = useOrganization({ id });
   if (!organization) return null;
   return (
@@ -81,6 +82,22 @@ const Organization = ({ env }) => {
               }}
             >
               Delete
+            </Button>
+            <Button
+              onClick={() => {
+                actions.openModal({
+                  modal: "Invite",
+                  title: "Invite To Organization",
+                  params: {
+                    onInvite: async (id) => {
+                      await onInviteToOrganization(id);
+                    },
+                    type: "ORGANIZATION",
+                  },
+                });
+              }}
+            >
+              Invite
             </Button>
           </div>
         )}
