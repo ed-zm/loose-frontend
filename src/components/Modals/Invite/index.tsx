@@ -4,12 +4,11 @@ import Button from "../../Button";
 import List from "../../List";
 import Loading from "../../Loading";
 
-const Invite = ({ onInvite, type, closeModal }) => {
+const Invite = ({ onInvite, type, typeId, closeModal }) => {
   return (
     <div>
-      <Search type={type}>
+      <Search type={type} typeId={typeId}>
         {({ items, refetch, searching }) => {
-          console.log("SEARCHING INSIDE", searching);
           if (searching) return <Loading />;
           return (
             <List

@@ -93,6 +93,7 @@ const Organization = ({ env }) => {
                       await onInviteToOrganization(id);
                     },
                     type: "ORGANIZATION",
+                    typeId: organization.id,
                   },
                 });
               }}
