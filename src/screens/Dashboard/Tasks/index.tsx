@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import classNames from "classnames";
+import InfiniteScroll from "react-infinite-scroller";
 import useTasks from "loose-components/src/screens/Dashboard/Tasks";
 import TaskCard from "../../../components/TaskCard";
 import Input from "../../../components/Input";
@@ -7,6 +7,7 @@ import Button from "../../../components/Button";
 import { ModalContext } from "loose-components/src/contexts/UI/Modal";
 import "./index.scss";
 import Select, { Option } from "../../../components/Select";
+import Loading from "../../../components/Loading";
 
 const Tasks = () => {
   const modal = useContext(ModalContext);
@@ -23,7 +24,7 @@ const Tasks = () => {
     titleFilter,
     // page,
     // setPage,
-    onSetCursor,
+    onFetchMore,
     pageInfo,
     loading,
   } = useTasks();
@@ -55,40 +56,22 @@ const Tasks = () => {
       </div>
       <ul className="Box tasks-list">
         <div className="Box-header d-flex flex-justify-between"></div>
-        {tasks.map((task) => (
-          <li className="tasks-list-item Box-body" key={task.id}>
-            <TaskCard task={task} />
-          </li>
-        ))}
+        <InfiniteScroll
+          pageStart={0}
+          loadMore={() => {
+            loading || !pageInfo.hasNextPage ? null : onFetchMore();
+          }}
+          hasMore={pageInfo.hasNextPage}
+          loader={<Loading />}
+          useWindow={false}
+        >
+          {tasks.map((task) => (
+            <li className="tasks-list-item Box-body" key={task.id}>
+              <TaskCard task={task} />
+            </li>
+          ))}
+        </InfiniteScroll>
       </ul>
-      {!!tasks.length && (
-        <div className="pagination">
-          <a
-            // className="previous_page"
-            onClick={() => onSetCursor("BEFORE")}
-            aria-disabled={loading || !pageInfo.hasPreviousPage}
-          >
-            Previous
-          </a>
-          {/* <em aria-current="page">1</em>
-        <a href="#url" aria-label="Page 2">
-          2
-        </a>
-        <a href="#url" aria-label="Page 3">
-          3
-        </a> */}
-          <a
-            onClick={() => onSetCursor("AFTER")}
-            // className="next_page"
-            // rel="next"
-            // href="#url"
-            // aria-label="Next Page"
-            aria-disabled={loading || !pageInfo.hasNextPage}
-          >
-            Next
-          </a>
-        </div>
-      )}
     </div>
   );
 };

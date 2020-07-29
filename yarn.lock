@@ -4417,9 +4417,9 @@ lodash@^4.0.0, lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.1
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
 
-"loose-components@git+ssh://git@github.com:loose-dev/loose-components.git#1.0.16":
-  version "1.0.16"
-  resolved "git+ssh://git@github.com:loose-dev/loose-components.git#37a39eee39c294807439ee0f1d86495e42ba4ac1"
+"loose-components@git+ssh://git@github.com:loose-dev/loose-components.git#1.0.20":
+  version "1.0.20"
+  resolved "git+ssh://git@github.com:loose-dev/loose-components.git#0837f8657de34846b942000c92cde9de4af8cff6"
 
 loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.4.0:
   version "1.4.0"
@@ -5999,6 +5999,13 @@ react-github-login@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/react-github-login/-/react-github-login-1.0.3.tgz#e3fdc29c1162ecc0704d9fe6096c69d6f53315e7"
   integrity sha1-4/3CnBFi7MBwTZ/mCWxp1vUzFec=
+
+react-infinite-scroller@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/react-infinite-scroller/-/react-infinite-scroller-1.2.4.tgz#f67eaec4940a4ce6417bebdd6e3433bfc38826e9"
+  integrity sha512-/oOa0QhZjXPqaD6sictN2edFMsd3kkMiE19Vcz5JDgHpzEJVqYcmq+V3mkwO88087kvKGe1URNksHEOt839Ubw==
+  dependencies:
+    prop-types "^15.5.8"
 
 react-is@16.8.6:
   version "16.8.6"
