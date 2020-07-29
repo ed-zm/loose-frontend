@@ -22,6 +22,8 @@ const Tasks = () => {
     setOrganizationOrPersonal,
     setTitleFilter,
     titleFilter,
+    orderBy,
+    setOrderBy,
     // page,
     // setPage,
     onFetchMore,
@@ -30,7 +32,7 @@ const Tasks = () => {
   } = useTasks();
   return (
     <div className="tasks">
-      <div className="tasks-create-button">
+      <div className="tasks-header">
         <Input placeholder="Title" value={titleFilter} onChange={(e) => setTitleFilter(e.target.value)} />
         <Select onChange={(e) => setState(parseInt(e.target.value, 10))} value={state}>
           <Option value={2}>All</Option>
@@ -46,7 +48,12 @@ const Tasks = () => {
           <Option value={null}>All</Option>
           <Option value="PERSONAL">Personal</Option>
         </Select>
+        <Select onChange={(e) => setOrderBy(e.target.value)} value={orderBy}>
+          <Option value="createdAt_DESC">Newest</Option>
+          <Option value="createdAt_ASC">Oldest</Option>
+        </Select>
         <Button
+          className="tasks-header-button"
           onClick={() => {
             modal.actions.openModal({ modal: "CreateTask", title: "Add Task", params: { tasks, variables } });
           }}

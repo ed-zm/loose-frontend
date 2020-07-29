@@ -7,14 +7,29 @@ import { ModalContext } from "loose-components/src/contexts/UI/Modal";
 import "./index.scss";
 import Input from "../../../components/Input";
 import Loading from "../../../components/Loading";
+import Select, { Option } from "../../../components/Select";
 
 const Teams = () => {
-  const { teams, loading, setNameFilter, nameFilter, onFetchMore, pageInfo, variables } = useTeams();
+  const {
+    teams,
+    loading,
+    setNameFilter,
+    nameFilter,
+    onFetchMore,
+    pageInfo,
+    variables,
+    orderBy,
+    setOrderBy,
+  } = useTeams();
   const modal = useContext(ModalContext);
   return (
     <div className="teams">
       <div className="teams-create-button">
         <Input placeholder="Find a Team" value={nameFilter} onChange={(e) => setNameFilter(e.target.value)} />
+        <Select onChange={(e) => setOrderBy(e.target.value)} value={orderBy}>
+          <Option value="createdAt_DESC">Newest</Option>
+          <Option value="createdAt_ASC">Oldest</Option>
+        </Select>
         <Button
           onClick={() => {
             modal.actions.openModal({ modal: "CreateTeam", title: "Create Team", params: { variables } });

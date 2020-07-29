@@ -6,15 +6,37 @@ import useOrganizations from "loose-components/src/screens/Dashboard/Organizatio
 import { ModalContext } from "loose-components/src/contexts/UI/Modal";
 import Input from "../../../components/Input";
 import Loading from "../../../components/Loading";
+import Select, { Option } from "../../../components/Select";
 import "./index.scss";
 
 const Organizations = () => {
-  const { organizations, setNameFilter, nameFilter, onFetchMore, pageInfo, loading, variables } = useOrganizations();
+  const {
+    organizations,
+    setNameFilter,
+    nameFilter,
+    onFetchMore,
+    pageInfo,
+    loading,
+    variables,
+    ownerOrMember,
+    setOwnerOrMember,
+    orderBy,
+    setOrderBy,
+  } = useOrganizations();
   const modal = useContext(ModalContext);
   return (
     <div className="organizations">
       <div className="organizations-create-button">
         <Input placeholder="Find a Organization" value={nameFilter} onChange={(e) => setNameFilter(e.target.value)} />
+        <Select onChange={(e) => setOwnerOrMember(e.target.value)} value={ownerOrMember}>
+          <Option value="">All</Option>
+          <Option value="OWNER">Owner</Option>
+          <Option value="MEMBER">Member</Option>
+        </Select>
+        <Select onChange={(e) => setOrderBy(e.target.value)} value={orderBy}>
+          <Option value="createdAt_DESC">Newest</Option>
+          <Option value="createdAt_ASC">Oldest</Option>
+        </Select>
         <Button
           onClick={() => {
             modal.actions.openModal({
