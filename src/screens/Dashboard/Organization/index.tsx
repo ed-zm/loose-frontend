@@ -36,6 +36,7 @@ const Organization = ({ env }) => {
     onUnlinkOrganization,
     onDeleteOrganization,
     onInviteToOrganization,
+    invitingToOrganization,
   } = useOrganization({ id });
   if (!organization) return null;
   return (
@@ -89,6 +90,7 @@ const Organization = ({ env }) => {
                   modal: "Invite",
                   title: "Invite To Organization",
                   params: {
+                    organization,
                     onInvite: async (id) => {
                       await onInviteToOrganization(id);
                     },

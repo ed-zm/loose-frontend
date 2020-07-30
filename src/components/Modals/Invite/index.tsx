@@ -1,39 +1,30 @@
-import React from "react";
-import Search from "../../Search";
+import React, { useState } from "react";
 import Button from "../../Button";
-import List from "../../List";
-import Loading from "../../Loading";
+import UsersList from "../../Lists/Users";
 
-const Invite = ({ onInvite, type, typeId, closeModal }) => {
+const Invite = ({ onInvite, organization, type, typeId, closeModal }) => {
+  const [inviting, setInviting] = useState(false);
   return (
     <div>
-      <Search type={type} typeId={typeId}>
-        {({ items, refetch, searching }) => {
-          if (searching) return <Loading />;
-          return (
-            <List
-              items={items}
-              renderItem={(user) => (
-                <div className="manage-team-members-card">
-                  <img className="avatar avatar-small" alt={user.name} src={user.avatar} width="32" height="32" />
-                  <span>
-                    {user.firstName} {user.lastName}
-                  </span>
-                  <Button
-                    onClick={async () => {
-                      await onInvite(user.id);
-                      await refetch();
-                    }}
-                    // disabled={removingMember}
-                  >
-                    Invite
-                  </Button>
-                </div>
-              )}
-            />
-          );
-        }}
-      </Search>
+      <UsersList
+        organization={organization}
+        type={type}
+        typeId={typeId}
+        action={({ user, refetch, loading }) => (
+          <Button
+            onClick={async () => {
+              await setInviting(true);
+              await onInvite(user.id);
+              refetch();
+              await setInviting(false);
+            }}
+            disabled={inviting || loading}
+            loading={inviting || loading}
+          >
+            Invite
+          </Button>
+        )}
+      />
     </div>
   );
 };

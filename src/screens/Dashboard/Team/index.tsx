@@ -6,24 +6,25 @@ import TaskCard from "../../../components/TaskCard";
 import Button from "../../../components/Button";
 import { ModalContext } from "loose-components/src/contexts/UI/Modal";
 import "./index.scss";
+import UsersList from "../../../components/Lists/Users";
 import List from "../../../components/List";
-import UserCard from "../../../components/UserCard";
+// import UserCard from "../../../components/UserCard";
 
 const Team = () => {
   const router = useRouter();
   const { actions } = useContext(ModalContext);
   const { id } = router.query;
-  const { data, teamTasks, onDeleteTeam, tab, setTab } = useTeam({
+  const { team, teamTasks, teamMembers, onDeleteTeam, tab, setTab } = useTeam({
     id,
   });
   return (
     <div className="team">
-      {data && data.team && (
+      {team && (
         <React.Fragment>
           <div className="team-profile">
             <img className="avatar" src={"/default_profile.png"} width={260} height={260} />
-            <span className="h2">{data.team.name}</span>
-            <div>{moment(data.team.createdAt).format("DD/MMM/YYYY HH:mm")}</div>
+            <span className="h2">{team.name}</span>
+            <div>{moment(team.createdAt).format("DD/MMM/YYYY HH:mm")}</div>
           </div>
           <div className="team-content">
             <div className="team-content-buttons">
@@ -32,7 +33,7 @@ const Team = () => {
                   actions.openModal({
                     modal: "EditTeam",
                     title: "Edit Team",
-                    params: { team: data.team },
+                    params: { team },
                   });
                 }}
               >
@@ -69,20 +70,21 @@ const Team = () => {
               </div>
             </nav>
             <div className="team-content-render">
-              {tab === "TASKS" && (
+              {false && tab === "TASKS" && (
                 <div className="team-content-render-tasks">
                   <List items={teamTasks} renderItem={(task) => <TaskCard task={task} />} />
                 </div>
               )}
               {tab === "USERS" && (
                 <div className="team-content-render-users">
-                  <List items={data.team.users} renderItem={(member) => <UserCard user={member} />} />
+                  {/* <List items={teamMembers} renderItem={(member) => <UserCard user={member} />} /> */}
+                  <UsersList team={team} key="team-members-list" />
                   <Button
                     onClick={() => {
                       actions.openModal({
                         modal: "ManageTeamMembers",
                         title: "Manage Team Members",
-                        params: { team: data.team },
+                        params: { team },
                       });
                     }}
                   >

@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { useRouter } from "next/router";
 import Markdown from "react-markdown";
 import moment from "moment";
-import Assign from "./components/Assign";
 import Labels from "./components/Labels";
 import Comments from "./components/Comments";
 import useTask from "loose-components/src/screens/Dashboard/Task";
@@ -16,10 +15,10 @@ const Task = () => {
   const modal = useContext(ModalContext);
   const user = useContext(UserContext);
   const { id } = router.query;
-  const { data, loading, error, onDeleteTask, isMember } = useTask({ id });
+  const { task, loading, error, onDeleteTask, isMember } = useTask({ id });
   return (
     <div className="task">
-      {data && data.task && (
+      {task && (
         <React.Fragment>
           <div className="task-title">
             <div>
@@ -27,19 +26,19 @@ const Task = () => {
                 src="/copy.png"
                 onClick={async () => {
                   if (navigator && navigator.clipboard) {
-                    await navigator.clipboard.writeText(data.task.code);
+                    await navigator.clipboard.writeText(task.code);
                     alert("copied to clipboard");
                   }
                 }}
               />
-              <span className="h1">{data.task.title}</span>
-              <span className="h1">{` #${data.task.code}`}</span>
+              <span className="h1">{task.title}</span>
+              <span className="h1">{` #${task.code}`}</span>
             </div>
-            {user.id === data.task.createdBy.id && (
+            {user.id === task.createdBy.id && (
               <div className="task-title-buttons">
                 <Button
                   onClick={() => {
-                    modal.actions.openModal({ modal: "EditTask", title: "Edit Task", params: { task: data.task } });
+                    modal.actions.openModal({ modal: "EditTask", title: "Edit Task", params: { task } });
                   }}
                 >
                   Edit
@@ -85,25 +84,36 @@ const Task = () => {
                 Open
               </span>
             </div>
-            <span className="h5">{`${data.task.createdBy.firstName} ${data.task.createdBy.lastName}`}</span>&nbsp;
-            <span> created this task on {moment(data.task.createdAt).format("MMM DD")}</span>
+            <span className="h5">{`${task.createdBy.firstName} ${task.createdBy.lastName}`}</span>&nbsp;
+            <span> created this task on {moment(task.createdAt).format("MMM DD")}</span>
           </div>
-          <Markdown className="" source={data.task.description} />
+          <Markdown className="" source={task.description} />
           {isMember && (
             <div>
-              {data.task.assignedTo ? (
+              {task.assignedTo ? (
                 <div>
-                  Assigned To: {data.task.assignedTo.firstName} {data.task.assignedTo.lastName}
+                  Assigned To: {task.assignedTo.firstName} {task.assignedTo.lastName}
                 </div>
               ) : (
-                <div>UNASSIGNED</div>
+                <div>
+                  UNASSIGNED
+                  {isMember && (
+                    <Button
+                      onClick={() => {
+                        modal.actions.openModal({ modal: "AssignTask", title: "Assign Task", params: { task } });
+                      }}
+                    >
+                      Assign
+                    </Button>
+                  )}
+                </div>
               )}
             </div>
           )}
-          <Labels task={data.task} />
+          <Labels task={task} />
+
           <div className="task-divider" />
-          {isMember && <Assign task={data.task} />}
-          <Comments task={data.task} />
+          <Comments task={task} />
         </React.Fragment>
       )}
     </div>

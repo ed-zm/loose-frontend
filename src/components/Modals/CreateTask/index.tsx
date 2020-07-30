@@ -4,11 +4,12 @@ import Input from "../../Input";
 import Button from "../../Button";
 import Select, { Option } from "../../Select";
 import useCreateTask from "loose-components/src/components/Modals/CreateTask";
+import OrganizationSelect from "../../OrganizationSelect";
+import TeamSelect from "../../TeamSelect";
 import "./index.scss";
 
 const CreateTask = ({ tasks, variables, closeModal }) => {
   const {
-    orgs,
     team,
     setTeam,
     teams,
@@ -35,20 +36,7 @@ const CreateTask = ({ tasks, variables, closeModal }) => {
         onChange={(e) => setEstimated(parseInt(e.target.value, 10))}
       />
       <TextAreaMD placeholder="description" value={description} onChange={(e) => setDescription(e.target.value)} />
-      <Select
-        onChange={(e) => setOrganization(e.target.value)}
-        value={organization}
-        items={orgs && orgs.organizations && orgs.organizations}
-        renderItem={(org) => (
-          <Option key={org.id} value={org.id}>
-            {org.name}
-          </Option>
-        )}
-      >
-        <Option key="personal-task-select" value={""}>
-          Personal
-        </Option>
-      </Select>
+      <OrganizationSelect organization={organization} setOrganization={setOrganization} />
       {organization && (
         <React.Fragment>
           <div style={{ display: "flex" }}>
@@ -61,18 +49,7 @@ const CreateTask = ({ tasks, variables, closeModal }) => {
             />
             <span>Team Task</span>
           </div>
-          {teamTask && (
-            <Select
-              onChange={(e) => setTeam(e.target.value)}
-              value={team}
-              items={teams}
-              renderItem={(team) => (
-                <Option key={team.id} value={team.id}>
-                  {team.name}
-                </Option>
-              )}
-            />
-          )}
+          {teamTask && <TeamSelect team={team} setTeam={setTeam} />}
         </React.Fragment>
       )}
       <Button onClick={onCreateTask} disabled={creatingTask}>

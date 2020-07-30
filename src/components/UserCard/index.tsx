@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.scss";
 
-const UserCard = ({ user }) => {
+const UserCard = ({ user, action }) => {
   return (
     <div className="user-card">
       <div className="user-card-profile">
@@ -13,9 +13,7 @@ const UserCard = ({ user }) => {
           <span className="user-card-profile-names-username">{user.username}</span>
         </div>
       </div>
-      <div />
-      <div />
-      <div />
+      {!!action && typeof action === "function" && <div>{action()}</div>}
     </div>
   );
 };

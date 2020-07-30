@@ -14,6 +14,7 @@ import GithubColumns from "./GithubColumns";
 import Confirm from "./Confirm";
 import Invite from "./Invite";
 import ManageTeamMembers from "./ManageTeamMembers";
+import AssignTask from "./AssignTask";
 import "./index.scss";
 
 const Modal = () => {
@@ -55,6 +56,7 @@ const Modal = () => {
           {modal === "Invite" && <Invite {...params} closeModal={actions.closeModal} />}
           {modal === "Confirm" && <Confirm {...params} closeModal={actions.closeModal} />}
           {modal === "ManageTeamMembers" && <ManageTeamMembers {...params} closeModal={actions.closeModal} />}
+          {modal === "AssignTask" && <AssignTask {...params} closeModal={actions.closeModal} />}
         </div>
       </div>
       {/* </div> */}
