@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "../../../components/Button";
-import useManageTeamMembers from "loose-components/src/components/modals/ManageTeamMembers";
+import useManageTeamMembers from "loose-components/src/components/Modals/ManageTeamMembers";
 import "./index.scss";
 import UsersList from "../../Lists/Users";
 
