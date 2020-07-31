@@ -1,0 +1,9 @@
+.organizations-list {
+    width: 100%;
+    &-create-button {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 2rem;
+    }
+}

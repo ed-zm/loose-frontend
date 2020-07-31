@@ -13,6 +13,8 @@ import RepositoryCard from "../../../components/RepositoryCard";
 import "./index.scss";
 import Loading from "../../../components/Loading";
 import ProjectCard from "../../../components/ProjectCard";
+import TasksList from "../../../components/Lists/Tasks";
+import TeamsList from "../../../components/Lists/Teams";
 
 const Organization = ({ env }) => {
   const router = useRouter();
@@ -137,6 +139,24 @@ const Organization = ({ env }) => {
             >
               <span> Projects</span>
             </a>
+            <a
+              onClick={() => {
+                setTab("TASKS");
+              }}
+              className="UnderlineNav-item"
+              aria-current={tab === "TASKS"}
+            >
+              <span>Tasks</span>
+            </a>
+            <a
+              onClick={() => {
+                setTab("TEAMS");
+              }}
+              className="UnderlineNav-item"
+              aria-current={tab === "TEAMS"}
+            >
+              <span>Teams</span>
+            </a>
           </div>
         </nav>
         {loadingRepositories || loadingProjects ? (
@@ -192,6 +212,8 @@ const Organization = ({ env }) => {
                 )}
               </div>
             )}
+            {tab === "TASKS" && <TasksList organization={organization} />}
+            {tab === "TEAMS" && <TeamsList organization={organization} />}
           </div>
         )}
       </div>

@@ -1,16 +1,4 @@
 .teams {
-    grid-column: 1 / -1;
-    width: 100%;
-    &-list {
-      width: 100%;
-      &-item {
-        list-style: none;
-      }
-    }
-    &-create-button {
-      width: 100%;
-      display: flex;
-      justify-content: flex-end;
-      margin-bottom: 2rem;
-    }
-  }
+  grid-column: 1 / -1;
+  width: 100%;
+}

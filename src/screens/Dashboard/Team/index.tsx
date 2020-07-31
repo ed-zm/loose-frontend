@@ -2,21 +2,20 @@ import React, { useContext } from "react";
 import { useRouter } from "next/router";
 import moment from "moment";
 import useTeam from "loose-components/src/screens/Dashboard/Team";
-import TaskCard from "../../../components/TaskCard";
 import Button from "../../../components/Button";
 import { ModalContext } from "loose-components/src/contexts/UI/Modal";
 import "./index.scss";
 import UsersList from "../../../components/Lists/Users";
-import List from "../../../components/List";
-// import UserCard from "../../../components/UserCard";
+import TasksList from "../../../components/Lists/Tasks";
 
 const Team = () => {
   const router = useRouter();
   const { actions } = useContext(ModalContext);
   const { id } = router.query;
-  const { team, teamTasks, teamMembers, onDeleteTeam, tab, setTab } = useTeam({
+  const { team, onDeleteTeam, tab, setTab } = useTeam({
     id,
   });
+  debugger;
   return (
     <div className="team">
       {team && (
@@ -70,14 +69,13 @@ const Team = () => {
               </div>
             </nav>
             <div className="team-content-render">
-              {false && tab === "TASKS" && (
+              {tab === "TASKS" && (
                 <div className="team-content-render-tasks">
-                  <List items={teamTasks} renderItem={(task) => <TaskCard task={task} />} />
+                  <TasksList team={team} />
                 </div>
               )}
               {tab === "USERS" && (
                 <div className="team-content-render-users">
-                  {/* <List items={teamMembers} renderItem={(member) => <UserCard user={member} />} /> */}
                   <UsersList team={team} key="team-members-list" />
                   <Button
                     onClick={() => {

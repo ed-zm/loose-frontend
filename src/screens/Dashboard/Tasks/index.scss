@@ -1,27 +1,6 @@
-.tasks-container {
-  @extend %basic-grid-column;
-  grid-row-gap: 3rem;
-}
-
 .tasks {
   width: 100%;
   display: grid;
   justify-items: center;
   grid-row-gap: 2rem;
-  &-header {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 3fr repeat(5, 1fr);
-    grid-column-gap: 2rem;
-    margin-bottom: 2rem;
-    &-button {
-      justify-self: end;
-    }
-  }
-  &-list {
-    width: 100%;
-    &-item {
-      list-style: none;
-    }
-  }
 }

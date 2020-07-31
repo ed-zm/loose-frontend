@@ -6,13 +6,15 @@ import Button from "../../../components/Button";
 import useUser from "loose-components/src/screens/Dashboard/User";
 import "./index.scss";
 import TextArea from "../../../components/TextArea";
+import TeamsList from "../../../components/Lists/Teams";
+import TasksList from "../../../components/Lists/Tasks";
+import OrganizationsList from "../../../components/Lists/Organizations";
 
 const User = () => {
   const router = useRouter();
   const { id } = router.query;
   const {
     user,
-    teams,
     currentPicture,
     fileType,
     closeCropper,
@@ -73,6 +75,16 @@ const User = () => {
       <div className="user-content">
         <nav className="UnderlineNav" aria-label="Foo bar">
           <div className="UnderlineNav-body">
+            <a onClick={() => setTab("TASKS")} className="UnderlineNav-item" aria-current={tab === "TASKS"}>
+              Teams
+            </a>
+            <a
+              onClick={() => setTab("ORGANIZATIONS")}
+              className="UnderlineNav-item"
+              aria-current={tab === "ORGANIZATIONS"}
+            >
+              Organizations
+            </a>
             <a onClick={() => setTab("TEAMS")} className="UnderlineNav-item" aria-current={tab === "TEAMS"}>
               <svg
                 className="octicon octicon-jersey"
@@ -91,22 +103,9 @@ const User = () => {
             </a>
           </div>
         </nav>
-        {tab === "TEAMS" && (
-          <ul className="Box">
-            {!!teams.length ? (
-              <li className="teams-list-item Box-header">
-                <h3 className="Box-title">Filters</h3>
-              </li>
-            ) : (
-              <span> No Teams Available</span>
-            )}
-            {teams.map((team) => (
-              <li className="teamss-list-item Box-body">
-                <span>{team.name}</span>
-              </li>
-            ))}
-          </ul>
-        )}
+        {tab === "TASKS" && <TasksList />}
+        {tab === "ORGANIZATIONS" && <OrganizationsList />}
+        {tab === "TEAMS" && <TeamsList />}
       </div>
       {currentPicture && fileType && (
         <Cropper closeCropper={closeCropper} src={currentPicture} fileType={fileType} savePicture={savePicture} />
