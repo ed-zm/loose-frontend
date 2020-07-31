@@ -76,7 +76,7 @@ const User = () => {
         <nav className="UnderlineNav" aria-label="Foo bar">
           <div className="UnderlineNav-body">
             <a onClick={() => setTab("TASKS")} className="UnderlineNav-item" aria-current={tab === "TASKS"}>
-              Teams
+              Tasks
             </a>
             <a
               onClick={() => setTab("ORGANIZATIONS")}
