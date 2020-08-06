@@ -1,5 +1,6 @@
 import React from "react";
-import router from "next/router";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 import parseError from "loose-components/src/utils/parseError";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
@@ -7,6 +8,8 @@ import useSignUp from "loose-components/src/screens/SignUp";
 import "./index.scss";
 
 const SignUp = () => {
+  const router = useRouter();
+  const { inviteCode } = router.query;
   const {
     firstName,
     setFirstName,
@@ -23,7 +26,15 @@ const SignUp = () => {
     error,
     signingUp,
   } = useSignUp({
-    callback: () => router.push(`/sign-in?accountCreated=true&mail=${email}`),
+    inviteCode: router.query.inviteCpde,
+    callback: async (token) => {
+      if (!!token && inviteCode) {
+        await Cookies.set("token", token);
+        router.push(`/dashboard/invite/${inviteCode}`);
+      } else {
+        router.push(`/sign-in?accountCreated=true&mail=${email}`);
+      }
+    },
   });
   const parsedError = parseError(error);
   return (

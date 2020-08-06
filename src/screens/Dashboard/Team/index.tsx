@@ -15,7 +15,6 @@ const Team = () => {
   const { team, onDeleteTeam, tab, setTab } = useTeam({
     id,
   });
-  debugger;
   return (
     <div className="team">
       {team && (

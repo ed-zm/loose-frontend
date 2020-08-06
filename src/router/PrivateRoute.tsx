@@ -35,7 +35,11 @@ const LoadingComponent = ({ children }) => {
 
 const PrivateRoute = (ComposedComponent) => {
   const Component = ({ token, user, ...props }) => {
-    if ((!user || !user.data.loggedIn) && process.browser) props.url.push("/sign-in");
+    if ((!user || !user.data.loggedIn) && process.browser) {
+      const route = props.url.pathname.split("/dashboard");
+      const redirectTo = route.length > 1 ? route[1].replace("[id]", props.url.query.id) : "";
+      props.url.push(`/sign-in${redirectTo ? `?redirectTo=${redirectTo}` : ""}`);
+    }
     return (
       <Providers user={user ? user.data.loggedIn : null} token={props.token}>
         <div className="main-layout">

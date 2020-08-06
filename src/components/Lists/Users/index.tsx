@@ -6,12 +6,13 @@ import useUsersList from "loose-components/src/components/Lists/Users";
 import Input from "../../Input";
 import "./index.scss";
 
-const Users = ({ action, team, organization, type, typeId }) => {
+const Users = ({ action, team, organization, type, typeId, invite }) => {
   const { users, pageInfo, onFetchMore, name, setName, refetch, loading, orderBy, setOrderBy } = useUsersList({
     team,
     organization,
     type,
     typeId,
+    invite,
   });
   useEffect(() => {
     console.log("MOUNTED");

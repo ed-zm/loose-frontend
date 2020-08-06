@@ -15,6 +15,7 @@ import Loading from "../../../components/Loading";
 import ProjectCard from "../../../components/ProjectCard";
 import TasksList from "../../../components/Lists/Tasks";
 import TeamsList from "../../../components/Lists/Teams";
+import UsersList from "../../../components/Lists/Users";
 
 const Organization = ({ env }) => {
   const router = useRouter();
@@ -157,6 +158,15 @@ const Organization = ({ env }) => {
             >
               <span>Teams</span>
             </a>
+            <a
+              onClick={() => {
+                setTab("MEMBERS");
+              }}
+              className="UnderlineNav-item"
+              aria-current={tab === "MEMBERS"}
+            >
+              <span>Members</span>
+            </a>
           </div>
         </nav>
         {loadingRepositories || loadingProjects ? (
@@ -214,6 +224,7 @@ const Organization = ({ env }) => {
             )}
             {tab === "TASKS" && <TasksList organization={organization} />}
             {tab === "TEAMS" && <TeamsList organization={organization} />}
+            {tab === "MEMBERS" && <UsersList organization={organization} />}
           </div>
         )}
       </div>

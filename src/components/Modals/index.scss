@@ -3,6 +3,7 @@
   width: 100vw;
   height: 100vh;
   justify-items: center;
+  z-index: 100;
   // background-color: rgba(0, 0, 0, 0.5);
   display: grid;
   grid-template-columns: repeat(12, 1fr);

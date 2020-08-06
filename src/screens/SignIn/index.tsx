@@ -11,7 +11,7 @@ import "./index.scss";
 
 const SignIn = () => {
   const router = useRouter();
-  const { accountCreated, mail } = router.query;
+  const { accountCreated, mail, redirectTo } = router.query;
   const {
     email,
     setEmail,
@@ -25,7 +25,9 @@ const SignIn = () => {
     resendVerificationEmailError,
     resendVerificationEmailSent,
   } = useSignIn({
-    callback: async () => await router.push("/dashboard"),
+    callback: async () => {
+      await router.push(`/dashboard${redirectTo ? redirectTo : ""}`);
+    },
     setToken: (token) => Cookies.set("token", token),
   });
   const parsedError = parseError(error);
