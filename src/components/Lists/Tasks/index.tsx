@@ -30,7 +30,7 @@ const Tasks = ({ team, organization }) => {
   return (
     <div className="task-list">
       <div className="tasks-list-header">
-        <Input placeholder="Title" value={titleFilter} onChange={(e) => setTitleFilter(e.target.value)} />
+        <Input placeholder="Title" value={titleFilter} onChange={(e) => setTitleFilter(e.target.value.toLowerCase())} />
         <Select onChange={(e) => setState(parseInt(e.target.value, 10))} value={state}>
           <Option value={2}>All</Option>
           <Option value={0}>Open</Option>

@@ -40,7 +40,7 @@ const SignIn = () => {
         <div className="Toast Toast--success">
           <span className="Toast-icon">
             <svg width="12" height="16" viewBox="0 0 12 16" className="octicon octicon-check" aria-hidden="true">
-              <path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z" />
+              <path fillRule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z" />
             </svg>
           </span>
           <span className="Toast-content">

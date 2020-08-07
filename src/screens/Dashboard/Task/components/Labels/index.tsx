@@ -33,7 +33,7 @@ const Labels = ({ task }) => {
             aria-hidden="true"
           >
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"
             ></path>
           </svg>
@@ -67,7 +67,7 @@ const Labels = ({ task }) => {
                 aria-hidden="true"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M13 1H1c-.55 0-1 .45-1 1v12c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V2c0-.55-.45-1-1-1zm0 13H1V2h12v12zM6 9H3V7h3V4h2v3h3v2H8v3H6V9z"
                 ></path>
               </svg>

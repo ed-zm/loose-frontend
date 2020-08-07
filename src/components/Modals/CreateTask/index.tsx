@@ -3,6 +3,7 @@ import TextAreaMD from "../../TextAreaMD";
 import Input from "../../Input";
 import Button from "../../Button";
 import Select, { Option } from "../../Select";
+import UsersList from "../../Lists/Users";
 import useCreateTask from "loose-components/src/components/Modals/CreateTask";
 import OrganizationSelect from "../../OrganizationSelect";
 import TeamSelect from "../../TeamSelect";
@@ -12,7 +13,6 @@ const CreateTask = ({ tasks, variables, closeModal }) => {
   const {
     team,
     setTeam,
-    teams,
     onCreateTask,
     title,
     setTitle,
@@ -25,6 +25,8 @@ const CreateTask = ({ tasks, variables, closeModal }) => {
     organization,
     setOrganization,
     creatingTask,
+    setAssignTo,
+    assignTo,
   } = useCreateTask({ tasks, variables, callback: closeModal });
   return (
     <div className="tasks-create-task">
@@ -50,6 +52,34 @@ const CreateTask = ({ tasks, variables, closeModal }) => {
             <span>Team Task</span>
           </div>
           {teamTask && <TeamSelect team={team} setTeam={setTeam} />}
+          {!!assignTo && !teamTask && (
+            <div className="tasks-create-task-assign-container">
+              <span>Assigned To {`${assignTo.firstName} ${assignTo.lastName}`}</span>
+              <Button
+                onClick={async () => {
+                  await setAssignTo(null);
+                }}
+              >
+                Change
+              </Button>
+            </div>
+          )}
+          {!teamTask && !assignTo && (
+            <div className="Box">
+              <UsersList
+                organization={organization}
+                action={({ user }) => (
+                  <Button
+                    onClick={async () => {
+                      await setAssignTo(user);
+                    }}
+                  >
+                    Assign
+                  </Button>
+                )}
+              />
+            </div>
+          )}
         </React.Fragment>
       )}
       <Button onClick={onCreateTask} disabled={creatingTask}>
