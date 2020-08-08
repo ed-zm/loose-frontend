@@ -38,6 +38,7 @@ const Teams = ({ organization }) => {
         </Button>
       </div>
       <List
+        loading={loading}
         pageInfo={pageInfo}
         onFetchMore={onFetchMore}
         items={teams}

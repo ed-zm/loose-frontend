@@ -14,9 +14,7 @@ const Users = ({ action, team, organization, type, typeId, invite }) => {
     typeId,
     invite,
   });
-  useEffect(() => {
-    console.log("MOUNTED");
-  }, []);
+  useEffect(() => {}, []);
   return (
     <div className="users-list">
       <div className="users-list-header">
@@ -30,6 +28,7 @@ const Users = ({ action, team, organization, type, typeId, invite }) => {
         pageInfo={pageInfo}
         onFetchMore={onFetchMore}
         items={users}
+        loading={loading}
         renderItem={(user) => (
           <UserCard user={user} action={action ? () => action({ user, loading, refetch }) : null} />
         )}

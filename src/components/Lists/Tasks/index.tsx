@@ -59,6 +59,7 @@ const Tasks = ({ team, organization }) => {
         </Button>
       </div>
       <List
+        loading={loading}
         pageInfo={pageInfo}
         onFetchMore={onFetchMore}
         items={tasks}

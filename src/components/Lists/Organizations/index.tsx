@@ -49,6 +49,7 @@ const Organizations = () => {
         </Button>
       </div>
       <List
+        loading={loading}
         pageInfo={pageInfo}
         onFetchMore={onFetchMore}
         items={organizations}
