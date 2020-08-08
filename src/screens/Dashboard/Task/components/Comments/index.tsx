@@ -29,7 +29,7 @@ const Comments = ({ task }) => {
           loading || !pageInfo.hasNextPage ? null : onFetchMore();
         }}
         hasMore={pageInfo.hasNextPage}
-        loader={<Loading />}
+        loader={<Loading key="comments-loader-key" />}
         useWindow={false}
       >
         {comments.map((comment) => (
