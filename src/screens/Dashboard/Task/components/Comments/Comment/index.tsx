@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import moment from "moment";
 import TextAreaMD from "../../../../../../components/TextAreaMD";
+import Markdown from "react-markdown";
 import useTaskComment from "loose-components/src/screens/Dashboard/Task/components/Comments/Comment";
 import { ModalContext } from "loose-components/src/contexts/UI/Modal";
 import Button from "../../../../../../components/Button";
@@ -94,7 +95,9 @@ const Comment = ({
           </Button>
         </React.Fragment>
       ) : (
-        <div className="Box-body">{text}</div>
+        <div className="Box-body">
+          <Markdown source={text} />
+        </div>
       )}
     </div>
   );
