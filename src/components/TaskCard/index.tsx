@@ -56,11 +56,15 @@ const TaskCard = ({ task }) => {
           </a>
         </Link>
         <div className="mt-1 text-small text-gray">
-          <span className="opened-by">Created By {`${task.createdBy.firstName} ${task.createdBy.lastName}`}</span>
+          <span className="opened-by">
+            Created By {`${task.createdBy.firstName} ${task.createdBy.lastName} (@${task.createdBy.username})`}
+          </span>
         </div>
         <div className="mt-1 text-small text-gray">
           <span className="opened-by">
-            {!!task.assignedTo ? `Assigned To ${task.assignedTo.firstName} ${task.assignedTo.lastName}` : `Unassigned`}
+            {!!task.assignedTo
+              ? `Assigned To ${task.assignedTo.firstName} ${task.assignedTo.lastName} (@${task.assignedTo.username})`
+              : `Unassigned`}
           </span>
         </div>
       </div>

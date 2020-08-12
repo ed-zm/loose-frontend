@@ -33,6 +33,7 @@ const Header = () => {
         </Link>
         <span
           onClick={async () => {
+            //we need to reset apollo store. PENDING
             await Cookies.remove("token");
             await user.actions.logout();
             await router.push("/sign-in");

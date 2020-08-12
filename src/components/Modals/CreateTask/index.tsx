@@ -51,7 +51,7 @@ const CreateTask = ({ tasks, variables, closeModal }) => {
             />
             <span>Team Task</span>
           </div>
-          {teamTask && <TeamSelect team={team} setTeam={setTeam} />}
+          {false && teamTask && <TeamSelect team={team} setTeam={setTeam} />}
           {!!assignTo && !teamTask && (
             <div className="tasks-create-task-assign-container">
               <span>Assigned To {`${assignTo.firstName} ${assignTo.lastName}`}</span>

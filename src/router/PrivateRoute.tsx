@@ -41,7 +41,7 @@ const PrivateRoute = (ComposedComponent) => {
       props.url.push(`/sign-in${redirectTo ? `?redirectTo=${redirectTo}` : ""}`);
     }
     return (
-      <Providers user={user ? user.data.loggedIn : null} token={props.token}>
+      <Providers user={user ? user.data.loggedIn : null} token={token}>
         <div className="main-layout">
           <div className="header-layout">
             <Header />
@@ -74,6 +74,7 @@ const PrivateRoute = (ComposedComponent) => {
     try {
       user = await apollo.query({
         query: LOGGED_IN,
+        fetchPolicy: "network-only",
       });
     } catch (e) {}
     const { publicRuntimeConfig } = getConfig();

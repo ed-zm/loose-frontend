@@ -84,7 +84,8 @@ const Task = () => {
                 Open
               </span>
             </div>
-            <span className="h5">{`${task.createdBy.firstName} ${task.createdBy.lastName}`}</span>&nbsp;
+            <span className="h5">{`${task.createdBy.firstName} ${task.createdBy.lastName} (@${task.createdBy.username})`}</span>
+            &nbsp;
             <span> created this task on {moment(task.createdAt).format("MMM DD")}</span>
           </div>
           <Markdown className="" source={task.description} />
@@ -92,7 +93,7 @@ const Task = () => {
             <div>
               {task.assignedTo ? (
                 <div>
-                  Assigned To: {task.assignedTo.firstName} {task.assignedTo.lastName}
+                  Assigned To: {task.assignedTo.firstName} {task.assignedTo.lastName} (@{task.assignedTo.username})
                 </div>
               ) : (
                 <div>
