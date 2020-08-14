@@ -35,7 +35,10 @@ const TaskCard = ({ task }) => {
         }}
       />
       <div className="task-text">
-        <Link href="/dashboard/task/[id]" as={`/dashboard/task/${task.code}`}>
+        <Link
+          href="/dashboard/task/[id]"
+          as={`/dashboard/task/${task.__typename === "ResponseRequest" ? task.task.code : task.code}`}
+        >
           <a className="link-gray-dark v-align-middle no-underline h4 js-navigation-open">
             <span className="tooltipped tooltipped-e">
               <svg
