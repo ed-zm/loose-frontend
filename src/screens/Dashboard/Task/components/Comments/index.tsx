@@ -36,7 +36,18 @@ const Comments = ({ task }) => {
           <Comment comment={comment} task={task} />
         ))}
       </InfiniteScroll>
-      <TextAreaMD placeholder="description" value={comment} onChange={(e) => setComment(e.target.value)} />
+      <TextAreaMD
+        placeholder="description"
+        value={comment}
+        onChange={async (e) => {
+          const value = e.target.value;
+          const found = value.match(/([@][\w_-]+)/gi);
+          if (found) {
+            await setMentions(found);
+          }
+          await setComment(value);
+        }}
+      />
       <Button className="task-comments-create-button" onClick={onCreateComment} disabled={creatingComment}>
         comment
       </Button>
