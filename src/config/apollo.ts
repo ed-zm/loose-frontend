@@ -53,12 +53,12 @@ const create = (token) => {
     link: ApolloLink.from([
       onError(({ graphQLErrors, networkError }) => {
         if (graphQLErrors) {
-          graphQLErrors.map(({ message }) => {
-            if (process.browser && process.env.STAGE !== "prod") console.log(message);
-            else console.log("An Unexpected Error has occured");
+          graphQLErrors.forEach(({ message }) => {
+            if (process.browser && process.env.STAGE !== "prod") window.showToast(message);
+            else window.showToast("An Unexpected Error has occured");
           });
         }
-        if (networkError && process.browser) console.log("There are problems with your Internet", networkError);
+        if (networkError && process.browser) window.showToast(`There are problems with your Internet ${networkError}`);
       }),
       authLink.concat(link),
     ]),

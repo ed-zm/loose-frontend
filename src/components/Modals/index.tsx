@@ -15,6 +15,7 @@ import Confirm from "./Confirm";
 import Invite from "./Invite";
 import ManageTeamMembers from "./ManageTeamMembers";
 import AssignTask from "./AssignTask";
+import { XIcon } from "@primer/octicons-react";
 import "./index.scss";
 
 const Modal = () => {
@@ -38,7 +39,7 @@ const Modal = () => {
         <span className="modal-title">
           {title}
           <span className="modal-cancel" onClick={actions.closeModal}>
-            X
+            <XIcon size="medium" />
           </span>
         </span>
         <div>

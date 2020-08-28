@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { toast } from "react-toastify";
 import { UserContext } from "loose-components/src/contexts/User";
 import Dropdown from "../Dropdown";
 import "./index.scss";
@@ -8,6 +9,18 @@ import Cookies from "js-cookie";
 
 const Header = () => {
   const user = useContext(UserContext);
+  useEffect(() => {
+    window.showToast = (message, type) => {
+      let options = { type };
+
+      if (!type) {
+        options.type = "info";
+        options.className = "black-background";
+      }
+
+      toast(message, options);
+    };
+  }, []);
   return (
     <header className="header-container Header py-lg-0">
       <Link href="/dashboard">

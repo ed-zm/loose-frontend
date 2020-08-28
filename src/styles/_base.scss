@@ -18,7 +18,8 @@ html {
 }
 
 body {
-  font-family: $font-sidebar;
+  font-family: BlinkMacSystemFont, -apple-system, "Segoe UI",
+  "Roboto", Helvetica, Arial, sans-serif;
   font-weight: 300;
   line-height: 1.6rem;
 }

@@ -17,7 +17,8 @@
   grid-template-rows: 3rem minmax(1rem, max-content);
   grid-row-gap: 2rem;
   margin-top: 10rem;
-  height: 400px;
+  margin-bottom: 10rem;
+  min-height: 400px;
   overflow-y: scroll;
   width: 100%;
   grid-column: 5 / 9;

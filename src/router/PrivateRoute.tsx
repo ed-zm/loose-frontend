@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { ToastContainer } from "react-toastify";
 import gql from "graphql-tag";
 import nextCookies from "next-cookies";
 import Cookies from "js-cookie";
@@ -10,6 +11,7 @@ import getEnv from "../utils/getEnv";
 import getConfig from "next/config";
 import { UIContext } from "loose-components/src/contexts/UI";
 import Loading from "../components/Loading";
+import "react-toastify/dist/ReactToastify.css";
 import "../styles/index.scss";
 
 const LOGGED_IN = gql`
@@ -43,6 +45,7 @@ const PrivateRoute = (ComposedComponent) => {
     return (
       <Providers user={user ? user.data.loggedIn : null} token={token}>
         <div className="main-layout">
+          <ToastContainer newestOnTop />
           <div className="header-layout">
             <Header />
           </div>
