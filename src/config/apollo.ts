@@ -54,11 +54,12 @@ const create = (token) => {
       onError(({ graphQLErrors, networkError }) => {
         if (graphQLErrors) {
           graphQLErrors.forEach(({ message }) => {
-            if (process.browser && process.env.STAGE !== "prod") window.showToast(message);
-            else window.showToast("An Unexpected Error has occured");
+            if (process.browser && process.env.STAGE !== "prod") window.showToast(message, "error");
+            else window.showToast("An Unexpected Error has occured", "error");
           });
         }
-        if (networkError && process.browser) window.showToast(`There are problems with your Internet ${networkError}`);
+        if (networkError && process.browser)
+          window.showToast(`There are problems with your Internet ${networkError}`, "error");
       }),
       authLink.concat(link),
     ]),

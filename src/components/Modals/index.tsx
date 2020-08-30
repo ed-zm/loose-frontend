@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { ModalContext } from "loose-components/src/contexts/UI/Modal";
+import { TaskContext } from "loose-components/src/contexts/Task";
 import GithubOrganizations from "./GithubOrganizations";
 import GithubRepos from "./GithubRepos";
 import GithubIssues from "./GithubIssues";
@@ -20,6 +21,7 @@ import "./index.scss";
 
 const Modal = () => {
   const { open, modal, params, actions, title, style = {}, ...rest } = useContext(ModalContext);
+  const { draft } = useContext(TaskContext);
   useEffect(() => {
     if (process.browser) {
       const closeOnEsc = ({ keyCode }) => {
@@ -32,32 +34,39 @@ const Modal = () => {
     }
   }, []);
   if (!open) return null;
+  const closeModal = () => {
+    if (modal === "CreateTask") {
+      const stringifiedDraft = JSON.stringify(draft);
+      localStorage.setItem("create-task-draft", stringifiedDraft);
+    }
+    actions.closeModal();
+  };
   return (
-    <div className="modal-container" onKeyPress={console.log}>
-      <div className="modal-backdrop" onClick={actions.closeModal} />
+    <div className="modal-container" onKeyPress={() => {}}>
+      <div className="modal-backdrop" onClick={closeModal} />
       <div className="modal">
         <span className="modal-title">
           {title}
-          <span className="modal-cancel" onClick={actions.closeModal}>
+          <span className="modal-cancel" onClick={closeModal}>
             <XIcon size="medium" />
           </span>
         </span>
         <div>
-          {modal === "GithubIssues" && <GithubIssues {...params} closeModal={actions.closeModal} />}
-          {modal === "GithubRepos" && <GithubRepos {...params} closeModal={actions.closeModal} />}
-          {modal === "GithubOrganizations" && <GithubOrganizations {...params} closeModal={actions.closeModal} />}
-          {modal === "CreateTask" && <CreateTask {...params} closeModal={actions.closeModal} />}
-          {modal === "EditTask" && <EditTask {...params} closeModal={actions.closeModal} />}
-          {modal === "CreateTeam" && <CreateTeam {...params} closeModal={actions.closeModal} />}
-          {modal === "EditTeam" && <EditTeam {...params} closeModal={actions.closeModal} />}
-          {modal === "CreateOrganization" && <CreateOrganization {...params} closeModal={actions.closeModal} />}
-          {modal === "EditOrganization" && <EditOrganization {...params} closeModal={actions.closeModal} />}
-          {modal === "GithubProjects" && <GithubProjects {...params} closeModal={actions.closeModal} />}
-          {modal === "GithubColumns" && <GithubColumns {...params} closeModal={actions.closeModal} />}
-          {modal === "Invite" && <Invite {...params} closeModal={actions.closeModal} />}
-          {modal === "Confirm" && <Confirm {...params} closeModal={actions.closeModal} />}
-          {modal === "ManageTeamMembers" && <ManageTeamMembers {...params} closeModal={actions.closeModal} />}
-          {modal === "AssignTask" && <AssignTask {...params} closeModal={actions.closeModal} />}
+          {modal === "GithubIssues" && <GithubIssues {...params} closeModal={closeModal} />}
+          {modal === "GithubRepos" && <GithubRepos {...params} closeModal={closeModal} />}
+          {modal === "GithubOrganizations" && <GithubOrganizations {...params} closeModal={closeModal} />}
+          {modal === "CreateTask" && <CreateTask {...params} closeModal={closeModal} />}
+          {modal === "EditTask" && <EditTask {...params} closeModal={closeModal} />}
+          {modal === "CreateTeam" && <CreateTeam {...params} closeModal={closeModal} />}
+          {modal === "EditTeam" && <EditTeam {...params} closeModal={closeModal} />}
+          {modal === "CreateOrganization" && <CreateOrganization {...params} closeModal={closeModal} />}
+          {modal === "EditOrganization" && <EditOrganization {...params} closeModal={closeModal} />}
+          {modal === "GithubProjects" && <GithubProjects {...params} closeModal={closeModal} />}
+          {modal === "GithubColumns" && <GithubColumns {...params} closeModal={closeModal} />}
+          {modal === "Invite" && <Invite {...params} closeModal={closeModal} />}
+          {modal === "Confirm" && <Confirm {...params} closeModal={closeModal} />}
+          {modal === "ManageTeamMembers" && <ManageTeamMembers {...params} closeModal={closeModal} />}
+          {modal === "AssignTask" && <AssignTask {...params} closeModal={closeModal} />}
         </div>
       </div>
       {/* </div> */}

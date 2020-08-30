@@ -55,11 +55,15 @@ const TextAreaMD = (props) => {
   return (
     <div className="textarea-md-container">
       <TabNav aria-label="Main">
-        <TabNav.Link onClick={() => setShowPreview(true)} selected={!showPreview}>
-          Write
+        <TabNav.Link selected={!showPreview}>
+          <span className="textarea-md-tab" onClick={() => setShowPreview(false)}>
+            Write
+          </span>
         </TabNav.Link>
-        <TabNav.Link onClick={() => setShowPreview(false)} selected={showPreview}>
-          Preview
+        <TabNav.Link selected={showPreview}>
+          <span className="textarea-md-tab" onClick={() => setShowPreview(true)}>
+            Preview
+          </span>
         </TabNav.Link>
       </TabNav>
       <div className="textarea-md-content-container">

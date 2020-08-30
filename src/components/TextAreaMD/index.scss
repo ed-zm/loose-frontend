@@ -35,17 +35,7 @@
 }
 
 .textarea-md-tab {
-  display: block;
-  padding: 0.8rem 1.6rem 0.8rem 1.6rem;
   cursor: pointer;
-  font-size: 1.6rem;
-  margin-bottom: -1px;
-  color: $text-icons;
-  font-weight: 400;
-  text-align: center;
-  &:hover {
-    background-color: $dark-primary-color;
-  }
 }
 
 .textarea-md-markdown-wrapper {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import TextAreaMD from "../../TextAreaMD";
 import Input from "../../Input";
 import Button from "../../Button";
@@ -7,9 +7,22 @@ import UsersList from "../../Lists/Users";
 import useCreateTask from "loose-components/src/components/Modals/CreateTask";
 import OrganizationSelect from "../../OrganizationSelect";
 import TeamSelect from "../../TeamSelect";
+import { TaskContext } from "loose-components/src/contexts/Task";
 import "./index.scss";
 
 const CreateTask = ({ tasks, variables, closeModal }) => {
+  const {
+    actions: { setDraft },
+  } = useContext(TaskContext);
+  const [memoDraft, setMemoDraft] = useState(null);
+  useEffect(() => {
+    if (process.browser) {
+      const storedDraft = localStorage.getItem("create-task-draft");
+      if (!!storedDraft) {
+        setMemoDraft(JSON.parse(storedDraft));
+      }
+    }
+  }, [process.browser]);
   const {
     team,
     setTeam,
@@ -27,9 +40,24 @@ const CreateTask = ({ tasks, variables, closeModal }) => {
     creatingTask,
     setAssignTo,
     assignTo,
+    useDraft,
   } = useCreateTask({ tasks, variables, callback: closeModal });
+  useEffect(() => {
+    setDraft({ team, title, estimated, description, teamTask, organization, assignTo });
+  }, [team, title, estimated, description, teamTask, organization, assignTo]);
   return (
     <div className="tasks-create-task">
+      {!!memoDraft && (
+        <Button
+          onClick={async () => {
+            await useDraft(memoDraft);
+            await localStorage.removeItem("create-task-draft");
+            await setMemoDraft(null);
+          }}
+        >
+          Continue With Draft
+        </Button>
+      )}
       <Input type="text" placeholder="title" value={title} onChange={(e) => setTitle(e.target.value)} />
       <Input
         type="number"
