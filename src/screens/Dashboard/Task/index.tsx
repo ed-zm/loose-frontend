@@ -88,7 +88,7 @@ const Task = () => {
             &nbsp;
             <span> created this task on {moment(task.createdAt).format("MMM DD")}</span>
           </div>
-          <Markdown className="" source={task.description} />
+          <Markdown className="markdown-body" source={task.description} />
           {isMember && (
             <div>
               {task.assignedTo ? (

@@ -92,7 +92,7 @@ const TextAreaMD = (props) => {
       <div className="textarea-md-content-container">
         {showPreview ? (
           <div className="textarea-md-markdown-wrapper">
-            <Markdown className="" source={props.value} />
+            <Markdown className="markdown-body" source={props.value} />
           </div>
         ) : (
           <TextArea className="textarea-md-textarea" {...props} />
