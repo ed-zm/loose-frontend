@@ -97,9 +97,9 @@ const Comment = ({
           </Button>
         </React.Fragment>
       ) : (
-        <div className="mark-body">
-          <Markdown source={text} />
-        </div>
+        // <div className="markdown-body">
+        <Markdown source={text} className="markdown-body" />
+        // </div>
       )}
     </div>
   );
