@@ -97,9 +97,9 @@ const Comment = ({
           </Button>
         </React.Fragment>
       ) : (
-        // <div className="markdown-body">
-        <Markdown source={text} className="markdown-body" />
-        // </div>
+        <div className="Box task-comment-content">
+          <Markdown source={text} className="markdown-body" />
+        </div>
       )}
     </div>
   );
