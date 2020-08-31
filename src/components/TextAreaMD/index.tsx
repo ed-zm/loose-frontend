@@ -9,6 +9,8 @@ import TextArea from "../TextArea";
 import { GET_S3_SIGNED_URL } from "./index.graphql";
 import "./index.scss";
 
+var IMAGE_MIME_REGEX = /^image\/(p?jpeg|gif|png)$/i;
+
 const TextAreaMD = (props) => {
   const [showPreview, setShowPreview] = useState(false);
   const [blob, setBlob] = useState(null);
@@ -17,7 +19,7 @@ const TextAreaMD = (props) => {
   useEffect(() => {
     if (s3Url) {
       new Promise(async (resolve) => {
-        const res = await axios.put(s3Url.getS3SignedUrl, blob, { headers: { "Content-Type": "image/jpg" } });
+        const res = await axios.put(s3Url.getS3SignedUrl, blob, { headers: { "Content-Type": currentImage.fileType } });
         resolve(res);
       })
         .then(async (res) => {
@@ -30,17 +32,38 @@ const TextAreaMD = (props) => {
           }
           props;
         })
-        .catch(() => {});
+        .catch((e) => {
+          console.log(e);
+        });
     }
   }, [s3Url]);
 
+  useEffect(() => {
+    const fileInput = document.getElementById("markdown-file-upload");
+    document.onpaste = (e) => {
+      const items = e.clipboardData.items;
+      for (let i = 0; i < items.length; i++) {
+        if (IMAGE_MIME_REGEX.test(items[i].type)) {
+          const list = new DataTransfer();
+          list.items.add(items[i].getAsFile());
+          fileInput.files = list.files;
+          const event = new Event("change", { bubbles: true });
+          fileInput.dispatchEvent(event);
+          return;
+        }
+      }
+    };
+  }, []);
+
   const selectPicture = async (results) => {
+    console.log("SELECT PICTURE", results);
     const result = results && !!results.length && results[0];
     if (result) {
       const [e, file] = result;
       const [name, fileType] = file.name.split(".");
       await setBlob(e.target.result);
       await setCurrentImage({ name, fileType: `image/${fileType}` });
+      console.log(name, fileType);
       await getS3SignedUrl({
         variables: {
           operation: "putObject",
@@ -75,7 +98,7 @@ const TextAreaMD = (props) => {
           <TextArea className="textarea-md-textarea" {...props} />
         )}
         {!showPreview && (
-          <FileReaderInput as="buffer" onChange={async (e, pic) => await selectPicture(pic)}>
+          <FileReaderInput as="buffer" onChange={async (e, pic) => await selectPicture(pic)} id="markdown-file-upload">
             <span className={classnames("textarea-md-attach")}>
               Attach files by dragging & dropping, selecting or pasting them.
             </span>
