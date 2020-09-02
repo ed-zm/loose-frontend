@@ -19,7 +19,12 @@ const TextAreaMD = (props) => {
   useEffect(() => {
     if (s3Url) {
       new Promise(async (resolve) => {
-        const res = await axios.put(s3Url.getS3SignedUrl, blob, { headers: { "Content-Type": currentImage.fileType } });
+        const res = await axios.put(s3Url.getS3SignedUrl, blob, {
+          headers: {
+            "Content-Type": currentImage.fileType,
+            "x-amz-acl": "public-read",
+          },
+        });
         resolve(res);
       })
         .then(async (res) => {
