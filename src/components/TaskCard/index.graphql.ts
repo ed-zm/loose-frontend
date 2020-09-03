@@ -5,11 +5,15 @@ export const UPDATE_TASK = gql`
     updateTask(where: { id: $id }, data: { state: $state }) {
       id
       state
-      assignedTo {
-        id
-        firstName
-        lastName
-      }
+    }
+  }
+`;
+
+export const UPDATE_RESPONSE_REQUEST = gql`
+  mutation($id: ID!, $state: Int!) {
+    updateResponseRequest(where: { id: $id }, data: { state: $state }) {
+      id
+      state
     }
   }
 `;
