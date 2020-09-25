@@ -16,7 +16,7 @@ const Comments = ({ task }) => {
     creatingComment,
     onCreateComment,
     setMentions,
-    pageInfo,
+    continueFetching,
     onFetchMore,
   } = useTaskComments({
     task,
@@ -26,10 +26,10 @@ const Comments = ({ task }) => {
       <InfiniteScroll
         pageStart={0}
         loadMore={() => {
-          loading || !pageInfo.hasNextPage ? null : onFetchMore();
+          loading || !continueFetching ? null : onFetchMore();
         }}
-        hasMore={pageInfo.hasNextPage}
-        loader={<Loading key="comments-loader-key" />}
+        hasMore={continueFetching}
+        loader={<div />}
         useWindow={false}
       >
         {comments.map((comment) => (

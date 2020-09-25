@@ -14,13 +14,13 @@ const Organizations = () => {
     setNameFilter,
     nameFilter,
     onFetchMore,
-    pageInfo,
     loading,
     variables,
     ownerOrMember,
     setOwnerOrMember,
     orderBy,
     setOrderBy,
+    continueFetching,
   } = useOrganizationsList();
   const modal = useContext(ModalContext);
   return (
@@ -32,9 +32,9 @@ const Organizations = () => {
           <Option value="OWNER">Owner</Option>
           <Option value="MEMBER">Member</Option>
         </Select>
-        <Select onChange={(e) => setOrderBy(e.target.value)} value={orderBy}>
-          <Option value="createdAt_DESC">Newest</Option>
-          <Option value="createdAt_ASC">Oldest</Option>
+        <Select onChange={(e) => setOrderBy({ createdAt: e.target.value })} value={orderBy.createdAt}>
+          <Option value="desc">Newest</Option>
+          <Option value="asc">Oldest</Option>
         </Select>
         <Button
           onClick={() => {
@@ -50,7 +50,7 @@ const Organizations = () => {
       </div>
       <List
         loading={loading}
-        pageInfo={pageInfo}
+        continueFetching={continueFetching}
         onFetchMore={onFetchMore}
         items={organizations}
         renderItem={(organization) => <OrganizationCard organization={organization} />}

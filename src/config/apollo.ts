@@ -54,8 +54,13 @@ const create = (token) => {
       onError(({ graphQLErrors, networkError }) => {
         if (graphQLErrors) {
           graphQLErrors.forEach(({ message }) => {
-            if (process.browser && process.env.STAGE !== "prod") window.showToast(message, "error");
-            else window.showToast("An Unexpected Error has occured", "error");
+            if(process.browser && window && !!window.showToast) {
+              if (process.env.STAGE !== "prod") window.showToast(message, "error");
+              else window.showToast("An Unexpected Error has occured", "error");
+            }
+            else {
+              console.log("An Unexpected Error has occured", message);
+            }
           });
         }
         if (networkError && process.browser)

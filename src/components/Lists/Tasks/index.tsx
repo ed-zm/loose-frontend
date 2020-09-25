@@ -23,7 +23,8 @@ const Tasks = ({ team, organization }) => {
     orderBy,
     setOrderBy,
     onFetchMore,
-    pageInfo,
+    // pageInfo,
+    continueFetching,
     loading,
   } = useTasksList({ team, organization });
   const modal = useContext(ModalContext);
@@ -45,9 +46,9 @@ const Tasks = ({ team, organization }) => {
           <Option value={null}>All</Option>
           <Option value="PERSONAL">Personal</Option>
         </Select>
-        <Select onChange={(e) => setOrderBy(e.target.value)} value={orderBy}>
-          <Option value="createdAt_DESC">Newest</Option>
-          <Option value="createdAt_ASC">Oldest</Option>
+        <Select onChange={(e) => setOrderBy({ createdAt: e.target.value })} value={orderBy.createdAt}>
+          <Option value="desc">Newest</Option>
+          <Option value="asc">Oldest</Option>
         </Select>
         <Button
           className="tasks-list-header-button"
@@ -60,7 +61,7 @@ const Tasks = ({ team, organization }) => {
       </div>
       <List
         loading={loading}
-        pageInfo={pageInfo}
+        continueFetching={continueFetching}
         onFetchMore={onFetchMore}
         items={tasks}
         renderItem={(task) => <TaskCard task={task} />}

@@ -25,9 +25,9 @@ const Teams = ({ organization }) => {
     <div className="teams-list">
       <div className="teams-list-create-button">
         <Input placeholder="Find a Team" value={nameFilter} onChange={(e) => setNameFilter(e.target.value)} />
-        <Select onChange={(e) => setOrderBy(e.target.value)} value={orderBy}>
-          <Option value="createdAt_DESC">Newest</Option>
-          <Option value="createdAt_ASC">Oldest</Option>
+        <Select onChange={(e) => setOrderBy({ createdAt: e.target.value })} value={orderBy.createdAt}>
+          <Option value="desc">Newest</Option>
+          <Option value="asc">Oldest</Option>
         </Select>
         <Button
           onClick={() => {

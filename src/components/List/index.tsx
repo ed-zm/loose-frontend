@@ -3,7 +3,7 @@ import InfiniteScroll from "react-infinite-scroller";
 import Loading from "../Loading";
 import "./index.scss";
 
-const List = ({ items = [], loading = false, renderItem, onFetchMore = () => {}, pageInfo }) => {
+const List = ({ items = [], loading = false, renderItem, onFetchMore = () => {}, continueFetching }) => {
   return (
     <div className="Box">
       <div className="Box-header d-flex flex-justify-between"></div>
@@ -13,11 +13,11 @@ const List = ({ items = [], loading = false, renderItem, onFetchMore = () => {},
         <InfiniteScroll
           pageStart={0}
           element="ul"
-          loadMore={() => {
-            loading || (pageInfo && !pageInfo.hasNextPage) ? null : onFetchMore();
+          loadMore={async () => {
+            loading || !continueFetching ? null : await onFetchMore();
           }}
-          hasMore={pageInfo ? pageInfo.hasNextPage : false}
-          loader={<Loading key="list-loader-key" />}
+          hasMore={continueFetching}
+          loader={<div />}
           useWindow={false}
         >
           {!!items.length ? (

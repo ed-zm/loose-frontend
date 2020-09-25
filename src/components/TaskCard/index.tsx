@@ -12,6 +12,7 @@ const TaskCard = ({ task }) => {
   const [updateTask] = useMutation(UPDATE_TASK);
   const [updateResponseRequest] = useMutation(UPDATE_RESPONSE_REQUEST);
   const isResponseRequest = task.__typename === "ResponseRequest";
+  // if (isResponseRequest) console.log("task", task.id);
   return (
     <div
       className="task-card"
@@ -19,7 +20,7 @@ const TaskCard = ({ task }) => {
     >
       <input
         type="checkbox"
-        checked={task.state === 1 ? true : false}
+        checked={!!(task.state === 1)}
         onChange={async () => {
           const state = task.state === 0 ? 1 : 0;
           if (isResponseRequest) {

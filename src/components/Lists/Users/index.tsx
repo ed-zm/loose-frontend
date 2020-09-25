@@ -7,7 +7,7 @@ import Input from "../../Input";
 import "./index.scss";
 
 const Users = ({ action, team, organization, type, typeId, invite }) => {
-  const { users, pageInfo, onFetchMore, name, setName, refetch, loading, orderBy, setOrderBy } = useUsersList({
+  const { users, continueFetching, onFetchMore, name, setName, refetch, loading, orderBy, setOrderBy } = useUsersList({
     team,
     organization,
     type,
@@ -19,13 +19,13 @@ const Users = ({ action, team, organization, type, typeId, invite }) => {
     <div className="users-list">
       <div className="users-list-header">
         <Input onChange={(e) => setName(e.target.value)} value={name} placeholder="Name" />
-        <Select onChange={(e) => setOrderBy(e.target.value)} value={orderBy}>
-          <Option value="firstName_ASC">A-Z</Option>
-          <Option value="firstName_DESC">Z-A</Option>
+        <Select onChange={(e) => setOrderBy({ createdAt: e.target.value })} value={orderBy.createdAt}>
+          <Option value="asx">A-Z</Option>
+          <Option value="desc">Z-A</Option>
         </Select>
       </div>
       <List
-        pageInfo={pageInfo}
+        continueFetching={continueFetching}
         onFetchMore={onFetchMore}
         items={users}
         loading={loading}
