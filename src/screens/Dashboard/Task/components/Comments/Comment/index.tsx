@@ -9,6 +9,7 @@ import "./index.scss";
 
 const Comment = ({
   task,
+  variables,
   comment: {
     id,
     user: { firstName, lastName },
@@ -31,6 +32,7 @@ const Comment = ({
     task,
     id,
     text,
+    variables,
   });
   return (
     <div key={id} className="Box">

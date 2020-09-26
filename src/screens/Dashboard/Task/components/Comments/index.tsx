@@ -18,6 +18,7 @@ const Comments = ({ task }) => {
     setMentions,
     continueFetching,
     onFetchMore,
+    variables,
   } = useTaskComments({
     task,
   });
@@ -33,7 +34,7 @@ const Comments = ({ task }) => {
         useWindow={false}
       >
         {comments.map((comment) => (
-          <Comment comment={comment} task={task} />
+          <Comment comment={comment} task={task} variables={variables} />
         ))}
       </InfiniteScroll>
       <TextAreaMD
