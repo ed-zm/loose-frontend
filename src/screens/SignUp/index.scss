@@ -3,6 +3,19 @@
     margin-top: 64px;
     padding: 0 16px 0 16px;
   }
+  &-subscription {
+    &-container {
+      height: 250px;
+      width: 200px;
+      display: grid;
+      margin: auto;
+      align-items: center;
+      justify-items: center;
+    }
+    &-title {
+      font-size: 1.6rem;
+    }
+  }
   &-form {
     &-container {
       display: grid;
@@ -15,6 +28,11 @@
     }
     &-input {
       margin-bottom: 15px;
+    }
+    &-stripe {
+      &-container {
+        margin-bottom: 15px;
+      }
     }
   }
 }

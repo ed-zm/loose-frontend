@@ -16,6 +16,7 @@ import Confirm from "./Confirm";
 import Invite from "./Invite";
 import ManageTeamMembers from "./ManageTeamMembers";
 import AssignTask from "./AssignTask";
+import Stripe from "./Stripe";
 import { XIcon } from "@primer/octicons-react";
 import "./index.scss";
 
@@ -67,6 +68,7 @@ const Modal = () => {
           {modal === "Confirm" && <Confirm {...params} closeModal={closeModal} />}
           {modal === "ManageTeamMembers" && <ManageTeamMembers {...params} closeModal={closeModal} />}
           {modal === "AssignTask" && <AssignTask {...params} closeModal={closeModal} />}
+          {modal === "Stripe" && <Stripe {...params} closeModal={closeModal} />}
         </div>
       </div>
       {/* </div> */}

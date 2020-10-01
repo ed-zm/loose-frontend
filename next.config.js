@@ -34,6 +34,7 @@ module.exports = withPlugins(
   ],
   {
     publicRuntimeConfig: {
+      STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY,
       GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
       HOST: process.env.HOST,
     },
