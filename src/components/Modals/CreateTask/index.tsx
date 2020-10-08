@@ -41,6 +41,8 @@ const CreateTask = ({ tasks, variables, closeModal }) => {
     setAssignTo,
     assignTo,
     useDraft,
+    priority,
+    setPriority,
   } = useCreateTask({ tasks, variables, callback: closeModal });
   useEffect(() => {
     setDraft({ team, title, estimated, description, teamTask, organization, assignTo });
@@ -65,6 +67,16 @@ const CreateTask = ({ tasks, variables, closeModal }) => {
         value={estimated}
         onChange={(e) => setEstimated(parseInt(e.target.value, 10))}
       />
+      <Select
+        onChange={(e) => {
+          setPriority(e.target.value);
+        }}
+        value={priority}
+      >
+        <Option value={0}>Low Priority</Option>
+        <Option value={1}>Medium Priority</Option>
+        <Option value={2}>High Priority</Option>
+      </Select>
       <TextAreaMD placeholder="description" value={description} onChange={(e) => setDescription(e.target.value)} />
       <OrganizationSelect organization={organization} setOrganization={setOrganization} />
       {organization && (

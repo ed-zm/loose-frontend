@@ -38,6 +38,9 @@ const Header = () => {
           />
           {user.firstName} {user.lastName}
         </span>
+        <Link href="/dashboard/prio">
+          <span>Prio</span>
+        </Link>
         <Link href="/dashboard/organizations">
           <span>My Organizations</span>
         </Link>

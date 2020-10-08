@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Children } from "react";
 import { useRouter } from "next/router";
 import { useMutation } from "@apollo/react-hooks";
 import Markdown from "react-markdown";
@@ -7,7 +7,7 @@ import moment from "moment";
 import { UPDATE_TASK, UPDATE_RESPONSE_REQUEST } from "./index.graphql";
 import "./index.scss";
 
-const TaskCard = ({ task }) => {
+const TaskCard = ({ task, children }) => {
   const router = useRouter();
   const [updateTask] = useMutation(UPDATE_TASK);
   const [updateResponseRequest] = useMutation(UPDATE_RESPONSE_REQUEST);
@@ -111,7 +111,7 @@ const TaskCard = ({ task }) => {
           </span>
         </div>
       </div>
-      <div></div>
+      <div>{children}</div>
     </div>
   );
 };
