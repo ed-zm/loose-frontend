@@ -43,7 +43,7 @@ const Invite = ({ onInvite, organization, type, typeId, closeModal }) => {
             <Button
               onClick={async () => {
                 await setInviting(true);
-                await onInvite(user.id);
+                await onInvite({ id: user.id });
                 refetch();
                 await setInviting(false);
               }}

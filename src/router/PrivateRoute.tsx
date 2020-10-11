@@ -39,7 +39,9 @@ const PrivateRoute = (ComposedComponent) => {
   const Component = ({ token, user, ...props }) => {
     if ((!user || !user.data.loggedIn) && process.browser) {
       const route = props.url.pathname.split("/dashboard");
-      const redirectTo = route.length > 1 ? route[1].replace("[id]", props.url.query.id) : "";
+      let redirectTo = route.length > 1 ? route[1].replace("[id]", props.url.query.id) : "";
+      redirectTo = !!redirectTo ? redirectTo.replace("[code]", props.url.query.code) : "";
+
       props.url.push(`/sign-in${redirectTo ? `?redirectTo=${redirectTo}` : ""}`);
     }
     return (
