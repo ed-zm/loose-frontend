@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import OrganizationsList from "../../../components/Lists/Organizations";
 import "./index.scss";
 
-const Organizations = () => {
+const Organizations = ({ env }) => {
   return (
     <div className="organizations">
-      <OrganizationsList />
+      <OrganizationsList env={env} />
     </div>
   );
 };

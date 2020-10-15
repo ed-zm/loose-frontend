@@ -38,8 +38,11 @@ const Modal = () => {
   if (!open) return null;
   const closeModal = () => {
     if (modal === "CreateTask") {
-      const stringifiedDraft = JSON.stringify(draft);
-      localStorage.setItem("create-task-draft", stringifiedDraft);
+      if (draft) {
+        console.log("DRAFT", draft);
+        const stringifiedDraft = JSON.stringify(draft);
+        localStorage.setItem("create-task-draft", stringifiedDraft);
+      }
     }
     actions.closeModal();
   };

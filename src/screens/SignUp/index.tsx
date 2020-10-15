@@ -4,15 +4,10 @@ import { useRouter } from "next/router";
 import parseError from "loose-components/src/utils/parseError";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
-import { loadStripe } from "@stripe/stripe-js";
 import useSignUp from "loose-components/src/screens/SignUp";
-import { CardElement, Elements, useStripe, useElements } from "@stripe/react-stripe-js";
 import "./index.scss";
 
 const SignUp = () => {
-  const stripe = useStripe();
-
-  const elements = useElements();
   const router = useRouter();
   const { inviteCode } = router.query;
   const {
@@ -30,8 +25,6 @@ const SignUp = () => {
     data,
     error,
     signingUp,
-    plan,
-    setPlan,
   } = useSignUp({
     inviteCode: router.query.inviteCode,
     callback: async (token) => {
@@ -43,21 +36,9 @@ const SignUp = () => {
       }
     },
   });
-
-  const onSubmit = async () => {
-    stripe.createToken(elements.getElement(CardElement)).then(({ error, token }) => {
-      if (!error) onSignUp(token);
-    });
-  };
   const parsedError = parseError(error);
   return (
     <div className="sign-up-container">
-      <div className="Box sign-up-subscription-container">
-        <span className="sign-up-subscription-title">standard 5$</span>
-        <Button onClick={() => setPlan("STANDARD")}>{plan === "STANDARD" ? "Selected" : "Select"}</Button>
-      </div>
-      {!!plan && (
-        <React.Fragment>
           <div className="mb-4 mb-md-8 container-md">
             <div className="text-mono text-center text-gray-light text-normal mb-3">Join Loose Dev</div>
             <h1 className="d-none d-md-block mt-0 mb-3 text-center h00-mktg lh-condensed-ultra">Create Your Account</h1>
@@ -117,30 +98,18 @@ const SignUp = () => {
                 if (e.key === "Enter") onSignUp();
               }}
             />
-            <div className="input-block sign-up-form-stripe-container">
-              <label className="sign-up-form-label">Card Information:</label>
-              <CardElement />
-            </div>
             {parsedError && <div className="sign-in-error flash flash-full flash-error">{parsedError}</div>}
             <Button
               className="btn-mktg signup-btn  js-octocaptcha-form-submit width-full"
-              onClick={onSubmit}
+              onClick={onSignUp}
               submitting={signingUp}
             >
               Create Account
             </Button>
           </div>
-        </React.Fragment>
       )}
     </div>
   );
 };
 
-export default ({ env, ...props }) => {
-  const stripePromise = loadStripe(env.STRIPE_PUBLIC_KEY);
-  return (
-    <Elements stripe={stripePromise}>
-      <SignUp {...props} />
-    </Elements>
-  );
-};
+export default SignUp;

@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import classNames from "classnames";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useRouter } from "next/router";
 import useOrganization from "loose-components/src/screens/Dashboard/Organization";

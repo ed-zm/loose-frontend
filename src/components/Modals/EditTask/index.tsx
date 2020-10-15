@@ -22,7 +22,6 @@ const EditTask = ({ task, closeModal }) => {
     priority,
     setPriority,
   } = useEditTask({ task, callback: closeModal });
-  console.log("TASK.PRIORITY", task);
   return (
     <div className="tasks-create-task">
       <Input type="text" placeholder="title" value={title} onChange={(e) => setTitle(e.target.value)} />

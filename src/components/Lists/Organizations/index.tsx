@@ -8,7 +8,7 @@ import Select, { Option } from "../../../components/Select";
 import List from "../../List";
 import "./index.scss";
 
-const Organizations = () => {
+const Organizations = ({ env }) => {
   const {
     organizations,
     setNameFilter,
@@ -41,7 +41,7 @@ const Organizations = () => {
             modal.actions.openModal({
               modal: "CreateOrganization",
               title: "Create Organization",
-              params: { variables },
+              params: { variables, env },
             });
           }}
         >

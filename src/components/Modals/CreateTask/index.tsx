@@ -45,7 +45,10 @@ const CreateTask = ({ tasks, variables, closeModal }) => {
     setPriority,
   } = useCreateTask({ tasks, variables, callback: closeModal });
   useEffect(() => {
-    setDraft({ team, title, estimated, description, teamTask, organization, assignTo });
+    if (!!team || !!title || !!estimated || !!description || !!teamTask || !!organization || !!assignTo) {
+      console.log("SET DRAFT", !!team, !!title, !!estimated, !!description, !!teamTask, !!organization, !!assignTo);
+      setDraft({ team, title, estimated, description, teamTask, organization, assignTo });
+    }
   }, [team, title, estimated, description, teamTask, organization, assignTo]);
   return (
     <div className="tasks-create-task">
@@ -55,6 +58,7 @@ const CreateTask = ({ tasks, variables, closeModal }) => {
             await useDraft(memoDraft);
             await localStorage.removeItem("create-task-draft");
             await setMemoDraft(null);
+            await setDraft(null);
           }}
         >
           Continue With Draft

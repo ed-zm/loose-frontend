@@ -3,4 +3,17 @@
   display: grid;
   grid-row-gap: 2rem;
   grid-template-columns: 1fr;
+  &-subscription {
+    &-container {
+      height: 100px;
+      width: 200px;
+      display: grid;
+      margin: auto;
+      align-items: center;
+      justify-items: center;
+    }
+    &-title {
+      font-size: 1.6rem;
+    }
+  }
 }
