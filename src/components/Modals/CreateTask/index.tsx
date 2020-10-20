@@ -126,7 +126,13 @@ const CreateTask = ({ tasks, variables, closeModal }) => {
           )}
         </React.Fragment>
       )}
-      <Button onClick={onCreateTask} disabled={creatingTask}>
+      <Button
+        onClick={async () => {
+          await onCreateTask();
+          await localStorage.removeItem("create-task-draft");
+        }}
+        disabled={creatingTask}
+      >
         Create Task
       </Button>
     </div>
